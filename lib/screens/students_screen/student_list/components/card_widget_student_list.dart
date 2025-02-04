@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
+import 'package:his_quiz/screens/students_screen/selected_student/selected_student_screen.dart';
+import 'package:his_quiz/screens/students_screen/student_details/student_details_screen.dart';
 
 class CardWidgetStudentList extends StatefulWidget {
+  final int index;
   final bool isSelectedStudentScreen;
 
   const CardWidgetStudentList({
     super.key,
     this.isSelectedStudentScreen = false,
+    required this.index,
   });
 
   @override
@@ -21,9 +26,13 @@ class _CardWidgetStudentListState extends State<CardWidgetStudentList> {
     return InkWell(
       onTap: () async {
         if (widget.isSelectedStudentScreen) {
-          //  await Get.off(()=>SelectedStudentScreen());
+          await Get.to(
+            const SelectedStudentScreen(),
+          );
         } else {
-          //  await Get.to(()=>StudenDetailScreen());
+          await Get.to(
+            const StudentDetailsScreen(),
+          );
         }
       },
       child: Container(

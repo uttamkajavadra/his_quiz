@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
-import 'package:his_quiz/screens/compitition_seasons/compitition_seasons_screen.dart';
+import 'package:his_quiz/screens/auth/login/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,7 +16,6 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     // Splash Screen
@@ -25,8 +24,8 @@ class _SplashScreenState extends State<SplashScreen> {
         seconds: 3,
       ),
       () {
-        Get.to(
-          const CompititionSeasonsScreen(),
+        Get.offAll(
+          const LoginScreen(),
         );
       },
     );

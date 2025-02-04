@@ -2,6 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:his_quiz/config/common_colors.dart';
 
 class CommonTextStyle {
+  static TextStyle button = const TextStyle(
+    fontSize: 16,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w500,
+    height: 1.50,
+    color: CommonColors.blackColor,
+  );
   static TextStyle bold = const TextStyle(
     fontSize: 14,
     fontFamily: 'Inter',
