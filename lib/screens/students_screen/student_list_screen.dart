@@ -75,7 +75,7 @@ class _StudentListScreenState extends State<StudentListScreen> {
                       left: 24,
                       right: 24,
                     ),
-                    child: CommonTextField(
+                    child: CommonSearchField(
                       hintText: "Search Students",
                       icon: Icons.search,
                     ),

@@ -2,21 +2,93 @@ import 'package:flutter/material.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 
-class CommonTextField extends StatefulWidget {
+class CommonAuthField extends StatefulWidget {
+  final String titleText;
+  final String hintText;
+  final TextEditingController controller;
+  final bool isPassword;
+
+  const CommonAuthField({
+    super.key,
+    required this.titleText,
+    required this.hintText,
+    required this.controller,
+    this.isPassword = false,
+  });
+
+  @override
+  State<CommonAuthField> createState() => _CommonAuthFieldState();
+}
+
+class _CommonAuthFieldState extends State<CommonAuthField> {
+  bool _obscureText = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _obscureText = widget.isPassword;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.titleText,
+          style: CommonTextStyle.bold.copyWith(
+            fontSize: 16,
+          ),
+        ),
+        const SizedBox(
+          height: 6,
+        ),
+        TextField(
+          controller: widget.controller,
+          obscureText: widget.isPassword ? _obscureText : false,
+          decoration: InputDecoration(
+            hintText: widget.hintText,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: 14,
+            ),
+            suffixIcon: widget.isPassword
+                ? IconButton(
+                    icon: Icon(
+                      _obscureText ? Icons.visibility : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
+                  )
+                : null,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class CommonSearchField extends StatefulWidget {
   final String hintText;
   final IconData icon;
 
-  const CommonTextField({
+  const CommonSearchField({
     super.key,
     required this.hintText,
     required this.icon,
   });
 
   @override
-  State<CommonTextField> createState() => _CommonTextFieldState();
+  State<CommonSearchField> createState() => _CommonSearchFieldState();
 }
 
-class _CommonTextFieldState extends State<CommonTextField> {
+class _CommonSearchFieldState extends State<CommonSearchField> {
   @override
   Widget build(BuildContext context) {
     return Row(

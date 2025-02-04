@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
-import 'package:his_quiz/screens/compitition_seasons/compitition_seasons_screen.dart';
+import 'package:his_quiz/screens/auth/login/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
       () {
         Get.offAll(
-          const CompititionSeasonsScreen(),
+          const LoginScreen(),
         );
       },
     );
