@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
-import 'package:his_quiz/screens/students_screen/components/card_widget_student_list.dart';
+import 'package:his_quiz/screens/students_screen/student_list/components/card_widget_student_list.dart';
 import 'package:his_quiz/widgets/common_bottom_bar.dart';
 import 'package:his_quiz/widgets/common_text_field.dart';
 
@@ -218,7 +218,10 @@ class _StudentListScreenState extends State<StudentListScreen> {
                       vertical: 16,
                     ),
                     itemBuilder: (context, index) {
-                      return const CardWidgetStudentList();
+                      return CardWidgetStudentList(
+                        index: index,
+                        // isSelectedStudentScreen: true,
+                      );
                     },
                   )
                 ],

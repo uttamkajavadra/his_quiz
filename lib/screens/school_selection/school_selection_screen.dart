@@ -89,7 +89,9 @@ class _SchoolSelectionScreenState extends State<SchoolSelectionScreen> {
                       vertical: 16,
                     ),
                     itemBuilder: (context, index) {
-                      return const CardWidgetSchoolSelection();
+                      return CardWidgetSchoolSelection(
+                        index: index,
+                      );
                     },
                   )
                 ],

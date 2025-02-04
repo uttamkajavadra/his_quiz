@@ -8,6 +8,7 @@ import 'package:his_quiz/screens/compitition_seasons/compitition_seasons_screen.
 import 'package:his_quiz/widgets/common_bottom_bar.dart';
 import 'package:his_quiz/widgets/common_button.dart';
 import 'package:his_quiz/widgets/common_text_field.dart';
+import 'package:his_quiz/widgets/loading_dialog.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -73,27 +74,30 @@ class _LoginScreenState extends State<LoginScreen> {
 
               // LOGIN BUTTON
               CommonButton(
-                child: isLoading
-                    ? const CircularProgressIndicator(
-                        color: CommonColors.whiteColor,
-                      )
-                    : Text(
-                        "Login",
-                        style: CommonTextStyle.bold.copyWith(
-                          fontSize: 16,
-                          color: CommonColors.whiteColor,
-                        ),
-                      ),
+                child: Text(
+                  "Login",
+                  style: CommonTextStyle.bold.copyWith(
+                    fontSize: 16,
+                    color: CommonColors.whiteColor,
+                  ),
+                ),
                 onPressed: () {
                   setState(() {
                     isLoading = true;
                   });
+
+                  // Show Loading Dialog
+                  showLoadingDialog();
 
                   Timer(
                     const Duration(
                       seconds: 2,
                     ),
                     () {
+                      // Hide Loading Dialog
+                      hideLoadingDialog();
+
+                      // Redirect
                       Get.offAll(
                         const CompititionSeasonsScreen(),
                       );
