@@ -16,7 +16,6 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     // Splash Screen
@@ -25,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
         seconds: 3,
       ),
       () {
-        Get.to(
+        Get.offAll(
           const CompititionSeasonsScreen(),
         );
       },

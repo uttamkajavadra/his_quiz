@@ -4,6 +4,7 @@ import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/screens/students_screen/components/card_widget_student_list.dart';
 import 'package:his_quiz/widgets/common_bottom_bar.dart';
+import 'package:his_quiz/widgets/common_text_field.dart';
 
 class StudentListScreen extends StatefulWidget {
   final bool isSelectedStudentScreen;
@@ -69,85 +70,14 @@ class _StudentListScreenState extends State<StudentListScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
+                  const Padding(
+                    padding: EdgeInsets.only(
                       left: 24,
                       right: 24,
                     ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              TextFormField(
-                                textAlign: TextAlign.start,
-                                keyboardType: TextInputType.text,
-                                style: CommonTextStyle.regular500.copyWith(
-                                  fontSize: 16,
-                                ),
-                                decoration: InputDecoration(
-                                  fillColor: CommonColors.whiteColor,
-                                  contentPadding: const EdgeInsets.only(
-                                    top: 8,
-                                    bottom: 16,
-                                    right: 20,
-                                    left: 20,
-                                  ),
-                                  hintText: "Search Students",
-                                  prefixIcon: const Icon(
-                                    Icons.search,
-                                    size: 20,
-                                  ),
-                                  hintStyle:
-                                      CommonTextStyle.regular400.copyWith(
-                                    color: CommonColors.hintTextColor,
-                                    fontSize: 14,
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: CommonColors.textFieldColor,
-                                    ),
-                                    borderRadius: BorderRadius.circular(
-                                      10,
-                                    ),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: CommonColors.textFieldColor,
-                                    ),
-                                    borderRadius: BorderRadius.circular(
-                                      10,
-                                    ),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: CommonColors.textFieldColor,
-                                    ),
-                                    borderRadius: BorderRadius.circular(
-                                      10,
-                                    ),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: CommonColors.textFieldColor,
-                                    ),
-                                    borderRadius: BorderRadius.circular(
-                                      10,
-                                    ),
-                                  ),
-                                ),
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction,
-                              ),
-                              const SizedBox(
-                                height: 16,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                    child: CommonTextField(
+                      hintText: "Search Students",
+                      icon: Icons.search,
                     ),
                   ),
                   Padding(
@@ -186,49 +116,93 @@ class _StudentListScreenState extends State<StudentListScreen> {
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                               ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    sortingValue,
-                                    style: CommonTextStyle.regular400.copyWith(
-                                      fontSize: 14,
-                                      color: CommonColors.textBlackColor,
+                              child: PopupMenuButton<String>(
+                                onSelected: (value) {
+                                  setState(() {
+                                    sortingValue = value;
+                                  });
+                                },
+                                itemBuilder: (context) => [
+                                  const PopupMenuItem(
+                                    // value: 'A-Z',
+                                    value: 'Name A to Z',
+                                    child: Text(
+                                      'Name A to Z',
                                     ),
                                   ),
-                                  const SizedBox(
-                                    width: 6,
-                                  ),
-                                  PopupMenuButton<String>(
-                                    onSelected: (value) {
-                                      setState(() {
-                                        sortingValue = value;
-                                      });
-                                    },
-                                    itemBuilder: (context) => [
-                                      const PopupMenuItem(
-                                        // value: 'A-Z',
-                                        value: 'Name A to Z',
-                                        child: Text(
-                                          'Name A to Z',
-                                        ),
-                                      ),
-                                      const PopupMenuItem(
-                                        // value: 'Z-A',
-                                        value: 'Name Z to A',
-                                        child: Text(
-                                          'Name Z to A',
-                                        ),
-                                      ),
-                                    ],
-                                    child: const Icon(
-                                      Icons.keyboard_arrow_down_rounded,
+                                  const PopupMenuItem(
+                                    // value: 'Z-A',
+                                    value: 'Name Z to A',
+                                    child: Text(
+                                      'Name Z to A',
                                     ),
                                   ),
                                 ],
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      sortingValue,
+                                      style:
+                                          CommonTextStyle.regular400.copyWith(
+                                        fontSize: 14,
+                                        color: CommonColors.textBlackColor,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 6,
+                                    ),
+                                    const Icon(
+                                      Icons.keyboard_arrow_down_rounded,
+                                    ),
+                                  ],
+                                ),
                               ),
+                              // child: Row(
+                              //   mainAxisSize: MainAxisSize.min,
+                              //   mainAxisAlignment: MainAxisAlignment.start,
+                              //   crossAxisAlignment: CrossAxisAlignment.center,
+                              //   children: [
+                              //     Text(
+                              //       sortingValue,
+                              //       style: CommonTextStyle.regular400.copyWith(
+                              //         fontSize: 14,
+                              //         color: CommonColors.textBlackColor,
+                              //       ),
+                              //     ),
+                              //     const SizedBox(
+                              //       width: 6,
+                              //     ),
+                              //     PopupMenuButton<String>(
+                              //       onSelected: (value) {
+                              //         setState(() {
+                              //           sortingValue = value;
+                              //         });
+                              //       },
+                              //       itemBuilder: (context) => [
+                              //         const PopupMenuItem(
+                              //           // value: 'A-Z',
+                              //           value: 'Name A to Z',
+                              //           child: Text(
+                              //             'Name A to Z',
+                              //           ),
+                              //         ),
+                              //         const PopupMenuItem(
+                              //           // value: 'Z-A',
+                              //           value: 'Name Z to A',
+                              //           child: Text(
+                              //             'Name Z to A',
+                              //           ),
+                              //         ),
+                              //       ],
+                              //       child: const Icon(
+                              //         Icons.keyboard_arrow_down_rounded,
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
                             ),
                           ],
                         )
