@@ -4,7 +4,6 @@ import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/screens/students_screen/components/card_widget_student_list.dart';
 import 'package:his_quiz/widgets/common_bottom_bar.dart';
-import 'package:his_quiz/widgets/common_text_field.dart';
 
 class StudentListScreen extends StatefulWidget {
   final bool isSelectedStudentScreen;
@@ -19,6 +18,8 @@ class StudentListScreen extends StatefulWidget {
 }
 
 class _StudentListScreenState extends State<StudentListScreen> {
+  String sortingValue = "Name A to Z";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +36,6 @@ class _StudentListScreenState extends State<StudentListScreen> {
               ),
               // color: AppColors.blackColor,
               child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
                     onTap: () {
@@ -54,14 +54,6 @@ class _StudentListScreenState extends State<StudentListScreen> {
                       ),
                     ),
                   ),
-                  // Row(
-                  //   children: actions ??
-                  //       [
-                  //         const SizedBox(
-                  //           width: 24,
-                  //         ),
-                  //       ],
-                  // ),
                 ],
               ),
             ),
@@ -77,24 +69,92 @@ class _StudentListScreenState extends State<StudentListScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // const Row(
-                  //   children: [
-                  //     Expanded(
-                  //       child: CommonTextField(
-                  //         hintText: "Search Students",
-                  //         margin: EdgeInsets.symmetric(
-                  //           horizontal: 16,
-                  //         ),
-                  //         prefixIcon: Icon(
-                  //           Icons.search,
-                  //           size: 20,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 24, right: 24),
+                    padding: const EdgeInsets.only(
+                      left: 24,
+                      right: 24,
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TextFormField(
+                                textAlign: TextAlign.start,
+                                keyboardType: TextInputType.text,
+                                style: CommonTextStyle.regular500.copyWith(
+                                  fontSize: 16,
+                                ),
+                                decoration: InputDecoration(
+                                  fillColor: CommonColors.whiteColor,
+                                  contentPadding: const EdgeInsets.only(
+                                    top: 8,
+                                    bottom: 16,
+                                    right: 20,
+                                    left: 20,
+                                  ),
+                                  hintText: "Search Students",
+                                  prefixIcon: const Icon(
+                                    Icons.search,
+                                    size: 20,
+                                  ),
+                                  hintStyle:
+                                      CommonTextStyle.regular400.copyWith(
+                                    color: CommonColors.hintTextColor,
+                                    fontSize: 14,
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: CommonColors.textFieldColor,
+                                    ),
+                                    borderRadius: BorderRadius.circular(
+                                      10,
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: CommonColors.textFieldColor,
+                                    ),
+                                    borderRadius: BorderRadius.circular(
+                                      10,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: CommonColors.textFieldColor,
+                                    ),
+                                    borderRadius: BorderRadius.circular(
+                                      10,
+                                    ),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: CommonColors.textFieldColor,
+                                    ),
+                                    borderRadius: BorderRadius.circular(
+                                      10,
+                                    ),
+                                  ),
+                                ),
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                              ),
+                              const SizedBox(
+                                height: 16,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 24,
+                      right: 24,
+                    ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -117,7 +177,9 @@ class _StudentListScreenState extends State<StudentListScreen> {
                                 color: CommonColors.hintTextColor,
                               ),
                             ),
-                            const SizedBox(width: 8),
+                            const SizedBox(
+                              width: 8,
+                            ),
                             Container(
                               decoration: ShapeDecoration(
                                 shape: RoundedRectangleBorder(
@@ -130,15 +192,40 @@ class _StudentListScreenState extends State<StudentListScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Name A to Z',
+                                    sortingValue,
                                     style: CommonTextStyle.regular400.copyWith(
                                       fontSize: 14,
                                       color: CommonColors.textBlackColor,
                                     ),
                                   ),
-                                  const SizedBox(width: 6),
-                                  const Icon(
-                                    Icons.keyboard_arrow_down_rounded,
+                                  const SizedBox(
+                                    width: 6,
+                                  ),
+                                  PopupMenuButton<String>(
+                                    onSelected: (value) {
+                                      setState(() {
+                                        sortingValue = value;
+                                      });
+                                    },
+                                    itemBuilder: (context) => [
+                                      const PopupMenuItem(
+                                        // value: 'A-Z',
+                                        value: 'Name A to Z',
+                                        child: Text(
+                                          'Name A to Z',
+                                        ),
+                                      ),
+                                      const PopupMenuItem(
+                                        // value: 'Z-A',
+                                        value: 'Name Z to A',
+                                        child: Text(
+                                          'Name Z to A',
+                                        ),
+                                      ),
+                                    ],
+                                    child: const Icon(
+                                      Icons.keyboard_arrow_down_rounded,
+                                    ),
                                   ),
                                 ],
                               ),
