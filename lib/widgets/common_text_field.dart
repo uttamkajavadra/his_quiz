@@ -7,6 +7,7 @@ class CommonAuthField extends StatefulWidget {
   final String hintText;
   final TextEditingController controller;
   final bool isPassword;
+  final String? Function(String?)? validator;
 
   const CommonAuthField({
     super.key,
@@ -14,6 +15,7 @@ class CommonAuthField extends StatefulWidget {
     required this.hintText,
     required this.controller,
     this.isPassword = false,
+    this.validator,
   });
 
   @override
@@ -37,19 +39,52 @@ class _CommonAuthFieldState extends State<CommonAuthField> {
         Text(
           widget.titleText,
           style: CommonTextStyle.bold.copyWith(
-            fontSize: 16,
+            fontSize: 14,
           ),
         ),
         const SizedBox(
           height: 6,
         ),
-        TextField(
+        TextFormField(
           controller: widget.controller,
           obscureText: widget.isPassword ? _obscureText : false,
+          validator: widget.validator,
           decoration: InputDecoration(
             hintText: widget.hintText,
+            hintStyle: CommonTextStyle.regular500.copyWith(
+              color: CommonColors.hintTextColor,
+            ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderSide: const BorderSide(
+                color: CommonColors.textFieldColor,
+              ),
+              borderRadius: BorderRadius.circular(
+                10,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: CommonColors.textFieldColor,
+              ),
+              borderRadius: BorderRadius.circular(
+                10,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: CommonColors.primary,
+              ),
+              borderRadius: BorderRadius.circular(
+                10,
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: CommonColors.redAccent,
+              ),
+              borderRadius: BorderRadius.circular(
+                10,
+              ),
             ),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 12,
