@@ -24,7 +24,7 @@ class _CommonButtonState extends State<CommonButton> {
       height: 50,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.orange,
+          backgroundColor: CommonColors.primary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
@@ -64,7 +64,7 @@ class _CommonDialogButtonState extends State<CommonDialogButton> {
           vertical: 12,
         ),
         // decoration: ShapeDecoration(
-        //   color: Colors.white,
+        //   color: CommonColors.whiteColor,
         //   shape: RoundedRectangleBorder(
         //     borderRadius: BorderRadius.circular(8),
         //   ),

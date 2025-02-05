@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
+import 'package:his_quiz/config/image_path.dart';
 import 'package:his_quiz/screens/students_screen/student_list/components/card_widget_student_list.dart';
 import 'package:his_quiz/widgets/common_bottom_bar.dart';
 import 'package:his_quiz/widgets/common_text_field.dart';
@@ -154,8 +156,14 @@ class _StudentListScreenState extends State<StudentListScreen> {
                                     const SizedBox(
                                       width: 6,
                                     ),
-                                    const Icon(
-                                      Icons.keyboard_arrow_down_rounded,
+                                    SvgPicture.asset(
+                                      ImagePath.dropDownIcon,
+                                      height: 25,
+                                      width: 25,
+                                      colorFilter: const ColorFilter.mode(
+                                        CommonColors.blackColor,
+                                        BlendMode.srcIn,
+                                      ),
                                     ),
                                   ],
                                 ),

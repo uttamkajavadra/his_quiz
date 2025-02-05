@@ -30,7 +30,7 @@ class _CardWidgetSchoolSelectionState extends State<CardWidgetSchoolSelection> {
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: CommonColors.whiteColor,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
             color: CommonColors.borderColor,

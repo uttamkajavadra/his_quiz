@@ -9,10 +9,10 @@ showLoadingDialog() {
       Get.dialog(
         Center(
           child: Material(
-            color: Colors.transparent,
+            color: CommonColors.transparentColor,
             child: Container(
               decoration: BoxDecoration(
-                // color: Colors.white,
+                // color: CommonColors.whiteColor,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: const CircularProgressIndicator(

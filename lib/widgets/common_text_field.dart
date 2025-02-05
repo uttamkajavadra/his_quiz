@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
+import 'package:his_quiz/config/image_path.dart';
 
 class CommonAuthField extends StatefulWidget {
   final String titleText;
@@ -152,6 +154,15 @@ class _CommonSearchFieldState extends State<CommonSearchField> {
                     widget.icon,
                     size: 20,
                   ),
+                  // prefixIcon: SvgPicture.asset(
+                  //   ImagePath.searchIcon,
+                  //   height: 30,
+                  //   width: 30,
+                  //   colorFilter: const ColorFilter.mode(
+                  //     CommonColors.blackColor,
+                  //     BlendMode.srcIn,
+                  //   ),
+                  // ),
                   hintStyle: CommonTextStyle.regular400.copyWith(
                     color: CommonColors.hintTextColor,
                     fontSize: 14,

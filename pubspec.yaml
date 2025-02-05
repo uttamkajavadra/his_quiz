@@ -42,6 +42,8 @@ dependencies:
   intl: ^0.20.2
   fluttertoast: ^8.2.8
   dotted_decoration: ^2.0.0
+  flutter_svg: ^2.0.17
+  dotted_border: ^2.1.0
 
 dev_dependencies:
   flutter_test:
