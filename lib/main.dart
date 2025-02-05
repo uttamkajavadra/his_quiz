@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         textTheme: const TextTheme(
           bodyMedium: TextStyle(
             color: CommonColors.textBlackColor,
-          ), // Use bodyMedium instead of bodyText2
+          ),
         ),
       ),
       home: const SplashScreen(),

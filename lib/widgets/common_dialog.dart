@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:his_quiz/config/common_colors.dart';
+import 'package:his_quiz/config/image_path.dart';
 import 'package:his_quiz/screens/students_screen/selected_student/selected_student_screen.dart';
 import 'package:his_quiz/screens/students_screen/student_list/student_list_screen.dart';
 import 'package:his_quiz/widgets/common_button.dart';
@@ -62,7 +65,7 @@ class VerifyFaceDialogState extends State<VerifyFaceDialog>
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: ShapeDecoration(
-          color: Colors.white,
+          color: CommonColors.whiteColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
@@ -88,7 +91,7 @@ class VerifyFaceDialogState extends State<VerifyFaceDialog>
                         width: 100 * animation.value,
                         height: 100 * animation.value,
                         decoration: BoxDecoration(
-                          color: Colors.orange.withOpacity(0.2),
+                          color: CommonColors.primary.withOpacity(0.2),
                           shape: BoxShape.circle,
                         ),
                       ),
@@ -101,7 +104,7 @@ class VerifyFaceDialogState extends State<VerifyFaceDialog>
                         width: 80 * animation.value,
                         height: 80 * animation.value,
                         decoration: BoxDecoration(
-                          color: Colors.orange.withOpacity(0.4),
+                          color: CommonColors.primary.withOpacity(0.4),
                           shape: BoxShape.circle,
                         ),
                       ),
@@ -114,7 +117,7 @@ class VerifyFaceDialogState extends State<VerifyFaceDialog>
                         width: 60,
                         height: 60,
                         decoration: const BoxDecoration(
-                          color: Colors.orange,
+                          color: CommonColors.primary,
                           shape: BoxShape.circle,
                         ),
                       ),
@@ -125,11 +128,20 @@ class VerifyFaceDialogState extends State<VerifyFaceDialog>
                         duration: const Duration(
                           milliseconds: 500,
                         ),
-                        child: const Icon(
-                          Icons.check,
-                          color: Colors.white,
-                          size: 30,
+                        child: SvgPicture.asset(
+                          ImagePath.doneIcon,
+                          height: 30,
+                          width: 30,
+                          colorFilter: const ColorFilter.mode(
+                            CommonColors.whiteColor,
+                            BlendMode.srcIn,
+                          ),
                         ),
+                        // child: const Icon(
+                        //   Icons.check,
+                        //   color: CommonColors.whiteColor,
+                        //   size: 30,
+                        // ),
                       ),
                     ],
                   );
@@ -251,7 +263,7 @@ class _RemoveStudentDialogState extends State<RemoveStudentDialog>
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: ShapeDecoration(
-          color: Colors.white,
+          color: CommonColors.whiteColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
@@ -277,7 +289,7 @@ class _RemoveStudentDialogState extends State<RemoveStudentDialog>
                         width: 100 * animation.value,
                         height: 100 * animation.value,
                         decoration: BoxDecoration(
-                          color: Colors.red.withOpacity(0.2),
+                          color: CommonColors.redAccent.withOpacity(0.2),
                           shape: BoxShape.circle,
                         ),
                       ),
@@ -290,7 +302,7 @@ class _RemoveStudentDialogState extends State<RemoveStudentDialog>
                         width: 80 * animation.value,
                         height: 80 * animation.value,
                         decoration: BoxDecoration(
-                          color: Colors.red.withOpacity(0.4),
+                          color: CommonColors.redAccent.withOpacity(0.4),
                           shape: BoxShape.circle,
                         ),
                       ),
@@ -303,7 +315,7 @@ class _RemoveStudentDialogState extends State<RemoveStudentDialog>
                         width: 60,
                         height: 60,
                         decoration: const BoxDecoration(
-                          color: Colors.red,
+                          color: CommonColors.redAccent,
                           shape: BoxShape.circle,
                         ),
                       ),
@@ -314,11 +326,20 @@ class _RemoveStudentDialogState extends State<RemoveStudentDialog>
                         duration: const Duration(
                           milliseconds: 500,
                         ),
-                        child: const Icon(
-                          Icons.delete_outline_rounded,
-                          color: Colors.white,
-                          size: 30,
+                        child: SvgPicture.asset(
+                          ImagePath.deleteIcon,
+                          height: 30,
+                          width: 30,
+                          colorFilter: const ColorFilter.mode(
+                            CommonColors.whiteColor,
+                            BlendMode.srcIn,
+                          ),
                         ),
+                        // child: const Icon(
+                        //   Icons.delete_outline_rounded,
+                        //   color: CommonColors.whiteColor,
+                        //   size: 30,
+                        // ),
                       ),
                     ],
                   );

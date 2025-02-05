@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:his_quiz/config/common_colors.dart';
@@ -61,18 +62,15 @@ class _FaceVerificationScreenState extends State<FaceVerificationScreen> {
               ),
               child: Column(
                 children: [
-                  Container(
-                    clipBehavior: Clip.antiAlias,
-                    decoration: ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                        side: const BorderSide(
-                          width: 2,
-                          strokeAlign: BorderSide.strokeAlignCenter,
-                          color: Color(0xFFFB923C),
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
+                  DottedBorder(
+                    color: CommonColors.primary,
+                    strokeWidth: 2,
+                    borderType: BorderType.RRect,
+                    radius: const Radius.circular(15),
+                    dashPattern: const [
+                      15,
+                      15,
+                    ],
                     child: Stack(
                       children: [
                         Container(
@@ -123,6 +121,7 @@ class _FaceVerificationScreenState extends State<FaceVerificationScreen> {
                       ],
                     ),
                   ),
+
                   // commonButton(
                   //     title: "Verify Face",
                   //     margin: EdgeInsets.only(top: Get.height*0.1,left: 12,right: 12),
