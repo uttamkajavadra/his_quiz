@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
-import 'package:his_quiz/config/image_path.dart';
 
 class CommonAuthField extends StatefulWidget {
   final String titleText;
