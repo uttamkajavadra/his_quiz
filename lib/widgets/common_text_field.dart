@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
+import 'package:his_quiz/config/image_path.dart';
 
 class CommonAuthField extends StatefulWidget {
   final String titleText;
@@ -93,8 +95,9 @@ class _CommonAuthFieldState extends State<CommonAuthField> {
             suffixIcon: widget.isPassword
                 ? IconButton(
                     icon: Icon(
-                      _obscureText ? Icons.visibility : Icons.visibility_off,
+                      _obscureText ? Icons.visibility_outlined : Icons.visibility_off_outlined,
                     ),
+                    color: CommonColors.textBlackColor,
                     onPressed: () {
                       setState(() {
                         _obscureText = !_obscureText;
@@ -148,19 +151,19 @@ class _CommonSearchFieldState extends State<CommonSearchField> {
                     left: 20,
                   ),
                   hintText: widget.hintText,
-                  prefixIcon: Icon(
-                    widget.icon,
-                    size: 20,
+                  prefixIcon: Container(
+                    height: 30,
+                    padding: const EdgeInsets.all(12.0),
+                    child: SvgPicture.asset(
+                      ImagePath.searchIcon,
+                      height: 30,
+                      width: 30,
+                      colorFilter: const ColorFilter.mode(
+                        CommonColors.blackColor,
+                        BlendMode.srcIn,
+                      ),
+                    ),
                   ),
-                  // prefixIcon: SvgPicture.asset(
-                  //   ImagePath.searchIcon,
-                  //   height: 30,
-                  //   width: 30,
-                  //   colorFilter: const ColorFilter.mode(
-                  //     CommonColors.blackColor,
-                  //     BlendMode.srcIn,
-                  //   ),
-                  // ),
                   hintStyle: CommonTextStyle.regular400.copyWith(
                     color: CommonColors.hintTextColor,
                     fontSize: 14,
