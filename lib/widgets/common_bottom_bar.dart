@@ -9,7 +9,7 @@ commonBottomBar() {
     mainAxisSize: MainAxisSize.min,
     children: [
       Container(
-        height: Get.width * 0.2,
+        height:70,
         color: CommonColors.primary,
         child: Row(
           children: [
