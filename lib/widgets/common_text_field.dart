@@ -1,0 +1,168 @@
+import 'package:flutter/material.dart';
+import 'package:his_quiz/config/common_colors.dart';
+import 'package:his_quiz/config/common_text_style.dart';
+
+class CommonAuthField extends StatefulWidget {
+  final String titleText;
+  final String hintText;
+  final TextEditingController controller;
+  final bool isPassword;
+
+  const CommonAuthField({
+    super.key,
+    required this.titleText,
+    required this.hintText,
+    required this.controller,
+    this.isPassword = false,
+  });
+
+  @override
+  State<CommonAuthField> createState() => _CommonAuthFieldState();
+}
+
+class _CommonAuthFieldState extends State<CommonAuthField> {
+  bool _obscureText = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _obscureText = widget.isPassword;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.titleText,
+          style: CommonTextStyle.bold.copyWith(
+            fontSize: 16,
+          ),
+        ),
+        const SizedBox(
+          height: 6,
+        ),
+        TextField(
+          controller: widget.controller,
+          obscureText: widget.isPassword ? _obscureText : false,
+          decoration: InputDecoration(
+            hintText: widget.hintText,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: 14,
+            ),
+            suffixIcon: widget.isPassword
+                ? IconButton(
+                    icon: Icon(
+                      _obscureText ? Icons.visibility : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
+                  )
+                : null,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class CommonSearchField extends StatefulWidget {
+  final String hintText;
+  final IconData icon;
+
+  const CommonSearchField({
+    super.key,
+    required this.hintText,
+    required this.icon,
+  });
+
+  @override
+  State<CommonSearchField> createState() => _CommonSearchFieldState();
+}
+
+class _CommonSearchFieldState extends State<CommonSearchField> {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextFormField(
+                textAlign: TextAlign.start,
+                keyboardType: TextInputType.text,
+                style: CommonTextStyle.regular500.copyWith(
+                  fontSize: 16,
+                ),
+                decoration: InputDecoration(
+                  fillColor: CommonColors.whiteColor,
+                  contentPadding: const EdgeInsets.only(
+                    top: 8,
+                    bottom: 16,
+                    right: 20,
+                    left: 20,
+                  ),
+                  hintText: widget.hintText,
+                  prefixIcon: Icon(
+                    widget.icon,
+                    size: 20,
+                  ),
+                  hintStyle: CommonTextStyle.regular400.copyWith(
+                    color: CommonColors.hintTextColor,
+                    fontSize: 14,
+                  ),
+                  border: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                      color: CommonColors.textFieldColor,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      10,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                      color: CommonColors.textFieldColor,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      10,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                      color: CommonColors.textFieldColor,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      10,
+                    ),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                      color: CommonColors.textFieldColor,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      10,
+                    ),
+                  ),
+                ),
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
