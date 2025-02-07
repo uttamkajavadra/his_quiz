@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
-import 'package:his_quiz/screens/students_screen/selected_student/selected_student_screen.dart';
-import 'package:his_quiz/screens/students_screen/student_details/student_details_screen.dart';
+import 'package:his_quiz/admin/students_screen/selected_student/selected_student_screen.dart';
+import 'package:his_quiz/admin/students_screen/student_details/student_details_screen.dart';
+import 'package:his_quiz/widgets/common_dialog.dart';
 
 class CardWidgetStudentList extends StatefulWidget {
   final int index;
@@ -98,6 +99,17 @@ class _CardWidgetStudentListState extends State<CardWidgetStudentList> {
                     ],
                   ),
                 ],
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                Get.dialog(
+                  const RemoveStudentDialog(),
+                );
+              },
+              icon: const Icon(
+                Icons.delete_outline,
+                color: CommonColors.redAccent,
               ),
             ),
           ],

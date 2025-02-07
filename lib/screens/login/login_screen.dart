@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
-import 'package:his_quiz/screens/compitition_seasons/compitition_seasons_screen.dart';
+import 'package:his_quiz/admin/compitition_seasons/compitition_seasons_screen.dart';
 import 'package:his_quiz/widgets/common_bottom_bar.dart';
 import 'package:his_quiz/widgets/common_button.dart';
 import 'package:his_quiz/widgets/common_text_field.dart';

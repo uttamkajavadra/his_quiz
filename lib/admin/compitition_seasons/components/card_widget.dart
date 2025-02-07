@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:his_quiz/admin/year_and_subject/year_and_subject_screen.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
-import 'package:his_quiz/screens/compitition_seasons/components/icon_title_widget.dart';
-import 'package:his_quiz/screens/school_selection/school_selection_screen.dart';
+import 'package:his_quiz/admin/compitition_seasons/components/icon_title_widget.dart';
+import 'package:his_quiz/admin/levels/levels_screen.dart';
 
 class CardWidget extends StatefulWidget {
   final int index;
@@ -24,9 +25,7 @@ class _CardWidgetState extends State<CardWidget> {
     return GestureDetector(
       onTap: () {
         Get.to(
-          SchoolSelectionScreen(
-            season: "Season ${widget.index + 1}",
-          ),
+          const YearAndSubjectScreen(),
         );
       },
       child: Container(

@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
-import 'package:his_quiz/screens/students_screen/student_details/components/title_subtitle.dart';
-import 'package:his_quiz/screens/students_screen/student_details/face_verification_screen.dart';
+import 'package:his_quiz/admin/students_screen/student_details/components/title_subtitle.dart';
+import 'package:his_quiz/admin/students_screen/student_details/face_verification_screen.dart';
 import 'package:his_quiz/widgets/common_bottom_bar.dart';
 import 'package:his_quiz/widgets/common_button.dart';
 
