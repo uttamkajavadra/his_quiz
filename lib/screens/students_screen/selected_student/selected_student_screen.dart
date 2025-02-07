@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
+import 'package:his_quiz/config/image_path.dart';
 import 'package:his_quiz/screens/students_screen/selected_student/components/selected_student_card_widget.dart';
+import 'package:his_quiz/screens/students_screen/student_list/student_list_screen.dart';
 import 'package:his_quiz/widgets/common_bottom_bar.dart';
 import 'package:his_quiz/widgets/common_text_field.dart';
 
@@ -95,13 +98,13 @@ class _SelectedStudentScreenState extends State<SelectedStudentScreen> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            InkWell(
+                            GestureDetector(
                               onTap: () {
-                                // Get.to(
-                                //   StudentListScreen(
-                                //     isSelectedStudentScreen: true,
-                                //   ),
-                                // );
+                                Get.to(
+                                  const StudentListScreen(
+                                    isSelectedStudentScreen: true,
+                                  ),
+                                );
                               },
                               child: const Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -109,20 +112,25 @@ class _SelectedStudentScreenState extends State<SelectedStudentScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Icon(
-                                    Icons.add_rounded,
+                                    Icons.person_add_alt_1_outlined,
                                     color: CommonColors.primary,
+                                    size: 20,
                                   ),
+                                  // Icon(
+                                  //   Icons.add,
+                                  //   color: CommonColors.primary,
+                                  //   size: 20,
+                                  // ),
                                   SizedBox(
                                     width: 4,
                                   ),
                                   Text(
-                                    'Add student',
+                                    'Add Student',
                                     style: TextStyle(
                                       color: Color(0xFFFB923C),
                                       fontSize: 14,
                                       fontFamily: 'Inter',
                                       fontWeight: FontWeight.w500,
-                                      decoration: TextDecoration.underline,
                                       decorationColor: CommonColors.primary,
                                       height: 1.57,
                                     ),
@@ -191,8 +199,14 @@ class _SelectedStudentScreenState extends State<SelectedStudentScreen> {
                                         const SizedBox(
                                           width: 6,
                                         ),
-                                        const Icon(
-                                          Icons.keyboard_arrow_down_rounded,
+                                        SvgPicture.asset(
+                                          ImagePath.dropDownIcon,
+                                          height: 30,
+                                          width: 30,
+                                          colorFilter: const ColorFilter.mode(
+                                            CommonColors.blackColor,
+                                            BlendMode.srcIn,
+                                          ),
                                         ),
                                       ],
                                     ),

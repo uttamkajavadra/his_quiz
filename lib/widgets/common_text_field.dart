@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
+import 'package:his_quiz/config/image_path.dart';
 
 class CommonAuthField extends StatefulWidget {
   final String titleText;
   final String hintText;
   final TextEditingController controller;
   final bool isPassword;
+  final String? Function(String?)? validator;
 
   const CommonAuthField({
     super.key,
@@ -14,6 +17,7 @@ class CommonAuthField extends StatefulWidget {
     required this.hintText,
     required this.controller,
     this.isPassword = false,
+    this.validator,
   });
 
   @override
@@ -37,19 +41,52 @@ class _CommonAuthFieldState extends State<CommonAuthField> {
         Text(
           widget.titleText,
           style: CommonTextStyle.bold.copyWith(
-            fontSize: 16,
+            fontSize: 14,
           ),
         ),
         const SizedBox(
           height: 6,
         ),
-        TextField(
+        TextFormField(
           controller: widget.controller,
           obscureText: widget.isPassword ? _obscureText : false,
+          validator: widget.validator,
           decoration: InputDecoration(
             hintText: widget.hintText,
+            hintStyle: CommonTextStyle.regular500.copyWith(
+              color: CommonColors.hintTextColor,
+            ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderSide: const BorderSide(
+                color: CommonColors.textFieldColor,
+              ),
+              borderRadius: BorderRadius.circular(
+                10,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: CommonColors.textFieldColor,
+              ),
+              borderRadius: BorderRadius.circular(
+                10,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: CommonColors.primary,
+              ),
+              borderRadius: BorderRadius.circular(
+                10,
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: CommonColors.redAccent,
+              ),
+              borderRadius: BorderRadius.circular(
+                10,
+              ),
             ),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 12,
@@ -58,8 +95,9 @@ class _CommonAuthFieldState extends State<CommonAuthField> {
             suffixIcon: widget.isPassword
                 ? IconButton(
                     icon: Icon(
-                      _obscureText ? Icons.visibility : Icons.visibility_off,
+                      _obscureText ? Icons.visibility_outlined : Icons.visibility_off_outlined,
                     ),
+                    color: CommonColors.textBlackColor,
                     onPressed: () {
                       setState(() {
                         _obscureText = !_obscureText;
@@ -113,9 +151,18 @@ class _CommonSearchFieldState extends State<CommonSearchField> {
                     left: 20,
                   ),
                   hintText: widget.hintText,
-                  prefixIcon: Icon(
-                    widget.icon,
-                    size: 20,
+                  prefixIcon: Container(
+                    height: 30,
+                    padding: const EdgeInsets.all(12.0),
+                    child: SvgPicture.asset(
+                      ImagePath.searchIcon,
+                      height: 30,
+                      width: 30,
+                      colorFilter: const ColorFilter.mode(
+                        CommonColors.blackColor,
+                        BlendMode.srcIn,
+                      ),
+                    ),
                   ),
                   hintStyle: CommonTextStyle.regular400.copyWith(
                     color: CommonColors.hintTextColor,
