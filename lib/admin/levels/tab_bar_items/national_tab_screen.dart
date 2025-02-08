@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:his_quiz/admin/compitition_seasons/components/card_widget.dart';
 import 'package:his_quiz/admin/levels/components/card_widget_levels_selection.dart';
 
 class NationalTabScreen extends StatefulWidget {

@@ -5,7 +5,6 @@ import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
 import 'package:his_quiz/admin/compitition_seasons/components/icon_title_widget.dart';
-import 'package:his_quiz/admin/levels/levels_screen.dart';
 
 class CardWidget extends StatefulWidget {
   final int index;

@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
-import 'package:his_quiz/config/image_path.dart';
 import 'package:his_quiz/admin/students_screen/selected_student/components/selected_student_card_widget.dart';
-import 'package:his_quiz/admin/students_screen/student_list/student_list_screen.dart';
 import 'package:his_quiz/widgets/common_bottom_bar.dart';
 import 'package:his_quiz/widgets/common_button.dart';
 import 'package:his_quiz/widgets/common_dialog.dart';

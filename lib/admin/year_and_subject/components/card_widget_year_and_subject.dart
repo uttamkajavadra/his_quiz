@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:his_quiz/admin/levels/levels_screen.dart';
-import 'package:his_quiz/config/common_colors.dart';
-import 'package:his_quiz/config/common_text_style.dart';
-import 'package:his_quiz/config/image_path.dart';
-import 'package:his_quiz/admin/students_screen/student_list/student_list_screen.dart';
 
 class CardWidgetYeasrAndSubject extends StatefulWidget {
   final int index;
