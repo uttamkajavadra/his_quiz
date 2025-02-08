@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:his_quiz/admin/speed_round/round_1/round_1_screen.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/admin/students_screen/selected_student/components/selected_student_card_widget.dart';
 import 'package:his_quiz/widgets/common_bottom_bar.dart';
@@ -143,7 +144,15 @@ class _SelectedStudentScreenState extends State<SelectedStudentScreen> {
                   child: CommonDialogButton(
                     title: "Start Round 1",
                     leftButton: false,
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(
+                        const Round1Screen(
+                          isGroupWiseRound: false,
+                          currentNumber: 20,
+                          totalNumber: 200,
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],

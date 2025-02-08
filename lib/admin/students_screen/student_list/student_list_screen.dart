@@ -142,17 +142,18 @@ class _StudentListScreenState extends State<StudentListScreen>
               border: Border.all(
                 color: CommonColors.primary,
               ),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(8),
             ),
             margin: const EdgeInsets.symmetric(
               horizontal: 20,
               vertical: 10,
             ),
+            padding: const EdgeInsets.all(4),
             child: TabBar(
               controller: tabController,
               indicator: BoxDecoration(
                 color: CommonColors.primary,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(4),
               ),
               indicatorColor: CommonColors.transparentColor,
               indicatorSize: TabBarIndicatorSize.tab,
