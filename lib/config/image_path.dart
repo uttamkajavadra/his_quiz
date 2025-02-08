@@ -9,6 +9,7 @@ class ImagePath {
   static const locationIcon = "assets/image/location_icon.png";
   static const doneIcon = "assets/image/done.svg";
   static const deleteIcon = "assets/image/delete.svg";
+  static const dangerCircleIcon = "assets/image/danger_circle.svg";
   static const dropDownIcon = "assets/image/dorp_down.svg";
   static const searchIcon = "assets/image/search.svg";
   static const faceScan = "assets/image/face_scan_icon.png";

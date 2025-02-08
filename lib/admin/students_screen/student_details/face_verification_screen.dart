@@ -165,6 +165,7 @@ class _FaceVerificationScreenState extends State<FaceVerificationScreen> {
                       onPressed: () {
                         Get.dialog(
                           const VerifyFaceDialog(),
+                          // const VerificationFaliedStudentDialog(),
                         );
                       },
                     ),

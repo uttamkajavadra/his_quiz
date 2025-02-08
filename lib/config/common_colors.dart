@@ -9,6 +9,7 @@ class CommonColors {
   static const Color transparentColor = Colors.transparent;
 
   static const Color primary = Color(0xffFB923C);
+  static Color? primaryBorderColor = Colors.orange[100];
   static const Color purple = Color(0xff4B4294);
   static const Color redAccent = Color(0xffF04438);
   static const Color scaffoldBackgroundColor = Color(0xffFEFCFA);
