@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:his_quiz/admin/speed_round/round_1/group_wise/group_wise_speed_round_screen.dart';
-import 'package:his_quiz/admin/speed_round/round_1/student_wise/student_wise_speed_round_screen.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
 import 'package:his_quiz/widgets/common_bottom_bar.dart';
 import 'package:his_quiz/widgets/common_button.dart';
 
-class Round1Screen extends StatefulWidget {
+class Round3Screen extends StatefulWidget {
   final bool isGroupWiseRound;
-  final int currentNumber;
-  final int totalNumber;
-  const Round1Screen({
+  final int totalQuestions;
+  final int questionTime;
+  const Round3Screen({
     super.key,
     required this.isGroupWiseRound,
-    required this.currentNumber,
-    required this.totalNumber,
+    required this.totalQuestions,
+    required this.questionTime,
   });
 
   @override
-  State<Round1Screen> createState() => _Round1ScreenState();
+  State<Round3Screen> createState() => _Round3ScreenState();
 }
 
-class _Round1ScreenState extends State<Round1Screen> {
+class _Round3ScreenState extends State<Round3Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +52,7 @@ class _Round1ScreenState extends State<Round1Screen> {
                   ),
                   Expanded(
                     child: Text(
-                      "Round 1",
+                      "Round 3",
                       textAlign: TextAlign.center,
                       style: CommonTextStyle.regular600.copyWith(
                         fontSize: 20,
@@ -90,7 +88,7 @@ class _Round1ScreenState extends State<Round1Screen> {
                     ),
                     padding: const EdgeInsets.all(16),
                     child: SvgPicture.asset(
-                      ImagePath.speedRound1Icon,
+                      ImagePath.speedRound3Icon,
                       height: 100,
                       width: 100,
                     ),
@@ -99,7 +97,7 @@ class _Round1ScreenState extends State<Round1Screen> {
                     height: 12,
                   ),
                   const Text(
-                    "Speed Round",
+                    "Pick N Answer Round",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
@@ -154,26 +152,30 @@ Lorem ipsum dolor sit amet consectetur. Varius pretium cursus laoreet eu amet cu
             ),
             child: CommonButton(
               child: Text(
-                "Start Round 1",
+                "Start Round 3",
                 style: CommonTextStyle.bold.copyWith(
                   fontSize: 16,
                   color: CommonColors.whiteColor,
                 ),
               ),
               onPressed: () {
-                widget.isGroupWiseRound
-                    ? Get.to(
-                        GroupWiseSpeedRoundScreen(
-                          currentGroupNumber: widget.currentNumber,
-                          totalGroupNumber: widget.totalNumber,
-                        ),
-                      )
-                    : Get.to(
-                        StudentWiseSpeedRoundScreen(
-                          currentStudentNumber: widget.currentNumber,
-                          totalStudentNumber: widget.totalNumber,
-                        ),
-                      );
+                // widget.isGroupWiseRound
+                //     ? Get.to(
+                //         GroupWiseSpeedRound2Screen(
+                //           currentGroupNumber: widget.currentNumber,
+                //           totalGroupNumber: widget.totalNumber,
+                //           questionTime: widget.questionTime,
+                //           currentQuestionNumber: 5,
+                //           totalQuestionNumber: widget.totalQuestions,
+                //         ),
+                //       )
+                //     : Get.to(
+                //         StudentWiseSpeedRound2Screen(
+                //           questionTime: widget.questionTime,
+                //           currentQuestionNumber: 5,
+                //           totalQuestionNumber: widget.totalQuestions,
+                //         ),
+                //       );
               },
             ),
           ),

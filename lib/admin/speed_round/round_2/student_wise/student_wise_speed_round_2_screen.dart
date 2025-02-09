@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:his_quiz/admin/speed_round/round_2/student_wise/components/card_widget_student_wise_round_2.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
@@ -10,31 +11,25 @@ import 'package:his_quiz/widgets/common_bottom_bar.dart';
 import 'package:his_quiz/widgets/common_button.dart';
 import 'package:his_quiz/widgets/common_dialog.dart';
 
-class StudentWiseSpeedRoundScreen extends StatefulWidget {
-  final int currentStudentNumber;
-  final int totalStudentNumber;
-  const StudentWiseSpeedRoundScreen({
+class StudentWiseSpeedRound2Screen extends StatefulWidget {
+  final int questionTime;
+  final int currentQuestionNumber;
+  final int totalQuestionNumber;
+
+  const StudentWiseSpeedRound2Screen({
     super.key,
-    required this.currentStudentNumber,
-    required this.totalStudentNumber,
+    required this.questionTime,
+    required this.currentQuestionNumber,
+    required this.totalQuestionNumber,
   });
 
   @override
-  State<StudentWiseSpeedRoundScreen> createState() =>
-      _StudentWiseSpeedRoundScreenState();
+  State<StudentWiseSpeedRound2Screen> createState() =>
+      _StudentWiseSpeedRound2ScreenState();
 }
 
-class _StudentWiseSpeedRoundScreenState
-    extends State<StudentWiseSpeedRoundScreen> {
-  List<String> options = [
-    "Earth",
-    "Mars",
-    "Jupiter",
-    "Venus",
-  ];
-
-  int? selectedAnswerIndex;
-
+class _StudentWiseSpeedRound2ScreenState
+    extends State<StudentWiseSpeedRound2Screen> {
   // Set initial countdown time in seconds
   int remainingSeconds = 60;
   Timer? timer;
@@ -42,6 +37,7 @@ class _StudentWiseSpeedRoundScreenState
   @override
   void initState() {
     super.initState();
+    remainingSeconds = widget.questionTime;
     startTimer();
   }
 
@@ -99,7 +95,7 @@ class _StudentWiseSpeedRoundScreenState
                   Expanded(
                     child: Center(
                       child: Text(
-                        "Speed Round",
+                        "Best Answer",
                         textAlign: TextAlign.center,
                         style: CommonTextStyle.regular600.copyWith(
                           fontSize: 20,
@@ -157,14 +153,14 @@ class _StudentWiseSpeedRoundScreenState
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                "Student No :",
+                "Question No :",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               Text(
-                "${widget.currentStudentNumber}/${widget.totalStudentNumber}",
+                "${widget.currentQuestionNumber}/${widget.totalQuestionNumber}",
                 style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
@@ -176,152 +172,66 @@ class _StudentWiseSpeedRoundScreenState
           const SizedBox(
             height: 20,
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 20,
-            ),
-            child: Text(
-              "What is the largest planet in our solar system?",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                width: 60,
+                height: 60,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: CommonColors.primary,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(6),
+                  child: Transform(
+                    alignment: Alignment.center,
+                    transform: Matrix4.diagonal3Values(
+                      -1,
+                      1,
+                      1,
+                    ),
+                    child: CircularProgressIndicator(
+                      value: remainingSeconds / widget.questionTime,
+                      strokeWidth: 6,
+                      backgroundColor: CommonColors.whiteColor,
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                        CommonColors.primary,
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            ),
+              Text(
+                '$remainingSeconds',
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: CommonColors.whiteColor,
+                ),
+              ),
+            ],
           ),
           const SizedBox(
             height: 20,
           ),
           Expanded(
             child: ListView.builder(
+              itemCount: 10,
+              physics: const BouncingScrollPhysics(),
               padding: const EdgeInsets.symmetric(
-                horizontal: 20,
+                horizontal: 16,
+                vertical: 16,
               ),
-              itemCount: options.length,
               itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedAnswerIndex = index;
-                    });
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.only(
-                      bottom: 12,
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 14,
-                    ),
-                    decoration: BoxDecoration(
-                      color: selectedAnswerIndex == index
-                          ? CommonColors.primary.withOpacity(0.1)
-                          : CommonColors.whiteColor,
-                      border: Border.all(
-                        color: selectedAnswerIndex == index
-                            ? CommonColors.primary
-                            : Colors.grey.shade300,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Center(
-                      child: Text(
-                        options[index],
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: selectedAnswerIndex == index
-                              ? CommonColors.primary
-                              : CommonColors.blackColor,
-                        ),
-                      ),
-                    ),
-                  ),
+                return CardWidgetStudentWiseRound2(
+                  index: index,
                 );
               },
             ),
           ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: const BorderRadius.all(
-                Radius.circular(8),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
-                  blurRadius: 8,
-                  spreadRadius: 2,
-                ),
-              ],
-            ),
-            child: Row(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(
-                    right: 8,
-                  ),
-                  child: Image.asset(
-                    ImagePath.studentImage,
-                    height: 64,
-                    width: 64,
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Giovani Romaguera",
-                        style: CommonTextStyle.regular500.copyWith(
-                          fontSize: 16,
-                        ),
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            ImagePath.homeIcon,
-                            width: 22,
-                            height: 22,
-                          ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 3,
-                            ),
-                            child: Text(
-                              "Delhi Public School",
-                              style: CommonTextStyle.regular400.copyWith(
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(
-                    left: 8,
-                  ),
-                  child: SvgPicture.asset(
-                    ImagePath.progressIcon,
-                    height: 52,
-                    width: 52,
-                  ),
-                ),
-              ],
-            ),
-          ).paddingOnly(
-            left: 20,
-            right: 20,
-          ),
           const SizedBox(
-            height: 10,
+            height: 20,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
@@ -337,7 +247,7 @@ class _StudentWiseSpeedRoundScreenState
               ),
               onPressed: () {
                 Get.dialog(
-                  const QuizResultRound1Dialog(),
+                  const QuizResultRound2Dialog(),
                 );
               },
             ),

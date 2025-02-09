@@ -21,6 +21,9 @@ class ImagePath {
   static const dropDownIcon = "assets/image/dorp_down.svg";
   static const searchIcon = "assets/image/search.svg";
   static const speedRound1Icon = "assets/image/speed_round_1.svg";
+  static const speedRound2Icon = "assets/image/speed_round_2.svg";
+  static const speedRound3Icon = "assets/image/speed_round_3.svg";
   static const timerIcon = "assets/image/timer.svg";
   static const progressIcon = "assets/image/progress.svg";
+  static const winnerIcon = "assets/image/winner.svg";
 }

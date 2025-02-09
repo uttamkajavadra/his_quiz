@@ -1,30 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:his_quiz/admin/speed_round/round_1/group_wise/group_wise_speed_round_screen.dart';
-import 'package:his_quiz/admin/speed_round/round_1/student_wise/student_wise_speed_round_screen.dart';
+import 'package:his_quiz/admin/speed_round/round_2/group_wise/group_wise_speed_round_2_screen.dart';
+import 'package:his_quiz/admin/speed_round/round_2/student_wise/student_wise_speed_round_2_screen.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
 import 'package:his_quiz/widgets/common_bottom_bar.dart';
 import 'package:his_quiz/widgets/common_button.dart';
 
-class Round1Screen extends StatefulWidget {
+class Round2Screen extends StatefulWidget {
   final bool isGroupWiseRound;
   final int currentNumber;
   final int totalNumber;
-  const Round1Screen({
+  final int totalQuestions;
+  final int questionTime;
+  const Round2Screen({
     super.key,
     required this.isGroupWiseRound,
     required this.currentNumber,
     required this.totalNumber,
+    required this.totalQuestions,
+    required this.questionTime,
   });
 
   @override
-  State<Round1Screen> createState() => _Round1ScreenState();
+  State<Round2Screen> createState() => _Round2ScreenState();
 }
 
-class _Round1ScreenState extends State<Round1Screen> {
+class _Round2ScreenState extends State<Round2Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +58,7 @@ class _Round1ScreenState extends State<Round1Screen> {
                   ),
                   Expanded(
                     child: Text(
-                      "Round 1",
+                      "Round 2",
                       textAlign: TextAlign.center,
                       style: CommonTextStyle.regular600.copyWith(
                         fontSize: 20,
@@ -90,7 +94,7 @@ class _Round1ScreenState extends State<Round1Screen> {
                     ),
                     padding: const EdgeInsets.all(16),
                     child: SvgPicture.asset(
-                      ImagePath.speedRound1Icon,
+                      ImagePath.speedRound2Icon,
                       height: 100,
                       width: 100,
                     ),
@@ -99,7 +103,7 @@ class _Round1ScreenState extends State<Round1Screen> {
                     height: 12,
                   ),
                   const Text(
-                    "Speed Round",
+                    "Best Answer Round",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
@@ -154,7 +158,7 @@ Lorem ipsum dolor sit amet consectetur. Varius pretium cursus laoreet eu amet cu
             ),
             child: CommonButton(
               child: Text(
-                "Start Round 1",
+                "Start Round 2",
                 style: CommonTextStyle.bold.copyWith(
                   fontSize: 16,
                   color: CommonColors.whiteColor,
@@ -163,15 +167,19 @@ Lorem ipsum dolor sit amet consectetur. Varius pretium cursus laoreet eu amet cu
               onPressed: () {
                 widget.isGroupWiseRound
                     ? Get.to(
-                        GroupWiseSpeedRoundScreen(
+                        GroupWiseSpeedRound2Screen(
                           currentGroupNumber: widget.currentNumber,
                           totalGroupNumber: widget.totalNumber,
+                          questionTime: widget.questionTime,
+                          currentQuestionNumber: 5,
+                          totalQuestionNumber: widget.totalQuestions,
                         ),
                       )
                     : Get.to(
-                        StudentWiseSpeedRoundScreen(
-                          currentStudentNumber: widget.currentNumber,
-                          totalStudentNumber: widget.totalNumber,
+                        StudentWiseSpeedRound2Screen(
+                          questionTime: widget.questionTime,
+                          currentQuestionNumber: 5,
+                          totalQuestionNumber: widget.totalQuestions,
                         ),
                       );
               },

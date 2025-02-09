@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class CommonColors {
   static const Color whiteColor = Color(0xffffffff);
   static const Color blackColor = Colors.black;
+  static const Color greenColor = Color(0xff00A651);
+  static const Color redColor = Color(0xffF04438);
   static const Color textBlackColor = Color(0xff21201D);
   static Color black50 = Colors.black.withOpacity(0.5);
 

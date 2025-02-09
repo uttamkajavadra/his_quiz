@@ -3,31 +3,25 @@ import 'package:get/get.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
-import 'package:his_quiz/admin/students_screen/student_details/student_details_screen.dart';
 import 'package:his_quiz/widgets/common_dialog.dart';
 
-class SelectedStudentCardWidget extends StatefulWidget {
+class CardWidgetWinnerList extends StatefulWidget {
   final int index;
 
-  const SelectedStudentCardWidget({
+  const CardWidgetWinnerList({
     super.key,
     required this.index,
   });
 
   @override
-  State<SelectedStudentCardWidget> createState() =>
-      _SelectedStudentCardWidgetState();
+  State<CardWidgetWinnerList> createState() => _CardWidgetWinnerListState();
 }
 
-class _SelectedStudentCardWidgetState extends State<SelectedStudentCardWidget> {
+class _CardWidgetWinnerListState extends State<CardWidgetWinnerList> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        // Get.to(
-        //   const StudentDetailsScreen(),
-        // );
-      },
+    return InkWell(
+      onTap: () async {},
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
@@ -87,7 +81,7 @@ class _SelectedStudentCardWidgetState extends State<SelectedStudentCardWidget> {
                             fontSize: 12,
                           ),
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ],

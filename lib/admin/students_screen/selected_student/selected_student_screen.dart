@@ -129,7 +129,7 @@ class _SelectedStudentScreenState extends State<SelectedStudentScreen> {
                     leftButton: true,
                     onTap: () {
                       Get.dialog(
-                        const DivideGroupDialog(
+                        const DivideGroupRound1Dialog(
                           // Static value
                           totalStudent: 200,
                         ),
