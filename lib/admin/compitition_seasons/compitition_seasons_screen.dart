@@ -473,18 +473,20 @@ class _CompititionSeasonsScreenState extends State<CompititionSeasonsScreen>
               color: Colors.orange.shade50,
               border: Border.all(
                 color: CommonColors.primary,
+                width: 0.3,
               ),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(8),
             ),
             margin: const EdgeInsets.symmetric(
               horizontal: 20,
               vertical: 10,
             ),
+            padding: const EdgeInsets.all(4),
             child: TabBar(
               controller: tabController,
               indicator: BoxDecoration(
                 color: CommonColors.primary,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(4),
               ),
               indicatorColor: CommonColors.transparentColor,
               indicatorSize: TabBarIndicatorSize.tab,
@@ -513,7 +515,6 @@ class _CompititionSeasonsScreenState extends State<CompititionSeasonsScreen>
             ),
           ),
           Expanded(
-            // Use Expanded to allow TabBarView to take available space
             child: TabBarView(
               controller: tabController,
               children: const [
@@ -523,18 +524,28 @@ class _CompititionSeasonsScreenState extends State<CompititionSeasonsScreen>
               ],
             ),
           ),
+          const SizedBox(
+            height: 20,
+          ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20.0,
+            ),
             child: CommonButton(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.add,
-                      size: 20, color: CommonColors.whiteColor),
+                  const Icon(
+                    Icons.add,
+                    size: 20,
+                    color: CommonColors.whiteColor,
+                  ),
                   Text(
                     "Add Season",
-                    style: CommonTextStyle.bold
-                        .copyWith(fontSize: 16, color: CommonColors.whiteColor),
+                    style: CommonTextStyle.bold.copyWith(
+                      fontSize: 16,
+                      color: CommonColors.whiteColor,
+                    ),
                   ),
                 ],
               ),
@@ -543,7 +554,9 @@ class _CompititionSeasonsScreenState extends State<CompititionSeasonsScreen>
               },
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(
+            height: 20,
+          ),
         ],
       ),
       bottomNavigationBar: commonBottomBar(),
