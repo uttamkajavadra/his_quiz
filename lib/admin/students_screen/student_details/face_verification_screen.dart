@@ -82,8 +82,8 @@ class _FaceVerificationScreenState extends State<FaceVerificationScreen> {
                           // ),
                           child: Image.asset(
                             ImagePath.studentImage,
-                            width: Get.width * 0.8,
-                            height: Get.width * 0.8,
+                            width: 300,
+                            height: 300,
                             fit: BoxFit.fill,
                           ),
                         ),
@@ -165,6 +165,7 @@ class _FaceVerificationScreenState extends State<FaceVerificationScreen> {
                       onPressed: () {
                         Get.dialog(
                           const VerifyFaceDialog(),
+                          // const VerificationFaliedStudentDialog(),
                         );
                       },
                     ),

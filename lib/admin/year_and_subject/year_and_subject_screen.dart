@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:his_quiz/admin/year_and_subject/components/card_widget_year_and_subject.dart';
 import 'package:his_quiz/config/common_text_style.dart';
-import 'package:his_quiz/screens/compitition_seasons/components/card_widget.dart';
 import 'package:his_quiz/widgets/common_bottom_bar.dart';
 
-class CompititionSeasonsScreen extends StatefulWidget {
-  const CompititionSeasonsScreen({super.key});
+class YearAndSubjectScreen extends StatefulWidget {
+  const YearAndSubjectScreen({super.key});
 
   @override
-  State<CompititionSeasonsScreen> createState() =>
-      _CompititionSeasonsScreenState();
+  State<YearAndSubjectScreen> createState() => _YearAndSubjectScreenState();
 }
 
-class _CompititionSeasonsScreenState extends State<CompititionSeasonsScreen> {
+class _YearAndSubjectScreenState extends State<YearAndSubjectScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: commonBottomBar(),
       body: Column(
         children: [
-          // commonAppBar(
-          //   title: "Competition Seasons",
-          // ),
+          // commonAppBar(title: "${widget.season}"),
           SafeArea(
             child: Container(
               height: 60,
@@ -42,7 +40,7 @@ class _CompititionSeasonsScreenState extends State<CompititionSeasonsScreen> {
                   ),
                   Expanded(
                     child: Text(
-                      "Competition Seasons",
+                      "Year and Subject",
                       textAlign: TextAlign.center,
                       style: CommonTextStyle.regular600.copyWith(
                         fontSize: 20,
@@ -69,18 +67,6 @@ class _CompititionSeasonsScreenState extends State<CompititionSeasonsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 24,
-                    ),
-                    child: Text(
-                      "Select State",
-                      textAlign: TextAlign.left,
-                      style: CommonTextStyle.regular700.copyWith(
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
                   ListView.builder(
                     itemCount: 10,
                     physics: const NeverScrollableScrollPhysics(),
@@ -90,8 +76,10 @@ class _CompititionSeasonsScreenState extends State<CompititionSeasonsScreen> {
                       vertical: 16,
                     ),
                     itemBuilder: (context, index) {
-                      return CardWidget(
+                      return CardWidgetYeasrAndSubject(
                         index: index,
+                        subject: "Maths",
+                        description: "Final Year Primary school Student",
                       );
                     },
                   )
@@ -101,7 +89,6 @@ class _CompititionSeasonsScreenState extends State<CompititionSeasonsScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: commonBottomBar(),
     );
   }
 }

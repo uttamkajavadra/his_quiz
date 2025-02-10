@@ -3,22 +3,22 @@ import 'package:get/get.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
-import 'package:his_quiz/screens/students_screen/student_list/student_list_screen.dart';
+import 'package:his_quiz/admin/students_screen/student_list/student_list_screen.dart';
 
-class CardWidgetSchoolSelection extends StatefulWidget {
+class CardWidgetLevelsSelection extends StatefulWidget {
   final int index;
 
-  const CardWidgetSchoolSelection({
+  const CardWidgetLevelsSelection({
     super.key,
     required this.index,
   });
 
   @override
-  State<CardWidgetSchoolSelection> createState() =>
-      _CardWidgetSchoolSelectionState();
+  State<CardWidgetLevelsSelection> createState() =>
+      _CardWidgetLevelsSelectionState();
 }
 
-class _CardWidgetSchoolSelectionState extends State<CardWidgetSchoolSelection> {
+class _CardWidgetLevelsSelectionState extends State<CardWidgetLevelsSelection> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

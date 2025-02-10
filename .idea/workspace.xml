@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9367161e-d16d-4077-84b9-06cd1d283579" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/his_quiz.iml" beforeDir="false" afterPath="$PROJECT_DIR$/his_quiz.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/common_app_bar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/common_app_bar.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,6 +72,7 @@
     "io.flutter.reload.alreadyRun": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/dreamworld/Documents/development/infotechsrealm/His-quiz-frontend",
+    "settings.editor.selected.configurable": "dart.settings",
     "show.migrate.to.gradle.popup": "false"
   }
 }]]></component>
