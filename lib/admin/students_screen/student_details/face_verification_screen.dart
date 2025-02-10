@@ -88,16 +88,12 @@ class _FaceVerificationScreenState extends State<FaceVerificationScreen> {
                           ),
                         ),
                         Positioned(
-                          left: 6,
+                          left: 10,
                           top: 7,
                           child: Container(
-                            width: 310,
+                            width: 322,
                             height: 191,
                             decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(20),
-                                topRight: Radius.circular(20),
-                              ),
                               gradient: LinearGradient(
                                 begin: const Alignment(
                                   0.00,
@@ -108,8 +104,8 @@ class _FaceVerificationScreenState extends State<FaceVerificationScreen> {
                                   1,
                                 ),
                                 colors: [
-                                  const Color(0x00FB923C).withOpacity(0.4),
-                                  const Color(0xFFFB923C).withOpacity(0.4),
+                                  const Color(0x00FB923C).withOpacity(0.2),
+                                  const Color(0xFFFB923C).withOpacity(0.2),
                                 ],
                               ),
                             ),

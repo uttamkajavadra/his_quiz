@@ -3,13 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:his_quiz/admin/group/review_group/review_group_screen.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/image_path.dart';
 import 'package:his_quiz/admin/students_screen/selected_student/selected_student_screen.dart';
 import 'package:his_quiz/admin/students_screen/student_list/student_list_screen.dart';
 import 'package:his_quiz/widgets/common_button.dart';
-import 'package:his_quiz/widgets/loading_dialog.dart';
 
 class VerifyFaceDialog extends StatefulWidget {
   const VerifyFaceDialog({super.key});
@@ -85,6 +83,7 @@ class VerifyFaceDialogState extends State<VerifyFaceDialog>
                   return Stack(
                     alignment: Alignment.center,
                     children: [
+                      // Outer Glow Circle
                       AnimatedContainer(
                         duration: const Duration(
                           milliseconds: 600,
@@ -96,6 +95,8 @@ class VerifyFaceDialogState extends State<VerifyFaceDialog>
                           shape: BoxShape.circle,
                         ),
                       ),
+
+                      // Middle Circle
                       AnimatedContainer(
                         duration: const Duration(
                           milliseconds: 400,
@@ -107,6 +108,8 @@ class VerifyFaceDialogState extends State<VerifyFaceDialog>
                           shape: BoxShape.circle,
                         ),
                       ),
+
+                      // Inner Circle
                       AnimatedContainer(
                         duration: const Duration(
                           milliseconds: 300,
@@ -118,6 +121,8 @@ class VerifyFaceDialogState extends State<VerifyFaceDialog>
                           shape: BoxShape.circle,
                         ),
                       ),
+
+                      // Checkmark Icon
                       AnimatedOpacity(
                         opacity: visible ? 1.0 : 0.0,
                         duration: const Duration(
@@ -278,6 +283,7 @@ class _VerificationFaliedStudentDialogState
                   return Stack(
                     alignment: Alignment.center,
                     children: [
+                      // Outer Glow Circle
                       AnimatedContainer(
                         duration: const Duration(
                           milliseconds: 600,
@@ -289,6 +295,8 @@ class _VerificationFaliedStudentDialogState
                           shape: BoxShape.circle,
                         ),
                       ),
+
+                      // Middle Circle
                       AnimatedContainer(
                         duration: const Duration(
                           milliseconds: 400,
@@ -300,6 +308,8 @@ class _VerificationFaliedStudentDialogState
                           shape: BoxShape.circle,
                         ),
                       ),
+
+                      // Inner Circle
                       AnimatedContainer(
                         duration: const Duration(
                           milliseconds: 300,
@@ -311,6 +321,8 @@ class _VerificationFaliedStudentDialogState
                           shape: BoxShape.circle,
                         ),
                       ),
+
+                      // Checkmark Icon
                       AnimatedOpacity(
                         opacity: visible ? 1.0 : 0.0,
                         duration: const Duration(
@@ -471,6 +483,7 @@ class _RemoveStudentDialogState extends State<RemoveStudentDialog>
                   return Stack(
                     alignment: Alignment.center,
                     children: [
+                      // Outer Glow Circle
                       AnimatedContainer(
                         duration: const Duration(
                           milliseconds: 600,
@@ -482,6 +495,8 @@ class _RemoveStudentDialogState extends State<RemoveStudentDialog>
                           shape: BoxShape.circle,
                         ),
                       ),
+
+                      // Middle Circle
                       AnimatedContainer(
                         duration: const Duration(
                           milliseconds: 400,
@@ -493,6 +508,8 @@ class _RemoveStudentDialogState extends State<RemoveStudentDialog>
                           shape: BoxShape.circle,
                         ),
                       ),
+
+                      // Inner Circle
                       AnimatedContainer(
                         duration: const Duration(
                           milliseconds: 300,
@@ -504,6 +521,8 @@ class _RemoveStudentDialogState extends State<RemoveStudentDialog>
                           shape: BoxShape.circle,
                         ),
                       ),
+
+                      // Checkmark Icon
                       AnimatedOpacity(
                         opacity: visible ? 1.0 : 0.0,
                         duration: const Duration(
@@ -587,16 +606,16 @@ class DivideGroupDialog extends StatefulWidget {
 }
 
 class _DivideGroupDialogState extends State<DivideGroupDialog> {
+  final TextEditingController _groupController = TextEditingController();
   int totalStudents = 0;
   int totalGroups = 0;
   int studentsPerGroup = 0;
 
   TextEditingController divideGroupController = TextEditingController();
 
-  final formKey = GlobalKey<FormState>();
-
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
 
     setState(() {
@@ -606,7 +625,7 @@ class _DivideGroupDialogState extends State<DivideGroupDialog> {
 
   void calculateGroups() {
     setState(() {
-      totalGroups = int.tryParse(divideGroupController.text) ?? 0;
+      totalGroups = int.tryParse(_groupController.text) ?? 0;
       studentsPerGroup = (totalGroups > 0) ? (totalStudents ~/ totalGroups) : 0;
     });
   }
@@ -675,9 +694,8 @@ class _DivideGroupDialogState extends State<DivideGroupDialog> {
         ),
         TextFormField(
           controller: controller,
-          // readOnly: true,
+          readOnly: true,
           validator: validator,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
           keyboardType: TextInputType.number,
           decoration: dialogInputDecoration(
             "Divide Group",
@@ -723,6 +741,7 @@ class _DivideGroupDialogState extends State<DivideGroupDialog> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            // Title Bar
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -740,29 +759,24 @@ class _DivideGroupDialogState extends State<DivideGroupDialog> {
               ],
             ),
             const SizedBox(height: 12),
-            Form(
-              key: formKey,
-              child: dialogTextField(
-                context,
-                "Divide Group",
-                divideGroupController,
-                (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Divide Group is required";
-                  }
-                  if (int.parse(value) <= 0) {
-                    return "Enter a valid number";
-                  }
-                  if (int.parse(value) > totalStudents) {
-                    return "Value cannot be greater than $totalStudents";
-                  }
-                  return null;
-                },
-              ),
+
+            // Input Field
+            dialogTextField(
+              context,
+              "Divide Group",
+              divideGroupController,
+              (value) {
+                if (value == null || value.isEmpty) {
+                  return "Divide Group is required";
+                }
+                return null;
+              },
             ),
             const SizedBox(
               height: 16,
             ),
+
+            // Display Group Calculations
             rowData(
               "Total Student",
               totalStudents.toString(),
@@ -775,9 +789,9 @@ class _DivideGroupDialogState extends State<DivideGroupDialog> {
               "Total student in group",
               studentsPerGroup.toString(),
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
+
+            // Action Buttons
             Row(
               children: [
                 Expanded(
@@ -789,38 +803,13 @@ class _DivideGroupDialogState extends State<DivideGroupDialog> {
                     },
                   ),
                 ),
-                const SizedBox(
-                  width: 12,
-                ),
+                const SizedBox(width: 12),
                 Expanded(
                   child: CommonDialogButton(
                     title: "Divide",
                     leftButton: false,
                     onTap: () {
-                      if (formKey.currentState!.validate()) {
-                        // Show Loading Dialog
-                        showLoadingDialog();
-
-                        Timer(
-                          const Duration(
-                            seconds: 2,
-                          ),
-                          () {
-                            // Hide Loading Dialog
-                            hideLoadingDialog();
-
-                            // Redirect
-                            Get.back();
-                            Get.to(
-                              ReviewGroupScreen(
-                                groupCount: totalGroups,
-                                studentsPerGroup: studentsPerGroup,
-                                totalGroups: totalGroups,
-                              ),
-                            );
-                          },
-                        );
-                      }
+                      Get.back();
                     },
                   ),
                 ),
