@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
-import 'package:his_quiz/admin/students_screen/student_details/student_details_screen.dart';
 import 'package:his_quiz/widgets/common_dialog.dart';
 
 class SelectedStudentCardWidget extends StatefulWidget {
