@@ -20,4 +20,5 @@ class ImagePath {
   static const timerIcon = "assets/image/timer.svg";
   static const progressIcon = "assets/image/progress.svg";
   static const speedRound1Icon = "assets/image/speed_round_1.svg";
+  static const hisQuizFooter = "assets/image/his_quiz_footer.png";
 }

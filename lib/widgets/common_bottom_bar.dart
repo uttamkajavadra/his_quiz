@@ -15,21 +15,18 @@ commonBottomBar() {
           children: [
             Image.asset(
               ImagePath.logo,
-              width: 120,
-              height: 64,
+              // width: 120,
+              height: double.infinity,
             ),
             Expanded(
-              child: Text(
-                "HIS-Quiz",
-                textAlign: TextAlign.center,
-                style: CommonTextStyle.regular700.copyWith(
-                  fontSize: 20,
-                ),
-              ),
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Image.asset(ImagePath.hisQuizFooter),
+              )
             ),
             Image.asset(
               ImagePath.powerBY,
-              height: 45,
+              height: 35,
             ),
           ],
         ),
