@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:his_quiz/admin/speed_round/round_2/winner_list/tab_bar_items/failed_tab_screen_round_2.dart';
-import 'package:his_quiz/admin/speed_round/round_2/winner_list/tab_bar_items/winner_tab_screen_round_2.dart';
+import 'package:his_quiz/admin/quiz_rounds/best_answer_round/winner_list/tab_bar_items/failed_tab_screen_round_2.dart';
+import 'package:his_quiz/admin/quiz_rounds/best_answer_round/winner_list/tab_bar_items/winner_tab_screen_round_2.dart';
+import 'package:his_quiz/admin/quiz_rounds/pick_n_answer_round/pop_up_screens/number_of_question_pop_up_screen.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/widgets/common_bottom_bar.dart';
 import 'package:his_quiz/widgets/common_button.dart';
-import 'package:his_quiz/widgets/common_dialog.dart';
 import 'package:his_quiz/widgets/common_text_field.dart';
 
 class Round2WinnerListScreen extends StatefulWidget {
@@ -239,9 +239,9 @@ class _Round2WinnerListScreenState extends State<Round2WinnerListScreen>
                     leftButton: true,
                     onTap: () {
                       Get.dialog(
-                        PickNAnswerRound(
-                          totalStudent: widget.numbersOfPassedStudents,
+                        NumberOfQuestionPopUpScreen(
                           isGroup: true,
+                          totalStudent: widget.numbersOfPassedStudents,
                         ),
                       );
                     },
@@ -256,9 +256,9 @@ class _Round2WinnerListScreenState extends State<Round2WinnerListScreen>
                     leftButton: false,
                     onTap: () {
                       Get.dialog(
-                        PickNAnswerRound(
-                          totalStudent: widget.numbersOfPassedStudents,
+                        NumberOfQuestionPopUpScreen(
                           isGroup: false,
+                          totalStudent: widget.numbersOfPassedStudents,
                         ),
                       );
                     },

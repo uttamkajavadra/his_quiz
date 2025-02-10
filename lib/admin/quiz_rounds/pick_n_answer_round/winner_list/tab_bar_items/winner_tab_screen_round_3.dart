@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:his_quiz/admin/speed_round/round_1/winner_list/components/card_widget_winner_list.dart';
+import 'package:his_quiz/admin/quiz_rounds/pick_n_answer_round/winner_list/components/card_widget_winner_list_round_3.dart';
 
-class WinnerTabScreen extends StatefulWidget {
+class WinnerTabScreenRound3 extends StatefulWidget {
   final int lengthOfList;
-  const WinnerTabScreen({
+  const WinnerTabScreenRound3({
     super.key,
     required this.lengthOfList,
   });
 
   @override
-  State<WinnerTabScreen> createState() => _WinnerTabScreenState();
+  State<WinnerTabScreenRound3> createState() => _WinnerTabScreenRound3State();
 }
 
-class _WinnerTabScreenState extends State<WinnerTabScreen> {
+class _WinnerTabScreenRound3State extends State<WinnerTabScreenRound3> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -26,7 +26,7 @@ class _WinnerTabScreenState extends State<WinnerTabScreen> {
               vertical: 16,
             ),
             itemBuilder: (context, index) {
-              return CardWidgetWinnerList(
+              return CardWidgetWinnerListRound3(
                 index: index,
               );
             },

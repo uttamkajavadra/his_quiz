@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:his_quiz/admin/speed_round/round_1/group_wise/group_wise_speed_round_screen.dart';
-import 'package:his_quiz/admin/speed_round/round_1/student_wise/student_wise_speed_round_screen.dart';
+import 'package:his_quiz/admin/quiz_rounds/speed_round/group_wise/group_wise_speed_round_screen.dart';
+import 'package:his_quiz/admin/quiz_rounds/speed_round/student_wise/student_wise_speed_round_screen.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
@@ -90,7 +90,7 @@ class _Round1ScreenState extends State<Round1Screen> {
                     ),
                     padding: const EdgeInsets.all(16),
                     child: SvgPicture.asset(
-                      ImagePath.speedRound1Icon,
+                      ImagePath.round1Icon,
                       height: 100,
                       width: 100,
                     ),

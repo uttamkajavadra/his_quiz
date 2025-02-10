@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:his_quiz/admin/speed_round/round_2/group_wise/components/card_widget_group_wise_round_2.dart';
+import 'package:his_quiz/admin/quiz_rounds/best_answer_round/student_wise/components/card_widget_student_wise_round_2.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
@@ -11,28 +11,25 @@ import 'package:his_quiz/widgets/common_bottom_bar.dart';
 import 'package:his_quiz/widgets/common_button.dart';
 import 'package:his_quiz/widgets/common_dialog.dart';
 
-class GroupWiseSpeedRound2Screen extends StatefulWidget {
+class StudentWiseSpeedRound2Screen extends StatefulWidget {
   final int questionTime;
-  final int currentGroupNumber;
-  final int totalGroupNumber;
   final int currentQuestionNumber;
   final int totalQuestionNumber;
-  const GroupWiseSpeedRound2Screen({
+
+  const StudentWiseSpeedRound2Screen({
     super.key,
     required this.questionTime,
-    required this.currentGroupNumber,
-    required this.totalGroupNumber,
     required this.currentQuestionNumber,
     required this.totalQuestionNumber,
   });
 
   @override
-  State<GroupWiseSpeedRound2Screen> createState() =>
-      _GroupWiseSpeedRound2ScreenState();
+  State<StudentWiseSpeedRound2Screen> createState() =>
+      _StudentWiseSpeedRound2ScreenState();
 }
 
-class _GroupWiseSpeedRound2ScreenState
-    extends State<GroupWiseSpeedRound2Screen> {
+class _StudentWiseSpeedRound2ScreenState
+    extends State<StudentWiseSpeedRound2Screen> {
   // Set initial countdown time in seconds
   int remainingSeconds = 60;
   Timer? timer;
@@ -156,24 +153,6 @@ class _GroupWiseSpeedRound2ScreenState
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                "Group No : ",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              Text(
-                "${widget.currentGroupNumber}/${widget.totalGroupNumber}",
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  color: CommonColors.primary,
-                ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              const Text(
                 "Question No :",
                 style: TextStyle(
                   fontSize: 16,
@@ -245,7 +224,7 @@ class _GroupWiseSpeedRound2ScreenState
                 vertical: 16,
               ),
               itemBuilder: (context, index) {
-                return CardWidgetGroupWiseRound2(
+                return CardWidgetStudentWiseRound2(
                   index: index,
                 );
               },

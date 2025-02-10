@@ -3,36 +3,48 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:his_quiz/admin/speed_round/round_2/student_wise/components/card_widget_student_wise_round_2.dart';
+import 'package:his_quiz/admin/quiz_rounds/pick_n_answer_round/pop_up_screens/round_3_quiz_result_pop_up_screen.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
 import 'package:his_quiz/widgets/common_bottom_bar.dart';
 import 'package:his_quiz/widgets/common_button.dart';
-import 'package:his_quiz/widgets/common_dialog.dart';
 
-class StudentWiseSpeedRound2Screen extends StatefulWidget {
+class StudentWisePickNAnswerRoundScreen extends StatefulWidget {
+  final int totalStudents;
   final int questionTime;
-  final int currentQuestionNumber;
-  final int totalQuestionNumber;
+  final int questionNumber;
 
-  const StudentWiseSpeedRound2Screen({
+  const StudentWisePickNAnswerRoundScreen({
     super.key,
+    required this.totalStudents,
     required this.questionTime,
-    required this.currentQuestionNumber,
-    required this.totalQuestionNumber,
+    required this.questionNumber,
   });
 
   @override
-  State<StudentWiseSpeedRound2Screen> createState() =>
-      _StudentWiseSpeedRound2ScreenState();
+  State<StudentWisePickNAnswerRoundScreen> createState() =>
+      _StudentWisePickNAnswerRoundScreenState();
 }
 
-class _StudentWiseSpeedRound2ScreenState
-    extends State<StudentWiseSpeedRound2Screen> {
+class _StudentWisePickNAnswerRoundScreenState
+    extends State<StudentWisePickNAnswerRoundScreen> {
   // Set initial countdown time in seconds
   int remainingSeconds = 60;
   Timer? timer;
+
+  List<int> answerOptions = [12, 15, 211, 220, 65, 45, 86, 82, 72];
+
+  // Set to track selected answers
+  // Set<int> selectedAnswers = {}; // Select multiple answer
+  int? selectedAnswerIndex; // Select single answer
+
+  List<String> options = [
+    "Respiration",
+    "Photosynthesis",
+    "Decomposition",
+    "Fermentation",
+  ];
 
   @override
   void initState() {
@@ -95,7 +107,7 @@ class _StudentWiseSpeedRound2ScreenState
                   Expanded(
                     child: Center(
                       child: Text(
-                        "Best Answer",
+                        "Pick 'N' Answer",
                         textAlign: TextAlign.center,
                         style: CommonTextStyle.regular600.copyWith(
                           fontSize: 20,
@@ -148,26 +160,12 @@ class _StudentWiseSpeedRound2ScreenState
           const SizedBox(
             height: 10,
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                "Question No :",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              Text(
-                "${widget.currentQuestionNumber}/${widget.totalQuestionNumber}",
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  color: CommonColors.primary,
-                ),
-              ),
-            ],
+          Text(
+            "Question No. ${widget.questionNumber}",
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
           ),
           const SizedBox(
             height: 20,
@@ -215,23 +213,72 @@ class _StudentWiseSpeedRound2ScreenState
           const SizedBox(
             height: 20,
           ),
+          const Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 20,
+            ),
+            child: Text(
+              "What is the process called when plants make their own food from sunlight?",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
           Expanded(
             child: ListView.builder(
-              itemCount: 10,
-              physics: const BouncingScrollPhysics(),
               padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 16,
+                horizontal: 20,
               ),
+              itemCount: options.length,
               itemBuilder: (context, index) {
-                return CardWidgetStudentWiseRound2(
-                  index: index,
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedAnswerIndex = index;
+                    });
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(
+                      bottom: 12,
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 14,
+                    ),
+                    decoration: BoxDecoration(
+                      color: selectedAnswerIndex == index
+                          ? CommonColors.primary.withOpacity(0.1)
+                          : CommonColors.whiteColor,
+                      border: Border.all(
+                        color: selectedAnswerIndex == index
+                            ? CommonColors.primary
+                            : Colors.grey.shade300,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Center(
+                      child: Text(
+                        options[index],
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: selectedAnswerIndex == index
+                              ? CommonColors.primary
+                              : CommonColors.blackColor,
+                        ),
+                      ),
+                    ),
+                  ),
                 );
               },
             ),
           ),
           const SizedBox(
-            height: 20,
+            height: 10,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
@@ -247,7 +294,7 @@ class _StudentWiseSpeedRound2ScreenState
               ),
               onPressed: () {
                 Get.dialog(
-                  const QuizResultRound2Dialog(),
+                  const Round3QuizResultPopUpScreen(),
                 );
               },
             ),

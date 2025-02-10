@@ -11,6 +11,7 @@ class ImagePath {
   static const faceScan = "assets/image/face_scan_icon.png";
   static const stateImage = "assets/image/state_image.png";
   static const studentImage = "assets/image/student_image.png";
+  static const student2Image = "assets/image/student_image_2.png";
   static const walesCity = "assets/image/wales_city_image.png";
   static const unitedKingdom = "assets/image/united_kingdom.png";
 
@@ -20,9 +21,10 @@ class ImagePath {
   static const dangerCircleIcon = "assets/image/danger_circle.svg";
   static const dropDownIcon = "assets/image/dorp_down.svg";
   static const searchIcon = "assets/image/search.svg";
-  static const speedRound1Icon = "assets/image/speed_round_1.svg";
-  static const speedRound2Icon = "assets/image/speed_round_2.svg";
-  static const speedRound3Icon = "assets/image/speed_round_3.svg";
+  static const round1Icon = "assets/image/round_1.svg";
+  static const round2Icon = "assets/image/round_2.svg";
+  static const round3Icon = "assets/image/round_3.svg";
+  static const round4Icon = "assets/image/round_4.svg";
   static const timerIcon = "assets/image/timer.svg";
   static const progressIcon = "assets/image/progress.svg";
   static const winnerIcon = "assets/image/winner.svg";

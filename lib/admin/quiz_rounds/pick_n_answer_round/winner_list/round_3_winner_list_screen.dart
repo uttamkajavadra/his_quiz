@@ -1,37 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:his_quiz/admin/speed_round/round_1/winner_list/tab_bar_items/winner_tab_screen.dart';
-import 'package:his_quiz/admin/speed_round/round_1/winner_list/tab_bar_items/failed_tab_screen.dart';
+import 'package:his_quiz/admin/quiz_rounds/pick_n_answer_round/winner_list/tab_bar_items/failed_tab_screen_round_3.dart';
+import 'package:his_quiz/admin/quiz_rounds/pick_n_answer_round/winner_list/tab_bar_items/winner_tab_screen_round_3.dart';
+import 'package:his_quiz/admin/quiz_rounds/sudden_death_round/pop_up_screen/add_timer_pop_up_screen.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/widgets/common_bottom_bar.dart';
 import 'package:his_quiz/widgets/common_button.dart';
-import 'package:his_quiz/widgets/common_dialog.dart';
 import 'package:his_quiz/widgets/common_text_field.dart';
 
-class Round1WinnerListScreen extends StatefulWidget {
+class Round3WinnerListScreen extends StatefulWidget {
   final int numbersOfFailedStudents;
   final int numbersOfPassedStudents;
-  const Round1WinnerListScreen({
+  const Round3WinnerListScreen({
     super.key,
     required this.numbersOfFailedStudents,
     required this.numbersOfPassedStudents,
   });
 
   @override
-  State<Round1WinnerListScreen> createState() => _Round1WinnerListScreenState();
+  State<Round3WinnerListScreen> createState() => _Round3WinnerListScreenState();
 }
 
-class _Round1WinnerListScreenState extends State<Round1WinnerListScreen>
+class _Round3WinnerListScreenState extends State<Round3WinnerListScreen>
     with SingleTickerProviderStateMixin {
   TabController? tabController;
 
-  String sortingValue = 'Name A to Z';
+  int totalStudents = 0;
 
   @override
   void initState() {
     super.initState();
     tabController = TabController(length: 2, vsync: this);
+
+    totalStudents =
+        widget.numbersOfPassedStudents + widget.numbersOfFailedStudents;
   }
 
   @override
@@ -60,7 +63,7 @@ class _Round1WinnerListScreenState extends State<Round1WinnerListScreen>
                   ),
                   Expanded(
                     child: Text(
-                      "1st Round Score",
+                      "3rd Round Score",
                       textAlign: TextAlign.center,
                       style: CommonTextStyle.regular600.copyWith(
                         fontSize: 20,
@@ -93,76 +96,11 @@ class _Round1WinnerListScreenState extends State<Round1WinnerListScreen>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "${widget.numbersOfPassedStudents} Students",
+                      "$totalStudents Students Attempted",
                       textAlign: TextAlign.left,
                       style: CommonTextStyle.regular700.copyWith(
                         fontSize: 16,
                       ),
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Sort by :',
-                          style: CommonTextStyle.regular400.copyWith(
-                            fontSize: 12,
-                            color: CommonColors.hintTextColor,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Container(
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          child: PopupMenuButton<String>(
-                            onSelected: (value) {
-                              setState(() {
-                                sortingValue = value;
-                              });
-                            },
-                            itemBuilder: (context) => [
-                              const PopupMenuItem(
-                                value: 'Name A to Z',
-                                child: Text(
-                                  'Name A to Z',
-                                ),
-                              ),
-                              const PopupMenuItem(
-                                value: 'Name Z to A',
-                                child: Text(
-                                  'Name Z to A',
-                                ),
-                              ),
-                            ],
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  sortingValue,
-                                  style: CommonTextStyle.regular400.copyWith(
-                                    fontSize: 14,
-                                    color: CommonColors.textBlackColor,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 6,
-                                ),
-                                const Icon(
-                                  Icons.keyboard_arrow_down_rounded,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
                     ),
                   ],
                 ),
@@ -215,10 +153,10 @@ class _Round1WinnerListScreenState extends State<Round1WinnerListScreen>
             child: TabBarView(
               controller: tabController,
               children: [
-                WinnerTabScreen(
+                WinnerTabScreenRound3(
                   lengthOfList: widget.numbersOfPassedStudents,
                 ),
-                FailedTabScreen(
+                FailedTabScreenRound3(
                   lengthOfList: widget.numbersOfFailedStudents,
                 ),
               ],
@@ -235,30 +173,12 @@ class _Round1WinnerListScreenState extends State<Round1WinnerListScreen>
               children: [
                 Expanded(
                   child: CommonDialogButton(
-                    title: "Divide Group",
-                    leftButton: true,
-                    onTap: () {
-                      Get.dialog(
-                        const DivideGroupRound2Dialog(
-                          // Static value
-                          totalStudent: 200,
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                Expanded(
-                  child: CommonDialogButton(
-                    title: "Start Round 2",
+                    title: "Start Round 4",
                     leftButton: false,
                     onTap: () {
                       Get.dialog(
-                        const NumberOfQuestionsRound2Dialog(
-                          // Static value
-                          totalStudent: 200,
+                        AddTimerPopUpScreen(
+                          totalStudent: widget.numbersOfPassedStudents,
                         ),
                       );
                     },
