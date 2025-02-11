@@ -73,244 +73,246 @@ class _PickNAnswerRoundScreenState extends State<PickNAnswerRoundScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          // commonAppBar(
-          //   title: "Competition Seasons",
-          // ),
-          SafeArea(
-            child: Container(
-              height: 60,
-              padding: const EdgeInsets.only(
-                left: 16,
-                right: 16,
-              ),
-              // color: AppColors.blackColor,
-              child: Row(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: const Icon(
-                      Icons.arrow_back_ios_new_rounded,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // commonAppBar(
+            //   title: "Competition Seasons",
+            // ),
+            SafeArea(
+              child: Container(
+                height: 60,
+                padding: const EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                ),
+                // color: AppColors.blackColor,
+                child: Row(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: const Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        "Pick 'N' Answer",
-                        textAlign: TextAlign.center,
-                        style: CommonTextStyle.regular600.copyWith(
-                          fontSize: 20,
+                    Expanded(
+                      child: Center(
+                        child: Text(
+                          "Pick 'N' Answer",
+                          textAlign: TextAlign.center,
+                          style: CommonTextStyle.regular600.copyWith(
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  // Row(
-                  //   children: actions ??
-                  //       [
-                  //         const SizedBox(
-                  //           width: 24,
-                  //         ),
-                  //       ],
-                  // ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: CommonColors.primary.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(
-                          ImagePath.timerIcon,
-                          height: 18,
-                          width: 18,
-                        ),
-                        const SizedBox(
-                          width: 4,
-                        ),
-                        Text(
-                          formatTime(remainingSeconds),
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.orange,
+                    // Row(
+                    //   children: actions ??
+                    //       [
+                    //         const SizedBox(
+                    //           width: 24,
+                    //         ),
+                    //       ],
+                    // ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: CommonColors.primary.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(
+                            ImagePath.timerIcon,
+                            height: 18,
+                            width: 18,
                           ),
-                        ),
-                      ],
+                          const SizedBox(
+                            width: 4,
+                          ),
+                          Text(
+                            formatTime(remainingSeconds),
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.orange,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                "Student No :",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  "Student No :",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
-              Text(
-                "1/${widget.totalStudents}",
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  color: CommonColors.primary,
+                Text(
+                  "1/${widget.totalStudents}",
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    color: CommonColors.primary,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Column(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image.asset(
-                  ImagePath.student2Image,
-                  width: 140,
-                  height: 140,
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Column(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.asset(
+                    ImagePath.student2Image,
+                    width: 140,
+                    height: 140,
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                "Giovani Romaguera",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: CommonColors.textBlackColor,
+                const SizedBox(
+                  height: 10,
                 ),
-              ),
-              const Text(
-                "Delhi Public School",
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: CommonColors.hintTextColor,
+                const Text(
+                  "Giovani Romaguera",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: CommonColors.textBlackColor,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          SizedBox(
-            height: 280,
-            width: 280,
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 32,
-                crossAxisSpacing: 32,
-                childAspectRatio: 2,
-              ),
-              itemCount: answerOptions.length,
-              itemBuilder: (context, index) {
-                // Select multiple answer
-                // bool isSelected =
-                //     selectedAnswers.contains(answerOptions[index]);
+                const Text(
+                  "Delhi Public School",
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: CommonColors.hintTextColor,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              height: 280,
+              width: 280,
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 32,
+                  crossAxisSpacing: 32,
+                  childAspectRatio: 2,
+                ),
+                itemCount: answerOptions.length,
+                itemBuilder: (context, index) {
+                  // Select multiple answer
+                  // bool isSelected =
+                  //     selectedAnswers.contains(answerOptions[index]);
 
-                // Select single answer
-                bool isSelected = selectedAnswerIndex == index;
-                return SizedBox(
-                  height: 48,
-                  width: 72,
-                  child: GestureDetector(
-                    onTap: () {
-                      // Select multiple answer
-                      // setState(() {
-                      //   if (isSelected) {
-                      //     selectedAnswers.remove(answerOptions[index]);
-                      //   } else {
-                      //     selectedAnswers.add(answerOptions[index]);
-                      //   }
-                      // });
+                  // Select single answer
+                  bool isSelected = selectedAnswerIndex == index;
+                  return SizedBox(
+                    height: 48,
+                    width: 72,
+                    child: GestureDetector(
+                      onTap: () {
+                        // Select multiple answer
+                        // setState(() {
+                        //   if (isSelected) {
+                        //     selectedAnswers.remove(answerOptions[index]);
+                        //   } else {
+                        //     selectedAnswers.add(answerOptions[index]);
+                        //   }
+                        // });
 
-                      // Select single answer
-                      setState(() {
-                        selectedAnswerIndex = index;
-                      });
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: isSelected
-                            ? CommonColors.primary
-                            : CommonColors.whiteColor,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
+                        // Select single answer
+                        setState(() {
+                          selectedAnswerIndex = index;
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
                           color: isSelected
                               ? CommonColors.primary
-                              : Colors.black12,
+                              : CommonColors.whiteColor,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: isSelected
+                                ? CommonColors.primary
+                                : Colors.black12,
+                          ),
                         ),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        answerOptions[index].toString(),
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: isSelected
-                              ? CommonColors.whiteColor
-                              : CommonColors.textBlackColor,
+                        alignment: Alignment.center,
+                        child: Text(
+                          answerOptions[index].toString(),
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: isSelected
+                                ? CommonColors.whiteColor
+                                : CommonColors.textBlackColor,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                );
-              },
-            ),
-          ),
-          Visibility(
-            visible: selectedAnswerIndex != null,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20.0,
-              ),
-              child: CommonButton(
-                child: Text(
-                  "Next",
-                  style: CommonTextStyle.bold.copyWith(
-                    fontSize: 16,
-                    color: CommonColors.whiteColor,
-                  ),
-                ),
-                onPressed: () {
-                  widget.isGroupWiseRound
-                      ? Get.to(
-                          GroupWisePickNAnswerRoundScreen(
-                            totalStudents: widget.totalStudents,
-                            questionTime: widget.questionTime,
-                            questionNumber: 12,
-                          ),
-                        )
-                      : Get.to(
-                          StudentWisePickNAnswerRoundScreen(
-                            totalStudents: widget.totalStudents,
-                            questionTime: widget.questionTime,
-                            questionNumber: 12,
-                          ),
-                        );
+                  );
                 },
               ),
             ),
-          ),
-        ],
+            Visibility(
+              visible: selectedAnswerIndex != null,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                ),
+                child: CommonButton(
+                  child: Text(
+                    "Next",
+                    style: CommonTextStyle.bold.copyWith(
+                      fontSize: 16,
+                      color: CommonColors.whiteColor,
+                    ),
+                  ),
+                  onPressed: () {
+                    widget.isGroupWiseRound
+                        ? Get.to(
+                            GroupWisePickNAnswerRoundScreen(
+                              totalStudents: widget.totalStudents,
+                              questionTime: widget.questionTime,
+                              questionNumber: 12,
+                            ),
+                          )
+                        : Get.to(
+                            StudentWisePickNAnswerRoundScreen(
+                              totalStudents: widget.totalStudents,
+                              questionTime: widget.questionTime,
+                              questionNumber: 12,
+                            ),
+                          );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: commonBottomBar(),
     );
