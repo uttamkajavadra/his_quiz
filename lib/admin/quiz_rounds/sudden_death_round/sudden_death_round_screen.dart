@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:his_quiz/admin/winner_screens/winner_screens.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
@@ -334,13 +335,17 @@ class _SuddenDeathRoundScreenState extends State<SuddenDeathRoundScreen> {
             ),
             child: CommonButton(
               child: Text(
-                "Next",
+                "Submit",
                 style: CommonTextStyle.bold.copyWith(
                   fontSize: 16,
                   color: CommonColors.whiteColor,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Get.to(
+                  const WinnerScreens(),
+                );
+              },
             ),
           ),
           const SizedBox(

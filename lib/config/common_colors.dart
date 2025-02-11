@@ -20,4 +20,10 @@ class CommonColors {
   static const Color textFieldColor = Color(0xffE9E9E9);
   static const Color hintTextColor = Color(0xff8C8D88);
   static const Color gretTextTextColor = Color(0xff82827E);
+
+  // Confetti Colors
+  static const Color confettiColor1 = Color(0xff155263);
+  static const Color confettiColor2 = Color(0xffFF6F3C);
+  static const Color confettiColor3 = Color(0xffFF9A3C);
+  static const Color confettiColor4 = Color(0xffFFC93C);
 }
