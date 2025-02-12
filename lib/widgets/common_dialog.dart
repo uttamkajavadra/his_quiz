@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:his_quiz/admin/group/review_group/review_group_screen.dart';
-import 'package:his_quiz/admin/quiz_rounds/speed_round/round_1_screen.dart';
 import 'package:his_quiz/admin/quiz_rounds/speed_round/winner_list/round_1_winner_list_screen.dart';
 import 'package:his_quiz/admin/quiz_rounds/best_answer_round/round_2_screen.dart';
 import 'package:his_quiz/admin/quiz_rounds/best_answer_round/winner_list/round_2_winner_list_screen.dart';
@@ -853,10 +852,10 @@ class _DivideGroupRound1DialogState extends State<DivideGroupRound1Dialog> {
 
                             // Redirect
                             Get.to(
-                              const Round1Screen(
-                                isGroupWiseRound: false,
-                                currentNumber: 20,
-                                totalNumber: 200,
+                              ReviewGroupScreen(
+                                groupCount: totalGroups,
+                                studentsPerGroup: studentsPerGroup,
+                                totalGroups: totalGroups,
                               ),
                             );
                           },
