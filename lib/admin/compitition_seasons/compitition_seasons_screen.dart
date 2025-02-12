@@ -285,7 +285,7 @@ class _CompititionSeasonsScreenState extends State<CompititionSeasonsScreen>
                 ),
                 CommonButton(
                   child: Text(
-                    "Login",
+                    "Create",
                     style: CommonTextStyle.bold.copyWith(
                       fontSize: 16,
                       color: CommonColors.whiteColor,

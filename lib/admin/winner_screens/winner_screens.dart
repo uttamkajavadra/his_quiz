@@ -41,22 +41,6 @@ class _WinnerScreensState extends State<WinnerScreens> {
       body: Stack(
         alignment: Alignment.topCenter,
         children: [
-          ConfettiWidget(
-            confettiController: confettiController,
-            blastDirectionality: BlastDirectionality.explosive,
-            emissionFrequency: 0.2,
-            numberOfParticles: 50,
-            maxBlastForce: 100,
-            minBlastForce: 80,
-            gravity: 0.03,
-            shouldLoop: false,
-            colors: const [
-              CommonColors.confettiColor1,
-              CommonColors.confettiColor2,
-              CommonColors.confettiColor3,
-              CommonColors.confettiColor4,
-            ],
-          ),
           Column(
             children: [
               // commonAppBar(title: "Jerome Bell"),
@@ -324,6 +308,22 @@ class _WinnerScreensState extends State<WinnerScreens> {
                   ),
                 ),
               )
+            ],
+          ),
+          ConfettiWidget(
+            confettiController: confettiController,
+            blastDirectionality: BlastDirectionality.explosive,
+            emissionFrequency: 0.2,
+            numberOfParticles: 50,
+            maxBlastForce: 100,
+            minBlastForce: 80,
+            gravity: 0.03,
+            shouldLoop: false,
+            colors: const [
+              CommonColors.confettiColor1,
+              CommonColors.confettiColor2,
+              CommonColors.confettiColor3,
+              CommonColors.confettiColor4,
             ],
           ),
         ],

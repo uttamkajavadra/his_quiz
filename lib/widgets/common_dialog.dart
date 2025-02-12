@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:his_quiz/admin/group/review_group/review_group_screen.dart';
+import 'package:his_quiz/admin/quiz_rounds/speed_round/round_1_screen.dart';
 import 'package:his_quiz/admin/quiz_rounds/speed_round/winner_list/round_1_winner_list_screen.dart';
 import 'package:his_quiz/admin/quiz_rounds/best_answer_round/round_2_screen.dart';
 import 'package:his_quiz/admin/quiz_rounds/best_answer_round/winner_list/round_2_winner_list_screen.dart';
@@ -620,12 +621,15 @@ class DivideGroupRound1Dialog extends StatefulWidget {
 }
 
 class _DivideGroupRound1DialogState extends State<DivideGroupRound1Dialog> {
-  final TextEditingController _groupController = TextEditingController();
   int totalStudents = 0;
   int totalGroups = 0;
   int studentsPerGroup = 0;
 
   TextEditingController divideGroupController = TextEditingController();
+
+  final formKey = GlobalKey<FormState>();
+
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -639,7 +643,7 @@ class _DivideGroupRound1DialogState extends State<DivideGroupRound1Dialog> {
 
   void calculateGroups() {
     setState(() {
-      totalGroups = int.tryParse(_groupController.text) ?? 0;
+      totalGroups = int.tryParse(divideGroupController.text) ?? 0;
       studentsPerGroup = (totalGroups > 0) ? (totalStudents ~/ totalGroups) : 0;
     });
   }
@@ -708,7 +712,6 @@ class _DivideGroupRound1DialogState extends State<DivideGroupRound1Dialog> {
         ),
         TextFormField(
           controller: controller,
-          readOnly: true,
           validator: validator,
           keyboardType: TextInputType.number,
           decoration: dialogInputDecoration(
@@ -775,16 +778,22 @@ class _DivideGroupRound1DialogState extends State<DivideGroupRound1Dialog> {
             const SizedBox(height: 12),
 
             // Input Field
-            dialogTextField(
-              context,
-              "Divide Group",
-              divideGroupController,
-              (value) {
-                if (value == null || value.isEmpty) {
-                  return "Divide Group is required";
-                }
-                return null;
-              },
+            Form(
+              key: formKey,
+              child: dialogTextField(
+                context,
+                "Divide Group",
+                divideGroupController,
+                (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Divide Group is required";
+                  }
+                  if (int.tryParse(value) == null) {
+                    return "Please enter a valid integer";
+                  }
+                  return null;
+                },
+              ),
             ),
             const SizedBox(
               height: 16,
@@ -823,7 +832,36 @@ class _DivideGroupRound1DialogState extends State<DivideGroupRound1Dialog> {
                     title: "Divide",
                     leftButton: false,
                     onTap: () {
-                      Get.back();
+                      if (formKey.currentState!.validate()) {
+                        setState(() {
+                          isLoading = true;
+                        });
+
+                        // Show Loading Dialog
+                        showLoadingDialog();
+
+                        Timer(
+                          const Duration(
+                            seconds: 2,
+                          ),
+                          () {
+                            // Hide Loading Dialog
+                            hideLoadingDialog();
+
+                            // Close Dialog
+                            Get.back();
+
+                            // Redirect
+                            Get.to(
+                              const Round1Screen(
+                                isGroupWiseRound: false,
+                                currentNumber: 20,
+                                totalNumber: 200,
+                              ),
+                            );
+                          },
+                        );
+                      }
                     },
                   ),
                 ),
@@ -1020,8 +1058,8 @@ class _DivideGroupRound2DialogState extends State<DivideGroupRound2Dialog> {
                         if (value == null || value.isEmpty) {
                           return "Divide Group is required";
                         }
-                        if (int.parse(value) <= 0) {
-                          return "Enter a valid number";
+                        if (int.tryParse(value) == null) {
+                          return "Please enter a valid integer";
                         }
                         if (int.parse(value) > totalStudents) {
                           return "Value cannot be greater than $totalStudents";
@@ -1041,8 +1079,8 @@ class _DivideGroupRound2DialogState extends State<DivideGroupRound2Dialog> {
                         if (value == null || value.isEmpty) {
                           return "Number of questions is required";
                         }
-                        if (int.parse(value) <= 0) {
-                          return "Enter a valid number";
+                        if (int.tryParse(value) == null) {
+                          return "Please enter a valid integer";
                         }
                         return null;
                       },
@@ -1059,8 +1097,8 @@ class _DivideGroupRound2DialogState extends State<DivideGroupRound2Dialog> {
                         if (value == null || value.isEmpty) {
                           return "Add time is required";
                         }
-                        if (int.parse(value) <= 0) {
-                          return "Enter a valid number";
+                        if (int.tryParse(value) == null) {
+                          return "Please enter a valid integer";
                         }
                         return null;
                       },
@@ -1328,8 +1366,8 @@ class _NumberOfQuestionsRound2DialogState
                         if (value == null || value.isEmpty) {
                           return "Number of questions is required";
                         }
-                        if (int.parse(value) <= 0) {
-                          return "Enter a valid number";
+                        if (int.tryParse(value) == null) {
+                          return "Please enter a valid integer";
                         }
                         return null;
                       },
