@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
             image: AssetImage(
               ImagePath.splashBackGroundImage,
             ),
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
           ),
         ),
         child: Column(
@@ -53,22 +53,25 @@ class _SplashScreenState extends State<SplashScreen> {
                   Image.asset(
                     ImagePath.logo,
                     width: Get.width * 0.7,
+                    height: 212,
                   ),
                   Text(
                     "HIS-Quiz 2025",
-                    style: CommonTextStyle.regular900.copyWith(
-                      fontSize: 22,
+                    style: CommonTextStyle.regular700.copyWith(
+                      fontSize: 20,
                     ),
                   )
                 ],
               ),
             ),
-            Padding(
+            Container(
               padding: const EdgeInsets.only(
                 bottom: 62,
               ),
+              width: double.infinity,
               child: Image.asset(
                 ImagePath.splashPowerBY,
+                height: 60,
               ),
             ),
           ],
