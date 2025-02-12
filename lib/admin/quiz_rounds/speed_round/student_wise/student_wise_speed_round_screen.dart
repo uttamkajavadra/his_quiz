@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -6,6 +8,7 @@ import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
 import 'package:his_quiz/widgets/common_bottom_bar.dart';
 import 'package:his_quiz/widgets/common_button.dart';
+import 'package:his_quiz/widgets/common_dialog.dart';
 
 class StudentWiseSpeedRoundScreen extends StatefulWidget {
   final int currentStudentNumber;
@@ -31,6 +34,41 @@ class _StudentWiseSpeedRoundScreenState
   ];
 
   int? selectedAnswerIndex;
+
+  // Set initial countdown time in seconds
+  int remainingSeconds = 60;
+  Timer? timer;
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
+
+  void startTimer() {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (remainingSeconds > 0) {
+        setState(() {
+          remainingSeconds--;
+        });
+      } else {
+        timer.cancel();
+      }
+    });
+  }
+
+  String formatTime(int seconds) {
+    int minutes = seconds ~/ 60;
+    int secs = seconds % 60;
+    return '${minutes.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}';
+  }
+
+  @override
+  void dispose() {
+    // Cancel the timer when widget is removed
+    timer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,9 +134,9 @@ class _StudentWiseSpeedRoundScreenState
                         const SizedBox(
                           width: 4,
                         ),
-                        const Text(
-                          "01:00",
-                          style: TextStyle(
+                        Text(
+                          formatTime(remainingSeconds),
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                             color: Colors.orange,
@@ -297,7 +335,11 @@ class _StudentWiseSpeedRoundScreenState
                   color: CommonColors.whiteColor,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Get.dialog(
+                  const QuizResultRound1Dialog(),
+                );
+              },
             ),
           ),
           const SizedBox(

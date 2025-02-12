@@ -1,32 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
-import 'package:his_quiz/widgets/common_dialog.dart';
 
-class SelectedStudentCardWidget extends StatefulWidget {
+class CardWidgetGroupWiseRound2 extends StatefulWidget {
   final int index;
 
-  const SelectedStudentCardWidget({
+  const CardWidgetGroupWiseRound2({
     super.key,
     required this.index,
   });
 
   @override
-  State<SelectedStudentCardWidget> createState() =>
-      _SelectedStudentCardWidgetState();
+  State<CardWidgetGroupWiseRound2> createState() =>
+      _CardWidgetGroupWiseRound2State();
 }
 
-class _SelectedStudentCardWidgetState extends State<SelectedStudentCardWidget> {
+class _CardWidgetGroupWiseRound2State extends State<CardWidgetGroupWiseRound2> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        // Get.to(
-        //   const StudentDetailsScreen(),
-        // );
-      },
+    return InkWell(
+      onTap: () async {},
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
@@ -86,21 +80,10 @@ class _SelectedStudentCardWidgetState extends State<SelectedStudentCardWidget> {
                             fontSize: 12,
                           ),
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ],
-              ),
-            ),
-            IconButton(
-              onPressed: () {
-                Get.dialog(
-                  const RemoveStudentDialog(),
-                );
-              },
-              icon: const Icon(
-                Icons.delete_outline,
-                color: CommonColors.redAccent,
               ),
             ),
           ],

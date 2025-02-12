@@ -1,35 +1,82 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:his_quiz/admin/quiz_rounds/pick_n_answer_round/pop_up_screens/round_3_quiz_result_pop_up_screen.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
 import 'package:his_quiz/widgets/common_bottom_bar.dart';
 import 'package:his_quiz/widgets/common_button.dart';
 
-class GroupWiseSpeedRoundScreen extends StatefulWidget {
-  final int currentGroupNumber;
-  final int totalGroupNumber;
-  const GroupWiseSpeedRoundScreen({
+class StudentWisePickNAnswerRoundScreen extends StatefulWidget {
+  final int totalStudents;
+  final int questionTime;
+  final int questionNumber;
+
+  const StudentWisePickNAnswerRoundScreen({
     super.key,
-    required this.currentGroupNumber,
-    required this.totalGroupNumber,
+    required this.totalStudents,
+    required this.questionTime,
+    required this.questionNumber,
   });
 
   @override
-  State<GroupWiseSpeedRoundScreen> createState() =>
-      _GroupWiseSpeedRoundScreenState();
+  State<StudentWisePickNAnswerRoundScreen> createState() =>
+      _StudentWisePickNAnswerRoundScreenState();
 }
 
-class _GroupWiseSpeedRoundScreenState extends State<GroupWiseSpeedRoundScreen> {
+class _StudentWisePickNAnswerRoundScreenState
+    extends State<StudentWisePickNAnswerRoundScreen> {
+  // Set initial countdown time in seconds
+  int remainingSeconds = 60;
+  Timer? timer;
+
+  List<int> answerOptions = [12, 15, 211, 220, 65, 45, 86, 82, 72];
+
+  // Set to track selected answers
+  // Set<int> selectedAnswers = {}; // Select multiple answer
+  int? selectedAnswerIndex; // Select single answer
+
   List<String> options = [
-    "Earth",
-    "Mars",
-    "Jupiter",
-    "Venus",
+    "Respiration",
+    "Photosynthesis",
+    "Decomposition",
+    "Fermentation",
   ];
 
-  int? selectedAnswerIndex;
+  @override
+  void initState() {
+    super.initState();
+    remainingSeconds = widget.questionTime;
+    startTimer();
+  }
+
+  void startTimer() {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (remainingSeconds > 0) {
+        setState(() {
+          remainingSeconds--;
+        });
+      } else {
+        timer.cancel();
+      }
+    });
+  }
+
+  String formatTime(int seconds) {
+    int minutes = seconds ~/ 60;
+    int secs = seconds % 60;
+    return '${minutes.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}';
+  }
+
+  @override
+  void dispose() {
+    // Cancel the timer when widget is removed
+    timer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +107,7 @@ class _GroupWiseSpeedRoundScreenState extends State<GroupWiseSpeedRoundScreen> {
                   Expanded(
                     child: Center(
                       child: Text(
-                        "Speed Round",
+                        "Pick 'N' Answer",
                         textAlign: TextAlign.center,
                         style: CommonTextStyle.regular600.copyWith(
                           fontSize: 20,
@@ -95,9 +142,9 @@ class _GroupWiseSpeedRoundScreenState extends State<GroupWiseSpeedRoundScreen> {
                         const SizedBox(
                           width: 4,
                         ),
-                        const Text(
-                          "01:00",
-                          style: TextStyle(
+                        Text(
+                          formatTime(remainingSeconds),
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                             color: Colors.orange,
@@ -113,23 +160,52 @@ class _GroupWiseSpeedRoundScreenState extends State<GroupWiseSpeedRoundScreen> {
           const SizedBox(
             height: 10,
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
+          Text(
+            "Question No. ${widget.questionNumber}",
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Stack(
+            alignment: Alignment.center,
             children: [
-              const Text(
-                "Group No : ",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+              Container(
+                width: 60,
+                height: 60,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: CommonColors.primary,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(6),
+                  child: Transform(
+                    alignment: Alignment.center,
+                    transform: Matrix4.diagonal3Values(
+                      -1,
+                      1,
+                      1,
+                    ),
+                    child: CircularProgressIndicator(
+                      value: remainingSeconds / widget.questionTime,
+                      strokeWidth: 6,
+                      backgroundColor: CommonColors.whiteColor,
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                        CommonColors.primary,
+                      ),
+                    ),
+                  ),
                 ),
               ),
               Text(
-                "${widget.currentGroupNumber}/${widget.totalGroupNumber}",
+                '$remainingSeconds',
                 style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  color: CommonColors.primary,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: CommonColors.whiteColor,
                 ),
               ),
             ],
@@ -142,7 +218,7 @@ class _GroupWiseSpeedRoundScreenState extends State<GroupWiseSpeedRoundScreen> {
               horizontal: 20,
             ),
             child: Text(
-              "What is the largest planet in our solar system?",
+              "What is the process called when plants make their own food from sunlight?",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 18,
@@ -201,86 +277,6 @@ class _GroupWiseSpeedRoundScreenState extends State<GroupWiseSpeedRoundScreen> {
               },
             ),
           ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: const BorderRadius.all(
-                Radius.circular(8),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
-                  blurRadius: 8,
-                  spreadRadius: 2,
-                ),
-              ],
-            ),
-            child: Row(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(
-                    right: 8,
-                  ),
-                  child: Image.asset(
-                    ImagePath.studentImage,
-                    height: 64,
-                    width: 64,
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Giovani Romaguera",
-                        style: CommonTextStyle.regular500.copyWith(
-                          fontSize: 16,
-                        ),
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            ImagePath.homeIcon,
-                            width: 22,
-                            height: 22,
-                          ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 3,
-                            ),
-                            child: Text(
-                              "Delhi Public School",
-                              style: CommonTextStyle.regular400.copyWith(
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(
-                    left: 8,
-                  ),
-                  child: SvgPicture.asset(
-                    ImagePath.progressIcon,
-                    height: 52,
-                    width: 52,
-                  ),
-                ),
-              ],
-            ),
-          ).paddingOnly(
-            left: 20,
-            right: 20,
-          ),
           const SizedBox(
             height: 10,
           ),
@@ -296,7 +292,11 @@ class _GroupWiseSpeedRoundScreenState extends State<GroupWiseSpeedRoundScreen> {
                   color: CommonColors.whiteColor,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Get.dialog(
+                  const Round3QuizResultPopUpScreen(),
+                );
+              },
             ),
           ),
           const SizedBox(
