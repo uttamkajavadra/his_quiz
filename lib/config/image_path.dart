@@ -30,4 +30,6 @@ class ImagePath {
   static const round4Icon = "assets/image/round_4.svg";
   static const winnerIcon = "assets/image/winner.svg";
   static const trophyIcon = "assets/image/trophy.svg";
+  static const levelSelect = "assets/image/level_select.svg";
+  static const levelUnSelect = "assets/image/level_unselect.svg";
 }
