@@ -127,24 +127,26 @@ class _CardWidgetStudentListState extends State<CardWidgetStudentList> {
                   color: CommonColors.redAccent,
                 ),
               ),
-            if (widget.studentsData.isWinner)
-              Column(
-                children: [
-                  SvgPicture.asset(
-                    ImagePath.trophyIcon,
-                    height: 30,
-                    width: 30,
-                  ),
-                  const Text(
-                    "Winner",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12,
-                      color: CommonColors.primary,
-                    ),
-                  ),
-                ],
-              )
+            if (Global.role == 'admin')
+              if (Global.competitionStatus == 'past')
+                if (widget.studentsData.isWinner)
+                  Column(
+                    children: [
+                      SvgPicture.asset(
+                        ImagePath.trophyIcon,
+                        height: 30,
+                        width: 30,
+                      ),
+                      const Text(
+                        "Winner",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
+                          color: CommonColors.primary,
+                        ),
+                      ),
+                    ],
+                  )
           ],
         ),
       ),

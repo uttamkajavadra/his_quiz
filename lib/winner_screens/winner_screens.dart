@@ -1,6 +1,8 @@
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:his_quiz/screens/login/login_screen.dart';
 import 'package:his_quiz/winner_screens/components/winner_screen_title_subtitle.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
@@ -301,7 +303,11 @@ class _WinnerScreensState extends State<WinnerScreens> {
                               ),
                             ],
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.offAll(
+                              const LoginScreen(),
+                            );
+                          },
                         ),
                       ),
                     ],
