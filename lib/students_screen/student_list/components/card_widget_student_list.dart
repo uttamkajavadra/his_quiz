@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
+import 'package:his_quiz/globals.dart';
+import 'package:his_quiz/models/students_data.dart';
+import 'package:his_quiz/quiz_rounds/quiz_details/quiz_details_screen.dart';
 import 'package:his_quiz/students_screen/selected_student/selected_student_screen.dart';
 import 'package:his_quiz/students_screen/student_details/student_details_screen.dart';
 import 'package:his_quiz/widgets/common_dialog.dart';
@@ -10,11 +14,13 @@ import 'package:his_quiz/widgets/common_dialog.dart';
 class CardWidgetStudentList extends StatefulWidget {
   final int index;
   final bool isSelectedStudentScreen;
+  final StudentsData studentsData;
 
   const CardWidgetStudentList({
     super.key,
     this.isSelectedStudentScreen = false,
     required this.index,
+    required this.studentsData,
   });
 
   @override
@@ -26,14 +32,22 @@ class _CardWidgetStudentListState extends State<CardWidgetStudentList> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        if (widget.isSelectedStudentScreen) {
+        if (Global.competitionStatus == "past") {
           await Get.to(
-            const SelectedStudentScreen(),
+            QuizDetailsScreen(
+              studentsData: widget.studentsData,
+            ),
           );
         } else {
-          await Get.to(
-            const StudentDetailsScreen(),
-          );
+          if (widget.isSelectedStudentScreen) {
+            await Get.to(
+              const SelectedStudentScreen(),
+            );
+          } else {
+            await Get.to(
+              const StudentDetailsScreen(),
+            );
+          }
         }
       },
       child: Container(
@@ -59,7 +73,7 @@ class _CardWidgetStudentListState extends State<CardWidgetStudentList> {
                 vertical: 0,
               ),
               child: Image.asset(
-                ImagePath.studentImage,
+                widget.studentsData.image,
                 height: 64,
                 width: 64,
               ),
@@ -69,7 +83,7 @@ class _CardWidgetStudentListState extends State<CardWidgetStudentList> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Giovani Romaguera",
+                    widget.studentsData.name,
                     style: CommonTextStyle.regular500.copyWith(
                       fontSize: 16,
                     ),
@@ -90,7 +104,7 @@ class _CardWidgetStudentListState extends State<CardWidgetStudentList> {
                           top: 3,
                         ),
                         child: Text(
-                          "Delhi Public School",
+                          widget.studentsData.schoolName,
                           style: CommonTextStyle.regular400.copyWith(
                             fontSize: 12,
                           ),
@@ -101,17 +115,36 @@ class _CardWidgetStudentListState extends State<CardWidgetStudentList> {
                 ],
               ),
             ),
-            IconButton(
-              onPressed: () {
-                Get.dialog(
-                  const RemoveStudentDialog(),
-                );
-              },
-              icon: const Icon(
-                Icons.delete_outline,
-                color: CommonColors.redAccent,
+            if (Global.competitionStatus != "past")
+              IconButton(
+                onPressed: () {
+                  Get.dialog(
+                    const RemoveStudentDialog(),
+                  );
+                },
+                icon: const Icon(
+                  Icons.delete_outline,
+                  color: CommonColors.redAccent,
+                ),
               ),
-            ),
+            if (widget.studentsData.isWinner)
+              Column(
+                children: [
+                  SvgPicture.asset(
+                    ImagePath.trophyIcon,
+                    height: 30,
+                    width: 30,
+                  ),
+                  const Text(
+                    "Winner",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12,
+                      color: CommonColors.primary,
+                    ),
+                  ),
+                ],
+              )
           ],
         ),
       ),

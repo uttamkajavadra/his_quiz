@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:his_quiz/students_screen/student_list/components/card_widget_student_list.dart';
+import 'package:his_quiz/quiz_rounds/speed_round/winner_list/components/card_widget_winner_list.dart';
 
 class FailedTabScreen extends StatefulWidget {
   final int lengthOfList;
@@ -26,7 +26,7 @@ class _FailedTabScreenState extends State<FailedTabScreen> {
               vertical: 16,
             ),
             itemBuilder: (context, index) {
-              return CardWidgetStudentList(
+              return CardWidgetWinnerList(
                 index: index,
                 // isSelectedStudentScreen: true,
               );
