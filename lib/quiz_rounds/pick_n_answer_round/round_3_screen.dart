@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 import 'package:his_quiz/quiz_rounds/pick_n_answer_round/pick_n_answer_round_screen.dart';
 import 'package:his_quiz/config/common_colors.dart';
@@ -24,6 +25,21 @@ class Round3Screen extends StatefulWidget {
 }
 
 class _Round3ScreenState extends State<Round3Screen> {
+  final FlutterTts flutterTts = FlutterTts();
+
+  final String description = """
+Lorem ipsum dolor sit amet consectetur. Varius pretium cursus laoreet eu amet cursus euismod felis. Orci sed sit vulputate urna curabitur pellentesque. Lorem ipsum dolor sit amet consectetur. Varius pretium cursus laoreet eu amet cursus euismod felis. Orci sed sit vulputate urna curabitur pellentesque.""";
+
+  Future<void> speak() async {
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setPitch(1.0);
+    await flutterTts.setSpeechRate(0.5);
+
+    await flutterTts.speak(
+      description,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,26 +48,67 @@ class _Round3ScreenState extends State<Round3Screen> {
           // commonAppBar(
           //   title: "Competition Seasons",
           // ),
+          // SafeArea(
+          //   child: Container(
+          //     height: 60,
+          //     padding: const EdgeInsets.only(
+          //       left: 16,
+          //       right: 16,
+          //     ),
+          //     // color: AppColors.blackColor,
+          //     child: Row(
+          //       // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: [
+          //         InkWell(
+          //           onTap: () {
+          //             Get.back();
+          //           },
+          //           child: const Icon(
+          //             Icons.arrow_back_ios_new_rounded,
+          //           ),
+          //         ),
+          //         Expanded(
+          //           child: Text(
+          //             "Round 3",
+          //             textAlign: TextAlign.center,
+          //             style: CommonTextStyle.regular600.copyWith(
+          //               fontSize: 20,
+          //             ),
+          //           ),
+          //         ),
+          //         // Row(
+          //         //   children: actions ??
+          //         //       [
+          //         //         const SizedBox(
+          //         //           width: 24,
+          //         //         ),
+          //         //       ],
+          //         // ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           SafeArea(
             child: Container(
               height: 60,
-              padding: const EdgeInsets.only(
-                left: 16,
-                right: 16,
-              ),
-              // color: AppColors.blackColor,
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Stack(
                 children: [
-                  InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: const Icon(
-                      Icons.arrow_back_ios_new_rounded,
+                  // Back Button
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: const Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                      ),
                     ),
                   ),
-                  Expanded(
+
+                  // Centered Title
+                  Center(
                     child: Text(
                       "Round 3",
                       textAlign: TextAlign.center,
@@ -60,14 +117,6 @@ class _Round3ScreenState extends State<Round3Screen> {
                       ),
                     ),
                   ),
-                  // Row(
-                  //   children: actions ??
-                  //       [
-                  //         const SizedBox(
-                  //           width: 24,
-                  //         ),
-                  //       ],
-                  // ),
                 ],
               ),
             ),
@@ -83,10 +132,8 @@ class _Round3ScreenState extends State<Round3Screen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    decoration: BoxDecoration(
-                      color: CommonColors.primary.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                    height: 180,
+                    width: 180,
                     padding: const EdgeInsets.all(16),
                     child: SvgPicture.asset(
                       ImagePath.round3Icon,
@@ -108,15 +155,14 @@ class _Round3ScreenState extends State<Round3Screen> {
                   const SizedBox(
                     height: 12,
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 20,
                     ),
                     child: Text(
-                      """
-Lorem ipsum dolor sit amet consectetur. Varius pretium cursus laoreet eu amet cursus euismod felis. Orci sed sit vulputate urna curabitur pellentesque. Lorem ipsum dolor sit amet consectetur. Varius pretium cursus laoreet eu amet cursus euismod felis. Orci sed sit vulputate urna curabitur pellentesque.""",
+                      description,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         color: CommonColors.hintTextColor,
                         fontWeight: FontWeight.w400,
@@ -126,18 +172,23 @@ Lorem ipsum dolor sit amet consectetur. Varius pretium cursus laoreet eu amet cu
                   const SizedBox(
                     height: 20,
                   ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                  GestureDetector(
+                    onTap: () {
+                      speak();
+                    },
+                    child: Container(
+                      height: 32,
+                      width: 32,
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: CommonColors.primary,
+                        borderRadius: BorderRadius.circular(4),
                       ),
-                      padding: const EdgeInsets.all(14),
-                      backgroundColor: CommonColors.primary,
-                    ),
-                    child: const Icon(
-                      Icons.volume_up,
-                      color: CommonColors.whiteColor,
+                      child: SvgPicture.asset(
+                        ImagePath.volumnIcon,
+                        height: 24,
+                        width: 24,
+                      ),
                     ),
                   ),
                 ],

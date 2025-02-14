@@ -501,6 +501,7 @@ class _CompititionSeasonsScreenState extends State<CompititionSeasonsScreen>
                 horizontal: 20,
                 vertical: 10,
               ),
+              padding: const EdgeInsets.all(4),
               child: TabBar(
                 controller: tabController,
                 indicator: BoxDecoration(

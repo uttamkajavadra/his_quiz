@@ -74,6 +74,7 @@ class _ToBeVerifyTabScreenState extends State<ToBeVerifyTabScreen> {
             itemBuilder: (context, index) {
               return CardWidgetStudentList(
                 index: index, studentsData: studentsList[index],
+                isRemovedStudent: false,
                 // isSelectedStudentScreen: true,
               );
             },

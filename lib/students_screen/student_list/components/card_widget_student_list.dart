@@ -15,12 +15,14 @@ class CardWidgetStudentList extends StatefulWidget {
   final int index;
   final bool isSelectedStudentScreen;
   final StudentsData studentsData;
+  final bool isRemovedStudent;
 
   const CardWidgetStudentList({
     super.key,
     this.isSelectedStudentScreen = false,
     required this.index,
     required this.studentsData,
+    required this.isRemovedStudent,
   });
 
   @override
@@ -32,23 +34,23 @@ class _CardWidgetStudentListState extends State<CardWidgetStudentList> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        if (Global.competitionStatus == "past") {
-          await Get.to(
-            QuizDetailsScreen(
-              studentsData: widget.studentsData,
-            ),
-          );
-        } else {
-          if (widget.isSelectedStudentScreen) {
-            await Get.to(
-              const SelectedStudentScreen(),
-            );
-          } else {
-            await Get.to(
-              const StudentDetailsScreen(),
-            );
-          }
-        }
+        Global.competitionStatus == "past"
+            ? widget.isRemovedStudent
+                ? await Get.to(
+                    const StudentDetailsScreen(),
+                  )
+                : await Get.to(
+                    QuizDetailsScreen(
+                      studentsData: widget.studentsData,
+                    ),
+                  )
+            : widget.isSelectedStudentScreen
+                ? await Get.to(
+                    const SelectedStudentScreen(),
+                  )
+                : await Get.to(
+                    const StudentDetailsScreen(),
+                  );
       },
       child: Container(
         padding: const EdgeInsets.all(8),

@@ -19,26 +19,67 @@ class _YearAndSubjectScreenState extends State<YearAndSubjectScreen> {
       body: Column(
         children: [
           // commonAppBar(title: "${widget.season}"),
+          // SafeArea(
+          //   child: Container(
+          //     height: 60,
+          //     padding: const EdgeInsets.only(
+          //       left: 16,
+          //       right: 16,
+          //     ),
+          //     // color: AppColors.blackColor,
+          //     child: Row(
+          //       // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: [
+          //         InkWell(
+          //           onTap: () {
+          //             Get.back();
+          //           },
+          //           child: const Icon(
+          //             Icons.arrow_back_ios_new_rounded,
+          //           ),
+          //         ),
+          //         Expanded(
+          //           child: Text(
+          //             "Year and Subject",
+          //             textAlign: TextAlign.center,
+          //             style: CommonTextStyle.regular600.copyWith(
+          //               fontSize: 20,
+          //             ),
+          //           ),
+          //         ),
+          //         // Row(
+          //         //   children: actions ??
+          //         //       [
+          //         //         const SizedBox(
+          //         //           width: 24,
+          //         //         ),
+          //         //       ],
+          //         // ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           SafeArea(
             child: Container(
               height: 60,
-              padding: const EdgeInsets.only(
-                left: 16,
-                right: 16,
-              ),
-              // color: AppColors.blackColor,
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Stack(
                 children: [
-                  InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: const Icon(
-                      Icons.arrow_back_ios_new_rounded,
+                  // Back Button
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: const Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                      ),
                     ),
                   ),
-                  Expanded(
+
+                  // Centered Title
+                  Center(
                     child: Text(
                       "Year and Subject",
                       textAlign: TextAlign.center,
@@ -47,14 +88,6 @@ class _YearAndSubjectScreenState extends State<YearAndSubjectScreen> {
                       ),
                     ),
                   ),
-                  // Row(
-                  //   children: actions ??
-                  //       [
-                  //         const SizedBox(
-                  //           width: 24,
-                  //         ),
-                  //       ],
-                  // ),
                 ],
               ),
             ),

@@ -32,4 +32,5 @@ class ImagePath {
   static const trophyIcon = "assets/image/trophy.svg";
   static const levelSelect = "assets/image/level_select.svg";
   static const levelUnSelect = "assets/image/level_unselect.svg";
+  static const volumnIcon = "assets/image/volumn.svg";
 }

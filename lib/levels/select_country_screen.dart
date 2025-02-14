@@ -34,26 +34,69 @@ class _SelectCountryScreenState extends State<SelectCountryScreen>
       body: Column(
         children: [
           // commonAppBar(title: "${widget.season}"),
+          // SafeArea(
+          //   child: Container(
+          //     height: 60,
+          //     padding: const EdgeInsets.only(
+          //       left: 16,
+          //       right: 16,
+          //     ),
+          //     // color: AppColors.blackColor,
+          //     child: Row(
+          //       // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: [
+          //         InkWell(
+          //           onTap: () {
+          //             Get.back();
+          //           },
+          //           child: const Icon(
+          //             Icons.arrow_back_ios_new_rounded,
+          //           ),
+          //         ),
+          //         Expanded(
+          //           child: Text(
+          //             Global.competitionStatus == "past"
+          //                 ? "Levels"
+          //                 : "Season 3",
+          //             textAlign: TextAlign.center,
+          //             style: CommonTextStyle.regular600.copyWith(
+          //               fontSize: 20,
+          //             ),
+          //           ),
+          //         ),
+          //         // Row(
+          //         //   children: actions ??
+          //         //       [
+          //         //         const SizedBox(
+          //         //           width: 24,
+          //         //         ),
+          //         //       ],
+          //         // ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           SafeArea(
             child: Container(
               height: 60,
-              padding: const EdgeInsets.only(
-                left: 16,
-                right: 16,
-              ),
-              // color: AppColors.blackColor,
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Stack(
                 children: [
-                  InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: const Icon(
-                      Icons.arrow_back_ios_new_rounded,
+                  // Back Button
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: const Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                      ),
                     ),
                   ),
-                  Expanded(
+
+                  // Centered Title
+                  Center(
                     child: Text(
                       Global.competitionStatus == "past"
                           ? "Levels"
@@ -64,14 +107,6 @@ class _SelectCountryScreenState extends State<SelectCountryScreen>
                       ),
                     ),
                   ),
-                  // Row(
-                  //   children: actions ??
-                  //       [
-                  //         const SizedBox(
-                  //           width: 24,
-                  //         ),
-                  //       ],
-                  // ),
                 ],
               ),
             ),
@@ -129,6 +164,7 @@ class _SelectCountryScreenState extends State<SelectCountryScreen>
                 horizontal: 20,
                 vertical: 10,
               ),
+              padding: const EdgeInsets.all(4),
               child: TabBar(
                 controller: tabController,
                 indicator: BoxDecoration(

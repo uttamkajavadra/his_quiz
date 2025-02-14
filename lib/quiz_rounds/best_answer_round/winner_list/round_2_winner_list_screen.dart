@@ -40,25 +40,58 @@ class _Round2WinnerListScreenState extends State<Round2WinnerListScreen>
       body: Column(
         children: [
           // commonAppBar(title: "Student List"),
+          // SafeArea(
+          //   child: Container(
+          //     height: 60,
+          //     padding: const EdgeInsets.only(
+          //       left: 16,
+          //       right: 16,
+          //     ),
+          //     // color: AppColors.blackColor,
+          //     child: Row(
+          //       children: [
+          //         InkWell(
+          //           onTap: () {
+          //             Get.back();
+          //           },
+          //           child: const Icon(
+          //             Icons.arrow_back_ios_new_rounded,
+          //           ),
+          //         ),
+          //         Expanded(
+          //           child: Text(
+          //             "2nd Round Score",
+          //             textAlign: TextAlign.center,
+          //             style: CommonTextStyle.regular600.copyWith(
+          //               fontSize: 20,
+          //             ),
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           SafeArea(
             child: Container(
               height: 60,
-              padding: const EdgeInsets.only(
-                left: 16,
-                right: 16,
-              ),
-              // color: AppColors.blackColor,
-              child: Row(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Stack(
                 children: [
-                  InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: const Icon(
-                      Icons.arrow_back_ios_new_rounded,
+                  // Back Button
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: const Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                      ),
                     ),
                   ),
-                  Expanded(
+
+                  // Centered Title
+                  Center(
                     child: Text(
                       "2nd Round Score",
                       textAlign: TextAlign.center,
@@ -99,71 +132,71 @@ class _Round2WinnerListScreenState extends State<Round2WinnerListScreen>
                         fontSize: 16,
                       ),
                     ),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Sort by :',
-                          style: CommonTextStyle.regular400.copyWith(
-                            fontSize: 12,
-                            color: CommonColors.hintTextColor,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Container(
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          child: PopupMenuButton<String>(
-                            onSelected: (value) {
-                              setState(() {
-                                sortingValue = value;
-                              });
-                            },
-                            itemBuilder: (context) => [
-                              const PopupMenuItem(
-                                value: 'Name A to Z',
-                                child: Text(
-                                  'Name A to Z',
-                                ),
-                              ),
-                              const PopupMenuItem(
-                                value: 'Name Z to A',
-                                child: Text(
-                                  'Name Z to A',
-                                ),
-                              ),
-                            ],
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  sortingValue,
-                                  style: CommonTextStyle.regular400.copyWith(
-                                    fontSize: 14,
-                                    color: CommonColors.textBlackColor,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 6,
-                                ),
-                                const Icon(
-                                  Icons.keyboard_arrow_down_rounded,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisSize: MainAxisSize.min,
+                    //   mainAxisAlignment: MainAxisAlignment.start,
+                    //   crossAxisAlignment: CrossAxisAlignment.center,
+                    //   children: [
+                    //     Text(
+                    //       'Sort by :',
+                    //       style: CommonTextStyle.regular400.copyWith(
+                    //         fontSize: 12,
+                    //         color: CommonColors.hintTextColor,
+                    //       ),
+                    //     ),
+                    //     const SizedBox(
+                    //       width: 8,
+                    //     ),
+                    //     Container(
+                    //       decoration: ShapeDecoration(
+                    //         shape: RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(12),
+                    //         ),
+                    //       ),
+                    //       child: PopupMenuButton<String>(
+                    //         onSelected: (value) {
+                    //           setState(() {
+                    //             sortingValue = value;
+                    //           });
+                    //         },
+                    //         itemBuilder: (context) => [
+                    //           const PopupMenuItem(
+                    //             value: 'Name A to Z',
+                    //             child: Text(
+                    //               'Name A to Z',
+                    //             ),
+                    //           ),
+                    //           const PopupMenuItem(
+                    //             value: 'Name Z to A',
+                    //             child: Text(
+                    //               'Name Z to A',
+                    //             ),
+                    //           ),
+                    //         ],
+                    //         child: Row(
+                    //           mainAxisSize: MainAxisSize.min,
+                    //           mainAxisAlignment: MainAxisAlignment.start,
+                    //           crossAxisAlignment: CrossAxisAlignment.center,
+                    //           children: [
+                    //             Text(
+                    //               sortingValue,
+                    //               style: CommonTextStyle.regular400.copyWith(
+                    //                 fontSize: 14,
+                    //                 color: CommonColors.textBlackColor,
+                    //               ),
+                    //             ),
+                    //             const SizedBox(
+                    //               width: 6,
+                    //             ),
+                    //             const Icon(
+                    //               Icons.keyboard_arrow_down_rounded,
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),

@@ -25,25 +25,58 @@ class _SelectedStudentScreenState extends State<SelectedStudentScreen> {
       body: Column(
         children: [
           // commonAppBar(title: "Selacted Student List"),
+          // SafeArea(
+          //   child: Container(
+          //     height: 60,
+          //     padding: const EdgeInsets.only(
+          //       left: 16,
+          //       right: 16,
+          //     ),
+          //     // color: AppColors.blackColor,
+          //     child: Row(
+          //       children: [
+          //         InkWell(
+          //           onTap: () {
+          //             Get.back();
+          //           },
+          //           child: const Icon(
+          //             Icons.arrow_back_ios_new_rounded,
+          //           ),
+          //         ),
+          //         Expanded(
+          //           child: Text(
+          //             "Selacted Student List",
+          //             textAlign: TextAlign.center,
+          //             style: CommonTextStyle.regular600.copyWith(
+          //               fontSize: 20,
+          //             ),
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           SafeArea(
             child: Container(
               height: 60,
-              padding: const EdgeInsets.only(
-                left: 16,
-                right: 16,
-              ),
-              // color: AppColors.blackColor,
-              child: Row(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Stack(
                 children: [
-                  InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: const Icon(
-                      Icons.arrow_back_ios_new_rounded,
+                  // Back Button
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: const Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                      ),
                     ),
                   ),
-                  Expanded(
+
+                  // Centered Title
+                  Center(
                     child: Text(
                       "Selacted Student List",
                       textAlign: TextAlign.center,

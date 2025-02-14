@@ -24,25 +24,58 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
       body: Column(
         children: [
           // commonAppBar(title: "Jerome Bell"),
+          // SafeArea(
+          //   child: Container(
+          //     height: 60,
+          //     padding: const EdgeInsets.only(
+          //       left: 16,
+          //       right: 16,
+          //     ),
+          //     // color: AppColors.blackColor,
+          //     child: Row(
+          //       children: [
+          //         InkWell(
+          //           onTap: () {
+          //             Get.back();
+          //           },
+          //           child: const Icon(
+          //             Icons.arrow_back_ios_new_rounded,
+          //           ),
+          //         ),
+          //         Expanded(
+          //           child: Text(
+          //             "Jerome Bell",
+          //             textAlign: TextAlign.center,
+          //             style: CommonTextStyle.regular600.copyWith(
+          //               fontSize: 20,
+          //             ),
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           SafeArea(
             child: Container(
               height: 60,
-              padding: const EdgeInsets.only(
-                left: 16,
-                right: 16,
-              ),
-              // color: AppColors.blackColor,
-              child: Row(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Stack(
                 children: [
-                  InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: const Icon(
-                      Icons.arrow_back_ios_new_rounded,
+                  // Back Button
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: const Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                      ),
                     ),
                   ),
-                  Expanded(
+
+                  // Centered Title
+                  Center(
                     child: Text(
                       "Jerome Bell",
                       textAlign: TextAlign.center,
@@ -55,220 +88,435 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
               ),
             ),
           ),
+          // Expanded(
+          //   child: SingleChildScrollView(
+          //     padding: const EdgeInsets.only(
+          //       top: 12,
+          //       left: 24,
+          //       right: 24,
+          //     ),
+          //     child: Column(
+          //       mainAxisSize: MainAxisSize.min,
+          //       mainAxisAlignment: MainAxisAlignment.center,
+          //       crossAxisAlignment: CrossAxisAlignment.center,
+          //       children: [
+          //         Container(
+          //           width: Get.width * 0.3,
+          //           height: Get.width * 0.3,
+          //           margin: const EdgeInsets.only(
+          //             bottom: 24,
+          //           ),
+          //           clipBehavior: Clip.antiAlias,
+          //           decoration: ShapeDecoration(
+          //             image: const DecorationImage(
+          //               image: AssetImage(
+          //                 ImagePath.studentImage,
+          //               ),
+          //               fit: BoxFit.fill,
+          //             ),
+          //             shape: RoundedRectangleBorder(
+          //               borderRadius: BorderRadius.circular(8),
+          //             ),
+          //           ),
+          //         ),
+          //         Column(
+          //           mainAxisSize: MainAxisSize.min,
+          //           mainAxisAlignment: MainAxisAlignment.start,
+          //           crossAxisAlignment: CrossAxisAlignment.start,
+          //           children: [
+          //             const TitleSubTitle(
+          //               title: "Sutdent Name",
+          //               subTitle: "Sigmund Legros",
+          //             ),
+          //             const TitleSubTitle(
+          //               title: "School Address",
+          //               subTitle: "OPENING MINDS, OPENING DOORS",
+          //             ),
+          //             const TitleSubTitle(
+          //               title: "City",
+          //               subTitle: "28 Headlands Kettering",
+          //             ),
+          //             const TitleSubTitle(
+          //               title: "Email",
+          //               subTitle: " Headlands, Kettering",
+          //             ),
+          //             const TitleSubTitle(
+          //               title: "State",
+          //               subTitle: "sigmundlegros@gmail.com",
+          //             ),
+          //             const SizedBox(
+          //               height: 24,
+          //             ),
+          //             Row(
+          //               mainAxisSize: MainAxisSize.min,
+          //               mainAxisAlignment: MainAxisAlignment.start,
+          //               crossAxisAlignment: CrossAxisAlignment.start,
+          //               children: [
+          //                 Expanded(
+          //                   child: Column(
+          //                     // mainAxisSize: MainAxisSize.min,
+          //                     mainAxisAlignment: MainAxisAlignment.center,
+          //                     crossAxisAlignment: CrossAxisAlignment.start,
+          //                     children: [
+          //                       Text(
+          //                         'State',
+          //                         style: CommonTextStyle.regular600.copyWith(
+          //                           fontSize: 14,
+          //                         ),
+          //                       ),
+          //                       const SizedBox(
+          //                         height: 8,
+          //                       ),
+          //                       Container(
+          //                         width: 150,
+          //                         height: 150,
+          //                         alignment: Alignment.center,
+          //                         decoration: ShapeDecoration(
+          //                           image: const DecorationImage(
+          //                             image: AssetImage(
+          //                               ImagePath.walesCity,
+          //                             ),
+          //                             fit: BoxFit.fill,
+          //                           ),
+          //                           shape: RoundedRectangleBorder(
+          //                             borderRadius: BorderRadius.circular(8),
+          //                           ),
+          //                         ),
+          //                       ),
+          //                       const SizedBox(
+          //                         height: 8,
+          //                       ),
+          //                       Center(
+          //                         child: Text(
+          //                           'Wales',
+          //                           textAlign: TextAlign.center,
+          //                           style: CommonTextStyle.regular600.copyWith(
+          //                             fontSize: 16,
+          //                             color: CommonColors.gretTextTextColor,
+          //                           ),
+          //                         ),
+          //                       ),
+          //                     ],
+          //                   ),
+          //                 ),
+          //                 const SizedBox(
+          //                   width: 12,
+          //                 ),
+          //                 Expanded(
+          //                   child: Column(
+          //                     mainAxisSize: MainAxisSize.min,
+          //                     mainAxisAlignment: MainAxisAlignment.center,
+          //                     crossAxisAlignment: CrossAxisAlignment.start,
+          //                     children: [
+          //                       Text(
+          //                         'Country',
+          //                         style: CommonTextStyle.regular600.copyWith(
+          //                           fontSize: 14,
+          //                         ),
+          //                       ),
+          //                       const SizedBox(
+          //                         height: 8,
+          //                       ),
+          //                       Container(
+          //                         width: 150,
+          //                         height: 150,
+          //                         decoration: ShapeDecoration(
+          //                           image: const DecorationImage(
+          //                             image: AssetImage(
+          //                               ImagePath.unitedKingdom,
+          //                             ),
+          //                             fit: BoxFit.fill,
+          //                           ),
+          //                           shape: RoundedRectangleBorder(
+          //                             borderRadius: BorderRadius.circular(8),
+          //                           ),
+          //                         ),
+          //                       ),
+          //                       const SizedBox(
+          //                         height: 8,
+          //                       ),
+          //                       Center(
+          //                         child: Text(
+          //                           'United Kingdom',
+          //                           textAlign: TextAlign.center,
+          //                           style: CommonTextStyle.regular600.copyWith(
+          //                             fontSize: 16,
+          //                             color: CommonColors.gretTextTextColor,
+          //                           ),
+          //                         ),
+          //                       ),
+          //                     ],
+          //                   ),
+          //                 ),
+          //               ],
+          //             ),
+          //             // commonButton(
+          //             //     title: "Verify Face",
+          //             //     margin: EdgeInsets.only(top: 48),
+          //             //     isFront: true,
+          //             //     isExpand: true,
+          //             //     onTap: () async {
+          //             //     await  Get.off(()=>FaceVerificatopnScreen());
+          //             //     },
+          //             //     frontImage: ImagePath.faceScan,
+          //             //     frontImageHeight: 20),
+          //             if (Global.competitionStatus != "past")
+          //               Container(
+          //                 margin: const EdgeInsets.only(
+          //                   top: 48,
+          //                   bottom: 48,
+          //                 ),
+          //                 child: CommonButton(
+          //                   child: Row(
+          //                     mainAxisSize: MainAxisSize.max,
+          //                     mainAxisAlignment: MainAxisAlignment.center,
+          //                     children: [
+          //                       Image.asset(
+          //                         ImagePath.faceScan,
+          //                         height: 20,
+          //                       ),
+          //                       const SizedBox(
+          //                         width: 8,
+          //                       ),
+          //                       Flexible(
+          //                         child: Text(
+          //                           "Verify Face",
+          //                           style: CommonTextStyle.bold.copyWith(
+          //                             fontSize: 16,
+          //                             color: CommonColors.whiteColor,
+          //                           ),
+          //                         ),
+          //                       ),
+          //                     ],
+          //                   ),
+          //                   onPressed: () {
+          //                     Get.to(
+          //                       const FaceVerificationScreen(),
+          //                     );
+          //                   },
+          //                 ),
+          //               ),
+          //           ],
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // )
+
           Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.only(
-                top: 12,
-                left: 24,
-                right: 24,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    width: Get.width * 0.3,
-                    height: Get.width * 0.3,
-                    margin: const EdgeInsets.only(
-                      bottom: 24,
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    decoration: ShapeDecoration(
-                      image: const DecorationImage(
-                        image: AssetImage(
-                          ImagePath.studentImage,
-                        ),
-                        fit: BoxFit.fill,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
+            child: Stack(
+              children: [
+                SingleChildScrollView(
+                  padding: const EdgeInsets.only(
+                    top: 12,
+                    left: 24,
+                    right: 24,
+                    bottom: 100,
                   ),
-                  Column(
+                  child: Column(
                     mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const TitleSubTitle(
-                        title: "Sutdent Name",
-                        subTitle: "Sigmund Legros",
+                      Container(
+                        width: Get.width * 0.3,
+                        height: Get.width * 0.3,
+                        margin: const EdgeInsets.only(
+                          bottom: 24,
+                        ),
+                        clipBehavior: Clip.antiAlias,
+                        decoration: ShapeDecoration(
+                          image: const DecorationImage(
+                            image: AssetImage(
+                              ImagePath.studentImage,
+                            ),
+                            fit: BoxFit.fill,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
                       ),
-                      const TitleSubTitle(
-                        title: "School Address",
-                        subTitle: "OPENING MINDS, OPENING DOORS",
-                      ),
-                      const TitleSubTitle(
-                        title: "City",
-                        subTitle: "28 Headlands Kettering",
-                      ),
-                      const TitleSubTitle(
-                        title: "Email",
-                        subTitle: " Headlands, Kettering",
-                      ),
-                      const TitleSubTitle(
-                        title: "State",
-                        subTitle: "sigmundlegros@gmail.com",
-                      ),
-                      const SizedBox(
-                        height: 24,
-                      ),
-                      Row(
+                      Column(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(
-                            child: Column(
-                              // mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'State',
-                                  style: CommonTextStyle.regular600.copyWith(
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Container(
-                                  width: 150,
-                                  height: 150,
-                                  alignment: Alignment.center,
-                                  decoration: ShapeDecoration(
-                                    image: const DecorationImage(
-                                      image: AssetImage(
-                                        ImagePath.walesCity,
-                                      ),
-                                      fit: BoxFit.fill,
-                                    ),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Center(
-                                  child: Text(
-                                    'Wales',
-                                    textAlign: TextAlign.center,
-                                    style: CommonTextStyle.regular600.copyWith(
-                                      fontSize: 16,
-                                      color: CommonColors.gretTextTextColor,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                          const TitleSubTitle(
+                            title: "Sutdent Name",
+                            subTitle: "Sigmund Legros",
+                          ),
+                          const TitleSubTitle(
+                            title: "School Name",
+                            subTitle: "OPENING MINDS, OPENING DOORS",
+                          ),
+                          const TitleSubTitle(
+                            title: "School Address",
+                            subTitle: "28 Headlands Kettering",
+                          ),
+                          const TitleSubTitle(
+                            title: "City",
+                            subTitle: "Headlands, Kettering",
+                          ),
+                          const TitleSubTitle(
+                            title: "Email",
+                            subTitle: "sigmundlegros@gmail.com",
                           ),
                           const SizedBox(
-                            width: 12,
+                            height: 24,
                           ),
-                          Expanded(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Country',
-                                  style: CommonTextStyle.regular600.copyWith(
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Container(
-                                  width: 150,
-                                  height: 150,
-                                  decoration: ShapeDecoration(
-                                    image: const DecorationImage(
-                                      image: AssetImage(
-                                        ImagePath.unitedKingdom,
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'State',
+                                      style:
+                                          CommonTextStyle.regular600.copyWith(
+                                        fontSize: 14,
                                       ),
-                                      fit: BoxFit.fill,
                                     ),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8),
+                                    const SizedBox(
+                                      height: 8,
                                     ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Center(
-                                  child: Text(
-                                    'United Kingdom',
-                                    textAlign: TextAlign.center,
-                                    style: CommonTextStyle.regular600.copyWith(
-                                      fontSize: 16,
-                                      color: CommonColors.gretTextTextColor,
+                                    Container(
+                                      width: 150,
+                                      height: 150,
+                                      alignment: Alignment.center,
+                                      decoration: ShapeDecoration(
+                                        image: const DecorationImage(
+                                          image: AssetImage(
+                                            ImagePath.walesCity,
+                                          ),
+                                          fit: BoxFit.fill,
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        'Wales',
+                                        textAlign: TextAlign.center,
+                                        style:
+                                            CommonTextStyle.regular600.copyWith(
+                                          fontSize: 16,
+                                          color: CommonColors.gretTextTextColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Country',
+                                      style:
+                                          CommonTextStyle.regular600.copyWith(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Container(
+                                      width: 150,
+                                      height: 150,
+                                      decoration: ShapeDecoration(
+                                        image: const DecorationImage(
+                                          image: AssetImage(
+                                            ImagePath.unitedKingdom,
+                                          ),
+                                          fit: BoxFit.fill,
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        'United Kingdom',
+                                        textAlign: TextAlign.center,
+                                        style:
+                                            CommonTextStyle.regular600.copyWith(
+                                          fontSize: 16,
+                                          color: CommonColors.gretTextTextColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Positioned Button
+                if (Global.competitionStatus != "past")
+                  Positioned(
+                    bottom: 20,
+                    left: 16,
+                    right: 16,
+                    child: CommonButton(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            ImagePath.faceScan,
+                            height: 20,
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Flexible(
+                            child: Text(
+                              "Verify Face",
+                              style: CommonTextStyle.bold.copyWith(
+                                fontSize: 16,
+                                color: CommonColors.whiteColor,
+                              ),
                             ),
                           ),
                         ],
                       ),
-                      // commonButton(
-                      //     title: "Verify Face",
-                      //     margin: EdgeInsets.only(top: 48),
-                      //     isFront: true,
-                      //     isExpand: true,
-                      //     onTap: () async {
-                      //     await  Get.off(()=>FaceVerificatopnScreen());
-                      //     },
-                      //     frontImage: ImagePath.faceScan,
-                      //     frontImageHeight: 20),
-                      if (Global.competitionStatus != "past")
-                        Container(
-                          margin: const EdgeInsets.only(
-                            top: 48,
-                            bottom: 48,
-                          ),
-                          child: CommonButton(
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  ImagePath.faceScan,
-                                  height: 20,
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                Flexible(
-                                  child: Text(
-                                    "Verify Face",
-                                    style: CommonTextStyle.bold.copyWith(
-                                      fontSize: 16,
-                                      color: CommonColors.whiteColor,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            onPressed: () {
-                              Get.to(
-                                const FaceVerificationScreen(),
-                              );
-                            },
-                          ),
-                        ),
-                    ],
+                      onPressed: () {
+                        Get.to(
+                          const FaceVerificationScreen(),
+                        );
+                      },
+                    ),
                   ),
-                ],
-              ),
+              ],
             ),
-          )
+          ),
         ],
       ),
     );

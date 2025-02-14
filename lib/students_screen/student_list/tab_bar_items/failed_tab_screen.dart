@@ -72,7 +72,9 @@ class _FailedTabScreenState extends State<FailedTabScreen> {
             ),
             itemBuilder: (context, index) {
               return CardWidgetStudentList(
-                index: index, studentsData: studentsList[index],
+                index: index,
+                studentsData: studentsList[index],
+                isRemovedStudent: true,
                 // isSelectedStudentScreen: true,
               );
             },

@@ -86,71 +86,140 @@ class _StudentWisePickNAnswerRoundScreenState
           // commonAppBar(
           //   title: "Competition Seasons",
           // ),
+          // SafeArea(
+          //   child: Container(
+          //     height: 60,
+          //     padding: const EdgeInsets.only(
+          //       left: 16,
+          //       right: 16,
+          //     ),
+          //     // color: AppColors.blackColor,
+          //     child: Row(
+          //       children: [
+          //         InkWell(
+          //           onTap: () {
+          //             Get.back();
+          //           },
+          //           child: const Icon(
+          //             Icons.arrow_back_ios_new_rounded,
+          //           ),
+          //         ),
+          //         Expanded(
+          //           child: Center(
+          //             child: Text(
+          //               "Pick 'N' Answer",
+          //               textAlign: TextAlign.center,
+          //               style: CommonTextStyle.regular600.copyWith(
+          //                 fontSize: 20,
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          //         // Row(
+          //         //   children: actions ??
+          //         //       [
+          //         //         const SizedBox(
+          //         //           width: 24,
+          //         //         ),
+          //         //       ],
+          //         // ),
+          //         Container(
+          //           padding: const EdgeInsets.symmetric(
+          //             horizontal: 8,
+          //             vertical: 4,
+          //           ),
+          //           decoration: BoxDecoration(
+          //             color: CommonColors.primary.withOpacity(0.1),
+          //             borderRadius: BorderRadius.circular(8),
+          //           ),
+          //           child: Row(
+          //             children: [
+          //               SvgPicture.asset(
+          //                 ImagePath.timerIcon,
+          //                 height: 18,
+          //                 width: 18,
+          //               ),
+          //               const SizedBox(
+          //                 width: 4,
+          //               ),
+          //               Text(
+          //                 formatTime(remainingSeconds),
+          //                 style: const TextStyle(
+          //                   fontSize: 14,
+          //                   fontWeight: FontWeight.w400,
+          //                   color: Colors.orange,
+          //                 ),
+          //               ),
+          //             ],
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           SafeArea(
             child: Container(
               height: 60,
-              padding: const EdgeInsets.only(
-                left: 16,
-                right: 16,
-              ),
-              // color: AppColors.blackColor,
-              child: Row(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Stack(
                 children: [
-                  InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: const Icon(
-                      Icons.arrow_back_ios_new_rounded,
-                    ),
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        "Pick 'N' Answer",
-                        textAlign: TextAlign.center,
-                        style: CommonTextStyle.regular600.copyWith(
-                          fontSize: 20,
-                        ),
+                  // Back Button
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: const Icon(
+                        Icons.arrow_back_ios_new_rounded,
                       ),
                     ),
                   ),
-                  // Row(
-                  //   children: actions ??
-                  //       [
-                  //         const SizedBox(
-                  //           width: 24,
-                  //         ),
-                  //       ],
-                  // ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
+
+                  // Centered Title
+                  Center(
+                    child: Text(
+                      "Pick 'N' Answer",
+                      textAlign: TextAlign.center,
+                      style: CommonTextStyle.regular600.copyWith(
+                        fontSize: 20,
+                      ),
                     ),
-                    decoration: BoxDecoration(
-                      color: CommonColors.primary.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(
-                          ImagePath.timerIcon,
-                          height: 18,
-                          width: 18,
-                        ),
-                        const SizedBox(
-                          width: 4,
-                        ),
-                        Text(
-                          formatTime(remainingSeconds),
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.orange,
+                  ),
+
+                  // Timer on the Right
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: CommonColors.primary.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SvgPicture.asset(
+                            ImagePath.timerIcon,
+                            height: 18,
+                            width: 18,
                           ),
-                        ),
-                      ],
+                          const SizedBox(
+                            width: 4,
+                          ),
+                          Text(
+                            formatTime(remainingSeconds),
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.orange,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -178,7 +247,14 @@ class _StudentWisePickNAnswerRoundScreenState
                 height: 60,
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
-                  color: CommonColors.primary,
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color(0xFFEA9539),
+                      Color(0xFFE66334),
+                    ],
+                  ),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(6),

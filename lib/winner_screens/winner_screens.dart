@@ -46,16 +46,36 @@ class _WinnerScreensState extends State<WinnerScreens> {
           Column(
             children: [
               // commonAppBar(title: "Jerome Bell"),
+              // SafeArea(
+              //   child: Container(
+              //     height: 60,
+              //     padding: const EdgeInsets.only(
+              //       left: 16,
+              //       right: 16,
+              //     ),
+              //     child: Row(
+              //       children: [
+              //         Expanded(
+              //           child: Text(
+              //             "Winner",
+              //             textAlign: TextAlign.center,
+              //             style: CommonTextStyle.regular600.copyWith(
+              //               fontSize: 20,
+              //             ),
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
               SafeArea(
                 child: Container(
                   height: 60,
-                  padding: const EdgeInsets.only(
-                    left: 16,
-                    right: 16,
-                  ),
-                  child: Row(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Stack(
                     children: [
-                      Expanded(
+                      // Centered Title
+                      Center(
                         child: Text(
                           "Winner",
                           textAlign: TextAlign.center,
