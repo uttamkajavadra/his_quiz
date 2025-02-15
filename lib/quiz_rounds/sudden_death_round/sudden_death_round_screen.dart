@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:his_quiz/globals.dart';
 import 'package:his_quiz/winner_screens/winner_screens.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
@@ -293,57 +294,60 @@ class _SuddenDeathRoundScreenState extends State<SuddenDeathRoundScreen> {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        width: 12,
-                      ),
-                      Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Container(
-                            width: 60,
-                            height: 60,
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  Color(0xFFEA9539),
-                                  Color(0xFFE66334),
-                                ],
-                              ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(6),
-                              child: Transform(
-                                alignment: Alignment.center,
-                                transform: Matrix4.diagonal3Values(
-                                  -1,
-                                  1,
-                                  1,
+                      if (Global.role != 'student')
+                        const SizedBox(
+                          width: 12,
+                        ),
+                      if (Global.role != 'student')
+                        Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Container(
+                              width: 60,
+                              height: 60,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Color(0xFFEA9539),
+                                    Color(0xFFE66334),
+                                  ],
                                 ),
-                                child: CircularProgressIndicator(
-                                  value: remainingSeconds / widget.questionTime,
-                                  strokeWidth: 6,
-                                  backgroundColor: CommonColors.whiteColor,
-                                  valueColor:
-                                      const AlwaysStoppedAnimation<Color>(
-                                    CommonColors.primary,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(6),
+                                child: Transform(
+                                  alignment: Alignment.center,
+                                  transform: Matrix4.diagonal3Values(
+                                    -1,
+                                    1,
+                                    1,
+                                  ),
+                                  child: CircularProgressIndicator(
+                                    value:
+                                        remainingSeconds / widget.questionTime,
+                                    strokeWidth: 6,
+                                    backgroundColor: CommonColors.whiteColor,
+                                    valueColor:
+                                        const AlwaysStoppedAnimation<Color>(
+                                      CommonColors.primary,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          Text(
-                            '$remainingSeconds',
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: CommonColors.whiteColor,
+                            Text(
+                              '$remainingSeconds',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: CommonColors.whiteColor,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
                     ],
                   ),
                   const SizedBox(

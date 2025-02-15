@@ -3,10 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:his_quiz/globals.dart';
 import 'package:his_quiz/quiz_rounds/best_answer_round/group_wise/components/card_widget_group_wise_round_2.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
+import 'package:his_quiz/quiz_rounds/pick_n_answer_round/round_3_screen.dart';
 import 'package:his_quiz/widgets/common_bottom_bar.dart';
 import 'package:his_quiz/widgets/common_button.dart';
 import 'package:his_quiz/widgets/common_dialog.dart';
@@ -33,6 +35,15 @@ class GroupWiseSpeedRound2Screen extends StatefulWidget {
 
 class _GroupWiseSpeedRound2ScreenState
     extends State<GroupWiseSpeedRound2Screen> {
+  List<String> options = [
+    "Earth",
+    "Mars",
+    "Jupiter",
+    "Venus",
+  ];
+
+  int? selectedAnswerIndex;
+
   // Set initial countdown time in seconds
   int remainingSeconds = 60;
   Timer? timer;
@@ -239,24 +250,27 @@ class _GroupWiseSpeedRound2ScreenState
                   color: CommonColors.primary,
                 ),
               ),
-              const SizedBox(
-                width: 10,
-              ),
-              const Text(
-                "Question No :",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+              if (Global.role != 'student')
+                const SizedBox(
+                  width: 10,
                 ),
-              ),
-              Text(
-                "${widget.currentQuestionNumber}/${widget.totalQuestionNumber}",
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  color: CommonColors.primary,
+              if (Global.role != 'student')
+                const Text(
+                  "Question No :",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
+              if (Global.role != 'student')
+                Text(
+                  "${widget.currentQuestionNumber}/${widget.totalQuestionNumber}",
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    color: CommonColors.primary,
+                  ),
+                ),
             ],
           ),
           const SizedBox(
@@ -312,43 +326,140 @@ class _GroupWiseSpeedRound2ScreenState
           const SizedBox(
             height: 20,
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: 10,
-              physics: const BouncingScrollPhysics(),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 16,
+          if (Global.role != 'student')
+            Expanded(
+              child: ListView.builder(
+                itemCount: 10,
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 16,
+                ),
+                itemBuilder: (context, index) {
+                  return CardWidgetGroupWiseRound2(
+                    index: index,
+                  );
+                },
               ),
-              itemBuilder: (context, index) {
-                return CardWidgetGroupWiseRound2(
-                  index: index,
-                );
-              },
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20.0,
-            ),
-            child: CommonButton(
+          if (Global.role == 'student')
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
               child: Text(
-                "Next",
-                style: CommonTextStyle.bold.copyWith(
-                  fontSize: 16,
-                  color: CommonColors.whiteColor,
+                "What is the largest planet in our solar system?",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              onPressed: () {
-                Get.dialog(
-                  const QuizResultRound2Dialog(),
+            ),
+          if (Global.role == 'student')
+            const SizedBox(
+              height: 20,
+            ),
+          if (Global.role == 'student')
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              itemCount: options.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedAnswerIndex = index;
+                    });
+
+                    if (Global.role == "student") {
+                      if (selectedAnswerIndex != null) {
+                        // Redirect for student flow
+                        Future.delayed(
+                          const Duration(
+                            seconds: 5,
+                          ),
+                          () {
+                            Get.to(
+                              // Round3Screen(
+                              //   isGroupWiseRound: widget.isGroup,
+                              //   totalStudents: widget.totalStudent,
+                              //   questionTime: int.parse(
+                              //     addTimeController.text,
+                              //   ),
+                              // ),
+                              const Round3Screen(
+                                isGroupWiseRound: true,
+                                totalStudents: 3,
+                                questionTime: 30,
+                              ),
+                            );
+                          },
+                        );
+                      }
+                    }
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(
+                      bottom: 12,
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 14,
+                    ),
+                    decoration: BoxDecoration(
+                      color: selectedAnswerIndex == index
+                          ? CommonColors.primary.withOpacity(0.1)
+                          : CommonColors.whiteColor,
+                      border: Border.all(
+                        color: selectedAnswerIndex == index
+                            ? CommonColors.primary
+                            : Colors.grey.shade300,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Center(
+                      child: Text(
+                        options[index],
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: selectedAnswerIndex == index
+                              ? CommonColors.primary
+                              : CommonColors.blackColor,
+                        ),
+                      ),
+                    ),
+                  ),
                 );
               },
             ),
-          ),
+          if (Global.role != 'student')
+            const SizedBox(
+              height: 20,
+            ),
+          if (Global.role != 'student')
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20.0,
+              ),
+              child: CommonButton(
+                child: Text(
+                  "Next",
+                  style: CommonTextStyle.bold.copyWith(
+                    fontSize: 16,
+                    color: CommonColors.whiteColor,
+                  ),
+                ),
+                onPressed: () {
+                  Get.dialog(
+                    const QuizResultRound2Dialog(),
+                  );
+                },
+              ),
+            ),
           const SizedBox(
             height: 20,
           ),

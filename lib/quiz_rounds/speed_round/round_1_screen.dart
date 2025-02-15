@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
+import 'package:his_quiz/globals.dart';
 import 'package:his_quiz/quiz_rounds/speed_round/group_wise/group_wise_speed_round_screen.dart';
 import 'package:his_quiz/quiz_rounds/speed_round/student_wise/student_wise_speed_round_screen.dart';
 import 'package:his_quiz/config/common_colors.dart';
@@ -30,6 +31,33 @@ class _Round1ScreenState extends State<Round1Screen> {
 
   final String description = """
 Lorem ipsum dolor sit amet consectetur. Varius pretium cursus laoreet eu amet cursus euismod felis. Orci sed sit vulputate urna curabitur pellentesque. Lorem ipsum dolor sit amet consectetur. Varius pretium cursus laoreet eu amet cursus euismod felis. Orci sed sit vulputate urna curabitur pellentesque.""";
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Redirect for student flow
+    Future.delayed(
+      const Duration(
+        seconds: 5,
+      ),
+      () {
+        widget.isGroupWiseRound
+            ? Get.to(
+                GroupWiseSpeedRoundScreen(
+                  currentGroupNumber: widget.currentNumber,
+                  totalGroupNumber: widget.totalNumber,
+                ),
+              )
+            : Get.to(
+                StudentWiseSpeedRoundScreen(
+                  currentStudentNumber: widget.currentNumber,
+                  totalStudentNumber: widget.totalNumber,
+                ),
+              );
+      },
+    );
+  }
 
   Future<void> speak() async {
     await flutterTts.setLanguage("en-US");
@@ -199,38 +227,40 @@ Lorem ipsum dolor sit amet consectetur. Varius pretium cursus laoreet eu amet cu
           const SizedBox(
             height: 20,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20.0,
-            ),
-            child: CommonButton(
-              child: Text(
-                "Start Round 1",
-                style: CommonTextStyle.bold.copyWith(
-                  fontSize: 16,
-                  color: CommonColors.whiteColor,
-                ),
+          if (Global.role != 'student')
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20.0,
               ),
-              onPressed: () {
-                widget.isGroupWiseRound
-                    ? Get.to(
-                        GroupWiseSpeedRoundScreen(
-                          currentGroupNumber: widget.currentNumber,
-                          totalGroupNumber: widget.totalNumber,
-                        ),
-                      )
-                    : Get.to(
-                        StudentWiseSpeedRoundScreen(
-                          currentStudentNumber: widget.currentNumber,
-                          totalStudentNumber: widget.totalNumber,
-                        ),
-                      );
-              },
+              child: CommonButton(
+                child: Text(
+                  "Start Round 1",
+                  style: CommonTextStyle.bold.copyWith(
+                    fontSize: 16,
+                    color: CommonColors.whiteColor,
+                  ),
+                ),
+                onPressed: () {
+                  widget.isGroupWiseRound
+                      ? Get.to(
+                          GroupWiseSpeedRoundScreen(
+                            currentGroupNumber: widget.currentNumber,
+                            totalGroupNumber: widget.totalNumber,
+                          ),
+                        )
+                      : Get.to(
+                          StudentWiseSpeedRoundScreen(
+                            currentStudentNumber: widget.currentNumber,
+                            totalStudentNumber: widget.totalNumber,
+                          ),
+                        );
+                },
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
+          if (Global.role != 'student')
+            const SizedBox(
+              height: 20,
+            ),
         ],
       ),
       bottomNavigationBar: commonBottomBar(),

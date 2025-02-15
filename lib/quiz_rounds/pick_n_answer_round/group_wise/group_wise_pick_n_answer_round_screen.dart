@@ -3,10 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:his_quiz/globals.dart';
 import 'package:his_quiz/quiz_rounds/pick_n_answer_round/pop_up_screens/round_3_quiz_result_pop_up_screen.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/config/image_path.dart';
+import 'package:his_quiz/quiz_rounds/sudden_death_round/round_4_screen.dart';
 import 'package:his_quiz/widgets/common_bottom_bar.dart';
 import 'package:his_quiz/widgets/common_button.dart';
 
@@ -369,9 +371,22 @@ class _GroupWisePickNAnswerRoundScreenState
                 ),
               ),
               onPressed: () {
-                Get.dialog(
-                  const Round3QuizResultPopUpScreen(),
-                );
+                Global.role == "student"
+                    ? Get.to(
+                        // Round4Screen(
+                        //   totalStudents: widget.totalStudent,
+                        //   questionTime: int.parse(
+                        //     addTimeController.text,
+                        //   ),
+                        // ),
+                        const Round4Screen(
+                          totalStudents: 3,
+                          questionTime: 30,
+                        ),
+                      )
+                    : Get.dialog(
+                        const Round3QuizResultPopUpScreen(),
+                      );
               },
             ),
           ),

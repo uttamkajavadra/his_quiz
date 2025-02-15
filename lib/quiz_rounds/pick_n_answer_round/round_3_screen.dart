@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
+import 'package:his_quiz/globals.dart';
 import 'package:his_quiz/quiz_rounds/pick_n_answer_round/pick_n_answer_round_screen.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
@@ -29,6 +30,27 @@ class _Round3ScreenState extends State<Round3Screen> {
 
   final String description = """
 Lorem ipsum dolor sit amet consectetur. Varius pretium cursus laoreet eu amet cursus euismod felis. Orci sed sit vulputate urna curabitur pellentesque. Lorem ipsum dolor sit amet consectetur. Varius pretium cursus laoreet eu amet cursus euismod felis. Orci sed sit vulputate urna curabitur pellentesque.""";
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Redirect for student flow
+    Future.delayed(
+      const Duration(
+        seconds: 5,
+      ),
+      () {
+        Get.to(
+          PickNAnswerRoundScreen(
+            totalStudents: widget.totalStudents,
+            questionTime: widget.questionTime,
+            isGroupWiseRound: widget.isGroupWiseRound,
+          ),
+        );
+      },
+    );
+  }
 
   Future<void> speak() async {
     await flutterTts.setLanguage("en-US");
@@ -198,32 +220,34 @@ Lorem ipsum dolor sit amet consectetur. Varius pretium cursus laoreet eu amet cu
           const SizedBox(
             height: 20,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20.0,
-            ),
-            child: CommonButton(
-              child: Text(
-                "Start Round 3",
-                style: CommonTextStyle.bold.copyWith(
-                  fontSize: 16,
-                  color: CommonColors.whiteColor,
-                ),
+          if (Global.role != 'student')
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20.0,
               ),
-              onPressed: () {
-                Get.to(
-                  PickNAnswerRoundScreen(
-                    totalStudents: widget.totalStudents,
-                    questionTime: widget.questionTime,
-                    isGroupWiseRound: widget.isGroupWiseRound,
+              child: CommonButton(
+                child: Text(
+                  "Start Round 3",
+                  style: CommonTextStyle.bold.copyWith(
+                    fontSize: 16,
+                    color: CommonColors.whiteColor,
                   ),
-                );
-              },
+                ),
+                onPressed: () {
+                  Get.to(
+                    PickNAnswerRoundScreen(
+                      totalStudents: widget.totalStudents,
+                      questionTime: widget.questionTime,
+                      isGroupWiseRound: widget.isGroupWiseRound,
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
+          if (Global.role != 'student')
+            const SizedBox(
+              height: 20,
+            ),
         ],
       ),
       bottomNavigationBar: commonBottomBar(),

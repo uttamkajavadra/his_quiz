@@ -6,6 +6,7 @@ import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/compitition_seasons/compitition_seasons_screen.dart';
 import 'package:his_quiz/globals.dart';
+import 'package:his_quiz/quiz_rounds/speed_round/round_1_screen.dart';
 import 'package:his_quiz/widgets/common_bottom_bar.dart';
 import 'package:his_quiz/widgets/common_button.dart';
 import 'package:his_quiz/widgets/common_text_field.dart';
@@ -247,6 +248,22 @@ class _LoginScreenState extends State<LoginScreen> {
                           Get.offAll(
                             const CompititionSeasonsScreen(),
                           );
+                        } else if (userNameController.text == "student") {
+                          Global.role = "student";
+                          Get.offAll(
+                            // const Round1Screen(
+                            //   isGroupWiseRound: true,
+                            //   currentNumber: 2,
+                            //   totalNumber: 20,
+                            // ),
+                            const Round1Screen(
+                              isGroupWiseRound: false,
+                              currentNumber: 2,
+                              totalNumber: 20,
+                            ),
+                          );
+                        } else {
+                          return null;
                         }
                       },
                     );
