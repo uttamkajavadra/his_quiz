@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -28,6 +30,9 @@ class Round3Screen extends StatefulWidget {
 class _Round3ScreenState extends State<Round3Screen> {
   final FlutterTts flutterTts = FlutterTts();
 
+  // Track speaking status
+  bool isSpeaking = false;
+
   final String description = """
 Lorem ipsum dolor sit amet consectetur. Varius pretium cursus laoreet eu amet cursus euismod felis. Orci sed sit vulputate urna curabitur pellentesque. Lorem ipsum dolor sit amet consectetur. Varius pretium cursus laoreet eu amet cursus euismod felis. Orci sed sit vulputate urna curabitur pellentesque.""";
 
@@ -35,31 +40,103 @@ Lorem ipsum dolor sit amet consectetur. Varius pretium cursus laoreet eu amet cu
   void initState() {
     super.initState();
 
+    // Check for TTS Availability
+    checkTts();
+
+    // Monitor speech progress
+    flutterTts.setProgressHandler((
+      String text,
+      int start,
+      int end,
+      String word,
+    ) {
+      isSpeaking = true;
+      log("Speaking... $word");
+    });
+
+    // Monitor when speaking is complete
+    flutterTts.setCancelHandler(() {
+      isSpeaking = false;
+      log("Speech cancelled.");
+    });
+
+    flutterTts.setPauseHandler(() {
+      isSpeaking = false;
+      log("Speech paused.");
+    });
+
+    flutterTts.setContinueHandler(() {
+      isSpeaking = true;
+      log("Speech resumed.");
+    });
+
+    flutterTts.setCompletionHandler(() {
+      isSpeaking = false;
+      log("Speech completed.");
+    });
+
     // Redirect for student flow
     Future.delayed(
       const Duration(
         seconds: 5,
       ),
       () {
-        Get.to(
-          PickNAnswerRoundScreen(
-            totalStudents: widget.totalStudents,
-            questionTime: widget.questionTime,
-            isGroupWiseRound: widget.isGroupWiseRound,
-          ),
-        );
+        if (Global.role == "student") {
+          // Stop speech before navigating
+          flutterTts.stop();
+          isSpeaking = false;
+
+          Get.to(
+            PickNAnswerRoundScreen(
+              totalStudents: widget.totalStudents,
+              questionTime: widget.questionTime,
+              isGroupWiseRound: widget.isGroupWiseRound,
+            ),
+          );
+        }
       },
     );
   }
 
-  Future<void> speak() async {
-    await flutterTts.setLanguage("en-US");
-    await flutterTts.setPitch(1.0);
-    await flutterTts.setSpeechRate(0.5);
+  Future<void> checkTts() async {
+    var engines = await flutterTts.getEngines;
+    log("Available TTS Engines: $engines");
+  }
 
-    await flutterTts.speak(
-      description,
-    );
+  Future<void> speak() async {
+    try {
+      if (isSpeaking) {
+        // Stop speech
+        await flutterTts.stop();
+        isSpeaking = false;
+        log("Speech stopped.");
+      } else {
+        await flutterTts.setLanguage("en-US");
+        await flutterTts.setPitch(1.0);
+        await flutterTts.setSpeechRate(0.5);
+
+        // await flutterTts.speak(
+        //   description,
+        // );
+
+        var result = await flutterTts.speak(description);
+        if (result == 1) {
+          isSpeaking = true;
+          log("Speaking...");
+        } else {
+          log("Failed to speak.");
+        }
+      }
+    } catch (e) {
+      log("Error: $e");
+    }
+  }
+
+  @override
+  void dispose() {
+    flutterTts.stop();
+    isSpeaking = false;
+    super.dispose();
   }
 
   @override
@@ -234,6 +311,10 @@ Lorem ipsum dolor sit amet consectetur. Varius pretium cursus laoreet eu amet cu
                   ),
                 ),
                 onPressed: () {
+                  // Stop speech before navigating
+                  flutterTts.stop();
+                  isSpeaking = false;
+                  
                   Get.to(
                     PickNAnswerRoundScreen(
                       totalStudents: widget.totalStudents,

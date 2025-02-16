@@ -6,13 +6,15 @@ import 'package:his_quiz/widgets/common_bottom_bar.dart';
 
 class ReviewGroupScreen extends StatefulWidget {
   final int groupCount;
-  final int studentsPerGroup;
+  // final int studentsPerGroup;
   final int totalGroups;
+  final List<List<int>> groups;
   const ReviewGroupScreen({
     super.key,
     required this.groupCount,
-    required this.studentsPerGroup,
+    // required this.studentsPerGroup,
     required this.totalGroups,
+    required this.groups,
   });
 
   @override
@@ -49,7 +51,7 @@ class _ReviewGroupScreenState extends State<ReviewGroupScreen> {
                   ),
                   Expanded(
                     child: Text(
-                      "Review Groups",
+                      "Review Groups ${widget.totalGroups}",
                       textAlign: TextAlign.center,
                       style: CommonTextStyle.regular600.copyWith(
                         fontSize: 20,
@@ -85,7 +87,8 @@ class _ReviewGroupScreenState extends State<ReviewGroupScreen> {
                   return CardWidgetReviewGroup(
                     index: index,
                     groupNumber: index + 1,
-                    studentsPerGroup: widget.studentsPerGroup,
+                    // studentsPerGroup: widget.studentsPerGroup,
+                    studentsPerGroup: widget.groups[index].length,
                     totalGroups: widget.totalGroups,
                   );
                 },

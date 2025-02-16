@@ -620,6 +620,9 @@ class DivideGroupRound1Dialog extends StatefulWidget {
 }
 
 class _DivideGroupRound1DialogState extends State<DivideGroupRound1Dialog> {
+  // Store the groups
+  List<List<int>> groups = [];
+
   int totalStudents = 0;
   int totalGroups = 0;
   int studentsPerGroup = 0;
@@ -641,10 +644,55 @@ class _DivideGroupRound1DialogState extends State<DivideGroupRound1Dialog> {
   }
 
   void calculateGroups() {
+    // setState(() {
+    //   totalGroups = int.tryParse(divideGroupController.text) ?? 0;
+    //   studentsPerGroup = (totalGroups > 0) ? (totalStudents ~/ totalGroups) : 0;
+    // });
+
     setState(() {
       totalGroups = int.tryParse(divideGroupController.text) ?? 0;
-      studentsPerGroup = (totalGroups > 0) ? (totalStudents ~/ totalGroups) : 0;
+      groups.clear(); // Clear previous groups
+
+      if (totalGroups > 0) {
+        studentsPerGroup = totalStudents ~/ totalGroups;
+        int remainder = totalStudents % totalGroups;
+
+        for (int i = 0; i < totalGroups; i++) {
+          // Add an extra student to groups until remainder is zero
+          int groupSize = studentsPerGroup + (remainder > 0 ? 1 : 0);
+          groups.add(
+            List.generate(
+              groupSize,
+              (index) => index + 1,
+            ),
+          );
+          remainder--;
+        }
+      }
     });
+  }
+
+  Widget displayGroups() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 10),
+        const Text(
+          "Group Distribution:",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 5),
+        ...List.generate(groups.length, (index) {
+          return rowData(
+            "Group ${index + 1}",
+            "${groups[index].length} Students",
+          );
+        }),
+      ],
+    );
   }
 
   InputDecoration dialogInputDecoration(String hint) {
@@ -811,7 +859,10 @@ class _DivideGroupRound1DialogState extends State<DivideGroupRound1Dialog> {
               "Total student in group",
               studentsPerGroup.toString(),
             ),
-            const SizedBox(height: 20),
+            // displayGroups(),
+            const SizedBox(
+              height: 20,
+            ),
 
             // Action Buttons
             Row(
@@ -854,8 +905,10 @@ class _DivideGroupRound1DialogState extends State<DivideGroupRound1Dialog> {
                             Get.to(
                               ReviewGroupScreen(
                                 groupCount: totalGroups,
-                                studentsPerGroup: studentsPerGroup,
-                                totalGroups: totalGroups,
+                                // studentsPerGroup: studentsPerGroup,
+                                // totalGroups: totalGroups,
+                                totalGroups: groups.length,
+                                groups: groups,
                               ),
                             );
                           },

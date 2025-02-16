@@ -62,7 +62,8 @@ class _CompititionSeasonsScreenState extends State<CompititionSeasonsScreen>
     DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
+      // firstDate: DateTime(2000),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2101),
     );
     if (picked != null) {
@@ -114,7 +115,7 @@ class _CompititionSeasonsScreenState extends State<CompititionSeasonsScreen>
     );
   }
 
-  Widget bottomTextField(
+  Widget bottomDatePickerField(
     BuildContext context,
     String label,
     TextEditingController controller,
@@ -148,6 +149,44 @@ class _CompititionSeasonsScreenState extends State<CompititionSeasonsScreen>
               ),
             ),
           ),
+        ),
+      ],
+    );
+  }
+
+  Widget bottomTextField(
+    BuildContext context,
+    String label,
+    TextEditingController controller,
+    final String? Function(String?)? validator,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        TextFormField(
+          controller: controller,
+          readOnly: false,
+          validator: validator,
+          // decoration: InputDecoration(
+          //   hintText: hintText,
+          //   border: OutlineInputBorder(
+          //     borderRadius: BorderRadius.circular(8),
+          //   ),
+          //   contentPadding: const EdgeInsets.symmetric(
+          //     vertical: 10,
+          //     horizontal: 15,
+          //   ),
+          // ),
+          decoration: bottomInputDecoration("Enter Host School"),
         ),
       ],
     );
@@ -202,7 +241,7 @@ class _CompititionSeasonsScreenState extends State<CompititionSeasonsScreen>
                 Row(
                   children: [
                     Expanded(
-                      child: bottomTextField(
+                      child: bottomDatePickerField(
                         context,
                         "Start Date",
                         startDateController,
@@ -218,22 +257,42 @@ class _CompititionSeasonsScreenState extends State<CompititionSeasonsScreen>
                       width: 10,
                     ),
                     Expanded(
-                      child: bottomTextField(
+                      child: bottomDatePickerField(
                         context,
                         "End Date",
                         endDateController,
+                        // (value) {
+                        //   if (value == null || value.isEmpty) {
+                        //     return "End Date is required";
+                        //   }
+                        //   DateTime? startDate = DateTime.tryParse(
+                        //     startDateController.text,
+                        //   );
+                        //   DateTime? endDate = DateTime.tryParse(value);
+                        //   if (startDate != null && endDate != null) {
+                        //     if (endDate.isBefore(startDate) ||
+                        //         endDate.isAtSameMomentAs(startDate)) {
+                        //       return "End Date must be after Start Date";
+                        //     }
+                        //   }
+                        //   return null;
+                        // },
                         (value) {
                           if (value == null || value.isEmpty) {
                             return "End Date is required";
                           }
-                          DateTime? startDate = DateTime.tryParse(
-                            startDateController.text,
-                          );
-                          DateTime? endDate = DateTime.tryParse(value);
-                          if (startDate != null &&
-                              endDate != null &&
-                              endDate.isBefore(startDate)) {
-                            return "End Date cannot be before Start Date";
+                          try {
+                            DateTime startDate = DateFormat('yyyy-MM-dd').parse(
+                              startDateController.text,
+                            );
+                            DateTime endDate =
+                                DateFormat('yyyy-MM-dd').parse(value);
+                            if (endDate.isBefore(startDate) ||
+                                endDate.isAtSameMomentAs(startDate)) {
+                              return "End Date must be after Start Date";
+                            }
+                          } catch (e) {
+                            return "Invalid date format";
                           }
                           return null;
                         },
