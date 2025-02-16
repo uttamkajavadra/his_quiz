@@ -48,28 +48,38 @@ Lorem ipsum dolor sit amet consectetur. Varius pretium cursus laoreet eu amet cu
       int end,
       String word,
     ) {
-      isSpeaking = true;
+      setState(() {
+        isSpeaking = true;
+      });
       log("Speaking... $word");
     });
 
     // Monitor when speaking is complete
     flutterTts.setCancelHandler(() {
-      isSpeaking = false;
+      setState(() {
+        isSpeaking = false;
+      });
       log("Speech cancelled.");
     });
 
     flutterTts.setPauseHandler(() {
-      isSpeaking = false;
+      setState(() {
+        isSpeaking = false;
+      });
       log("Speech paused.");
     });
 
     flutterTts.setContinueHandler(() {
-      isSpeaking = true;
+      setState(() {
+        isSpeaking = true;
+      });
       log("Speech resumed.");
     });
 
     flutterTts.setCompletionHandler(() {
-      isSpeaking = false;
+      setState(() {
+        isSpeaking = false;
+      });
       log("Speech completed.");
     });
 
@@ -82,7 +92,9 @@ Lorem ipsum dolor sit amet consectetur. Varius pretium cursus laoreet eu amet cu
         if (Global.role == "student") {
           // Stop speech before navigating
           flutterTts.stop();
-          isSpeaking = false;
+          setState(() {
+            isSpeaking = false;
+          });
 
           Get.to(
             SuddenDeathRoundScreen(
@@ -296,31 +308,36 @@ Lorem ipsum dolor sit amet consectetur. Varius pretium cursus laoreet eu amet cu
             height: 20,
           ),
           if (Global.role != 'student')
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20.0,
-              ),
-              child: CommonButton(
-                child: Text(
-                  "Start Round 4",
-                  style: CommonTextStyle.bold.copyWith(
-                    fontSize: 16,
-                    color: CommonColors.whiteColor,
-                  ),
+            Visibility(
+              visible: !isSpeaking,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
                 ),
-                onPressed: () {
-                  // Stop speech before navigating
-                  flutterTts.stop();
-                  isSpeaking = false;
-
-                  Get.to(
-                    SuddenDeathRoundScreen(
-                      currentStudents: 1,
-                      totalStudents: widget.totalStudents,
-                      questionTime: widget.questionTime,
+                child: CommonButton(
+                  child: Text(
+                    "Start Round 4",
+                    style: CommonTextStyle.bold.copyWith(
+                      fontSize: 16,
+                      color: CommonColors.whiteColor,
                     ),
-                  );
-                },
+                  ),
+                  onPressed: () {
+                    // Stop speech before navigating
+                    flutterTts.stop();
+                    setState(() {
+                      isSpeaking = false;
+                    });
+
+                    Get.to(
+                      SuddenDeathRoundScreen(
+                        currentStudents: 1,
+                        totalStudents: widget.totalStudents,
+                        questionTime: widget.questionTime,
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           if (Global.role != 'student')

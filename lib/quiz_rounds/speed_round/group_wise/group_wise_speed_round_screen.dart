@@ -38,6 +38,7 @@ class _GroupWiseSpeedRoundScreenState extends State<GroupWiseSpeedRoundScreen> {
 
   // Set initial countdown time in seconds
   int remainingSeconds = 60;
+  int answerTimer = 0;
   Timer? timer;
 
   @override
@@ -47,14 +48,11 @@ class _GroupWiseSpeedRoundScreenState extends State<GroupWiseSpeedRoundScreen> {
   }
 
   void startTimer() {
+    // remainingSeconds = 0;
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (remainingSeconds > 0) {
-        setState(() {
-          remainingSeconds--;
-        });
-      } else {
-        timer.cancel();
-      }
+      setState(() {
+        answerTimer++;
+      });
     });
   }
 
@@ -204,7 +202,7 @@ class _GroupWiseSpeedRoundScreenState extends State<GroupWiseSpeedRoundScreen> {
                             width: 4,
                           ),
                           Text(
-                            formatTime(remainingSeconds),
+                            formatTime(answerTimer),
                             style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
@@ -321,25 +319,25 @@ class _GroupWiseSpeedRoundScreenState extends State<GroupWiseSpeedRoundScreen> {
                       ? GestureDetector(
                           onTap: () {
                             Get.to(
-                                // Round2Screen(
-                                //   isGroupWiseRound: true,
-                                //   currentNumber: 2,
-                                //   totalNumber: totalGroups,
-                                //   totalQuestions: int.parse(
-                                //     numberOfQuestionController.text,
-                                //   ),
-                                //   questionTime: int.parse(
-                                //     addTimeController.text,
-                                //   ),
-                                // ),
-                                const Round2Screen(
-                                  isGroupWiseRound: true,
-                                  currentNumber: 2,
-                                  totalNumber: 20,
-                                  totalQuestions: 5,
-                                  questionTime: 30,
-                                ),
-                              );
+                              // Round2Screen(
+                              //   isGroupWiseRound: true,
+                              //   currentNumber: 2,
+                              //   totalNumber: totalGroups,
+                              //   totalQuestions: int.parse(
+                              //     numberOfQuestionController.text,
+                              //   ),
+                              //   questionTime: int.parse(
+                              //     addTimeController.text,
+                              //   ),
+                              // ),
+                              const Round2Screen(
+                                isGroupWiseRound: true,
+                                currentNumber: 2,
+                                totalNumber: 20,
+                                totalQuestions: 5,
+                                questionTime: 30,
+                              ),
+                            );
                           },
                           child: Container(
                             width: 70,
@@ -482,6 +480,9 @@ class _GroupWiseSpeedRoundScreenState extends State<GroupWiseSpeedRoundScreen> {
                   ),
                 ),
                 onPressed: () {
+                  // Set answer timer
+                  Global.timer = answerTimer;
+
                   Get.dialog(
                     const QuizResultRound1Dialog(),
                   );

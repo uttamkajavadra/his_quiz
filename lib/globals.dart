@@ -15,6 +15,9 @@ class Global {
   static String? locationID;
   static RxBool isInternetConnected = true.obs;
 
+  // Timer variable
+  static int timer = 0;
+
   static void clearData() {
     token = null;
     userId = null;
@@ -28,5 +31,8 @@ class Global {
     businessID = null;
     location = null;
     locationID = null;
+
+    // Clear timer
+    timer = 0;
   }
 }

@@ -38,7 +38,8 @@ class _StudentWiseSpeedRoundScreenState
   int? selectedAnswerIndex;
 
   // Set initial countdown time in seconds
-  int remainingSeconds = 60;
+  // int remainingSeconds = 60;
+  int answerTimer = 0;
   Timer? timer;
 
   @override
@@ -67,10 +68,10 @@ class _StudentWiseSpeedRoundScreenState
 
   // Time starts from 0
   void startTimer() {
-    remainingSeconds = 0;
+    // remainingSeconds = 0;
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
-        remainingSeconds++;
+        answerTimer++;
       });
     });
   }
@@ -215,7 +216,7 @@ class _StudentWiseSpeedRoundScreenState
                             width: 4,
                           ),
                           Text(
-                            formatTime(remainingSeconds),
+                            formatTime(answerTimer),
                             style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
@@ -475,6 +476,9 @@ class _StudentWiseSpeedRoundScreenState
                   ),
                 ),
                 onPressed: () {
+                  // Set answer timer
+                  Global.timer = answerTimer;
+
                   Get.dialog(
                     const QuizResultRound1Dialog(),
                   );

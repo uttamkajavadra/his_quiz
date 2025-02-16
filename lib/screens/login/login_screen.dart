@@ -177,7 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                         String usernamePattern = r'^[a-zA-Z0-9_]+$';
                         RegExp regex = RegExp(usernamePattern);
-                        if (!regex.hasMatch(value)) {
+                        if (!regex.hasMatch(value.trim())) {
                           return "Username can only contain letters, numbers, and underscores";
                         }
                         return null;
@@ -238,17 +238,18 @@ class _LoginScreenState extends State<LoginScreen> {
                         hideLoadingDialog();
 
                         // Redirect
-                        if (userNameController.text == "admin") {
+                        if (userNameController.text.trim() == "admin") {
                           Global.role = "admin";
                           Get.offAll(
                             const CompititionSeasonsScreen(),
                           );
-                        } else if (userNameController.text == "host") {
+                        } else if (userNameController.text.trim() == "host") {
                           Global.role = "host";
                           Get.offAll(
                             const CompititionSeasonsScreen(),
                           );
-                        } else if (userNameController.text == "student") {
+                        } else if (userNameController.text.trim() ==
+                            "student") {
                           Global.role = "student";
                           Get.offAll(
                             // const Round1Screen(
