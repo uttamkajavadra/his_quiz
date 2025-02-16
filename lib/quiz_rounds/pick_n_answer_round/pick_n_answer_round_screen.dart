@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:his_quiz/globals.dart';
 import 'package:his_quiz/quiz_rounds/pick_n_answer_round/group_wise/group_wise_pick_n_answer_round_screen.dart';
 import 'package:his_quiz/quiz_rounds/pick_n_answer_round/student_wise/student_wise_pick_n_answer_round_screen.dart';
 import 'package:his_quiz/config/common_colors.dart';
@@ -30,7 +31,11 @@ class PickNAnswerRoundScreen extends StatefulWidget {
 class _PickNAnswerRoundScreenState extends State<PickNAnswerRoundScreen> {
   // Set initial countdown time in seconds
   int remainingSeconds = 60;
+  int answerTimer = Global.timer;
   Timer? timer;
+
+  // Maximum time in seconds (answer time + question time)
+  int maxTime = 0;
 
   List<int> answerOptions = [12, 15, 211, 220, 65, 45, 86, 82, 72];
 
@@ -42,6 +47,7 @@ class _PickNAnswerRoundScreenState extends State<PickNAnswerRoundScreen> {
   void initState() {
     super.initState();
     remainingSeconds = widget.questionTime;
+    maxTime = Global.timer + widget.questionTime;
     startTimer();
   }
 
@@ -50,7 +56,43 @@ class _PickNAnswerRoundScreenState extends State<PickNAnswerRoundScreen> {
       if (remainingSeconds > 0) {
         setState(() {
           remainingSeconds--;
+
+          // Set answer time
+          answerTimer++;
         });
+
+        // Check if the maximum time is reached
+        if (answerTimer >= maxTime) {
+          timer.cancel();
+
+          // Set answer timer
+          Global.timer = answerTimer;
+
+          // Redirect to the desired screen
+          if (widget.isGroupWiseRound) {
+            // Set answer timer
+            Global.timer = answerTimer;
+
+            Get.to(
+              GroupWisePickNAnswerRoundScreen(
+                totalStudents: widget.totalStudents,
+                questionTime: widget.questionTime,
+                questionNumber: 12,
+              ),
+            );
+          } else {
+            // Set answer timer
+            Global.timer = answerTimer;
+
+            Get.to(
+              StudentWisePickNAnswerRoundScreen(
+                totalStudents: widget.totalStudents,
+                questionTime: widget.questionTime,
+                questionNumber: 12,
+              ),
+            );
+          }
+        }
       } else {
         timer.cancel();
       }
@@ -204,7 +246,8 @@ class _PickNAnswerRoundScreenState extends State<PickNAnswerRoundScreen> {
                               width: 4,
                             ),
                             Text(
-                              formatTime(remainingSeconds),
+                              // formatTime(remainingSeconds),
+                              formatTime(answerTimer),
                               style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
@@ -364,21 +407,29 @@ class _PickNAnswerRoundScreenState extends State<PickNAnswerRoundScreen> {
                     ),
                   ),
                   onPressed: () {
-                    widget.isGroupWiseRound
-                        ? Get.to(
-                            GroupWisePickNAnswerRoundScreen(
-                              totalStudents: widget.totalStudents,
-                              questionTime: widget.questionTime,
-                              questionNumber: 12,
-                            ),
-                          )
-                        : Get.to(
-                            StudentWisePickNAnswerRoundScreen(
-                              totalStudents: widget.totalStudents,
-                              questionTime: widget.questionTime,
-                              questionNumber: 12,
-                            ),
-                          );
+                    if (widget.isGroupWiseRound) {
+                      // Set answer timer
+                      Global.timer = answerTimer;
+
+                      Get.to(
+                        GroupWisePickNAnswerRoundScreen(
+                          totalStudents: widget.totalStudents,
+                          questionTime: widget.questionTime,
+                          questionNumber: 12,
+                        ),
+                      );
+                    } else {
+                      // Set answer timer
+                      Global.timer = answerTimer;
+
+                      Get.to(
+                        StudentWisePickNAnswerRoundScreen(
+                          totalStudents: widget.totalStudents,
+                          questionTime: widget.questionTime,
+                          questionNumber: 12,
+                        ),
+                      );
+                    }
                   },
                 ),
               ),

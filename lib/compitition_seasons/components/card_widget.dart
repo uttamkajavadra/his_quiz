@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:his_quiz/globals.dart';
 import 'package:his_quiz/year_and_subject/year_and_subject_screen.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
@@ -23,9 +24,11 @@ class _CardWidgetState extends State<CardWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(
-          const YearAndSubjectScreen(),
-        );
+        Global.competitionStatus == "upcoming"
+            ? null
+            : Get.to(
+                const YearAndSubjectScreen(),
+              );
       },
       child: Container(
         padding: const EdgeInsets.all(8),

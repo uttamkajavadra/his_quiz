@@ -33,7 +33,11 @@ class _GroupWisePickNAnswerRoundScreenState
     extends State<GroupWisePickNAnswerRoundScreen> {
   // Set initial countdown time in seconds
   int remainingSeconds = 60;
+  int answerTimer = Global.timer;
   Timer? timer;
+
+  // Maximum time in seconds (answer time + question time)
+  int maxTime = 0;
 
   List<int> answerOptions = [12, 15, 211, 220, 65, 45, 86, 82, 72];
 
@@ -52,6 +56,7 @@ class _GroupWisePickNAnswerRoundScreenState
   void initState() {
     super.initState();
     remainingSeconds = widget.questionTime;
+    maxTime = Global.timer + widget.questionTime;
     startTimer();
   }
 
@@ -60,7 +65,44 @@ class _GroupWisePickNAnswerRoundScreenState
       if (remainingSeconds > 0) {
         setState(() {
           remainingSeconds--;
+
+          // Set answer time
+          answerTimer++;
         });
+
+        // Check if the maximum time is reached
+        if (answerTimer >= maxTime) {
+          timer.cancel();
+
+          // Set answer timer
+          Global.timer = answerTimer;
+
+          // Redirect to the desired screen
+          if (Global.role == "student") {
+            // Set answer timer
+            Global.timer = answerTimer;
+
+            Get.to(
+              // Round4Screen(
+              //   totalStudents: widget.totalStudent,
+              //   questionTime: int.parse(
+              //     addTimeController.text,
+              //   ),
+              // ),
+              const Round4Screen(
+                totalStudents: 3,
+                questionTime: 30,
+              ),
+            );
+          } else {
+            // Set answer timer
+            Global.timer = answerTimer;
+
+            Get.dialog(
+              const Round3QuizResultPopUpScreen(),
+            );
+          }
+        }
       } else {
         timer.cancel();
       }
@@ -371,22 +413,30 @@ class _GroupWisePickNAnswerRoundScreenState
                 ),
               ),
               onPressed: () {
-                Global.role == "student"
-                    ? Get.to(
-                        // Round4Screen(
-                        //   totalStudents: widget.totalStudent,
-                        //   questionTime: int.parse(
-                        //     addTimeController.text,
-                        //   ),
-                        // ),
-                        const Round4Screen(
-                          totalStudents: 3,
-                          questionTime: 30,
-                        ),
-                      )
-                    : Get.dialog(
-                        const Round3QuizResultPopUpScreen(),
-                      );
+                if (Global.role == "student") {
+                  // Set answer timer
+                  Global.timer = answerTimer;
+
+                  Get.to(
+                    // Round4Screen(
+                    //   totalStudents: widget.totalStudent,
+                    //   questionTime: int.parse(
+                    //     addTimeController.text,
+                    //   ),
+                    // ),
+                    const Round4Screen(
+                      totalStudents: 3,
+                      questionTime: 30,
+                    ),
+                  );
+                } else {
+                  // Set answer timer
+                  Global.timer = answerTimer;
+
+                  Get.dialog(
+                    const Round3QuizResultPopUpScreen(),
+                  );
+                }
               },
             ),
           ),

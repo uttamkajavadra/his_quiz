@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:his_quiz/config/common_colors.dart';
 import 'package:his_quiz/config/common_text_style.dart';
 import 'package:his_quiz/levels/select_country_screen.dart';
+import 'package:his_quiz/students_screen/student_list/student_list_screen.dart';
 
 class CardWidgetLevelSelection extends StatefulWidget {
   final int index;
@@ -26,9 +27,13 @@ class _CardWidgetLevelSelection extends State<CardWidgetLevelSelection> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(
-          const SelectCountryScreen(),
-        );
+        widget.levelName == "National"
+            ? Get.to(
+                const StudentListScreen(),
+              )
+            : Get.to(
+                const SelectCountryScreen(),
+              );
       },
       child: Container(
         padding: const EdgeInsets.all(8),
