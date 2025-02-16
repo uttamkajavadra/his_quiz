@@ -42,6 +42,10 @@ class _StudentWiseSpeedRoundScreenState
   int answerTimer = 0;
   Timer? timer;
 
+  // Maximum time in seconds (5 minutes and 12 seconds)
+  // final int maxTime = 312;
+  final int maxTime = 60;
+
   @override
   void initState() {
     super.initState();
@@ -73,6 +77,19 @@ class _StudentWiseSpeedRoundScreenState
       setState(() {
         answerTimer++;
       });
+
+      // Check if the maximum time is reached
+      if (answerTimer >= maxTime) {
+        timer.cancel();
+
+        // Set answer timer
+        Global.timer = answerTimer;
+
+        // Redirect to the desired screen
+        Get.dialog(
+          const QuizResultRound1Dialog(),
+        );
+      }
     });
   }
 

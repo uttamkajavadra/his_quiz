@@ -29,7 +29,11 @@ class SuddenDeathRoundScreen extends StatefulWidget {
 class _SuddenDeathRoundScreenState extends State<SuddenDeathRoundScreen> {
   // Set initial countdown time in seconds
   int remainingSeconds = 60;
+  int answerTimer = Global.timer;
   Timer? timer;
+
+  // Maximum time in seconds (answer time + question time)
+  int maxTime = 0;
 
   List<int> answerOptions = [12, 15, 211, 220, 65, 45, 86, 82, 72];
 
@@ -48,6 +52,7 @@ class _SuddenDeathRoundScreenState extends State<SuddenDeathRoundScreen> {
   void initState() {
     super.initState();
     remainingSeconds = widget.questionTime;
+    maxTime = Global.timer + widget.questionTime;
     startTimer();
   }
 
@@ -56,7 +61,23 @@ class _SuddenDeathRoundScreenState extends State<SuddenDeathRoundScreen> {
       if (remainingSeconds > 0) {
         setState(() {
           remainingSeconds--;
+
+          // Set answer time
+          answerTimer++;
         });
+
+        // Check if the maximum time is reached
+        if (answerTimer >= maxTime) {
+          timer.cancel();
+
+          // Set answer timer
+          Global.timer = answerTimer;
+
+          // Redirect to the desired screen
+          Get.to(
+            const WinnerScreens(),
+          );
+        }
       } else {
         timer.cancel();
       }
@@ -209,7 +230,8 @@ class _SuddenDeathRoundScreenState extends State<SuddenDeathRoundScreen> {
                             width: 4,
                           ),
                           Text(
-                            formatTime(remainingSeconds),
+                            // formatTime(remainingSeconds),
+                            formatTime(answerTimer),
                             style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
@@ -438,6 +460,9 @@ class _SuddenDeathRoundScreenState extends State<SuddenDeathRoundScreen> {
                 ),
               ),
               onPressed: () {
+                // Set answer timer
+                Global.timer = answerTimer;
+
                 Get.to(
                   const WinnerScreens(),
                 );

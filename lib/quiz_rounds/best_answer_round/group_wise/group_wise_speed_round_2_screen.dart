@@ -46,12 +46,17 @@ class _GroupWiseSpeedRound2ScreenState
 
   // Set initial countdown time in seconds
   int remainingSeconds = 60;
+  int answerTimer = Global.timer;
   Timer? timer;
+
+  // Maximum time in seconds (answer time + question time)
+  int maxTime = 0;
 
   @override
   void initState() {
     super.initState();
     remainingSeconds = widget.questionTime;
+    maxTime = Global.timer + widget.questionTime;
     startTimer();
   }
 
@@ -60,7 +65,23 @@ class _GroupWiseSpeedRound2ScreenState
       if (remainingSeconds > 0) {
         setState(() {
           remainingSeconds--;
+
+          // Set answer time
+          answerTimer++;
         });
+
+        // Check if the maximum time is reached
+        if (answerTimer >= maxTime) {
+          timer.cancel();
+
+          // Set answer timer
+          Global.timer = answerTimer;
+
+          // Redirect to the desired screen
+          Get.dialog(
+            const QuizResultRound2Dialog(),
+          );
+        }
       } else {
         timer.cancel();
       }
@@ -213,7 +234,8 @@ class _GroupWiseSpeedRound2ScreenState
                             width: 4,
                           ),
                           Text(
-                            formatTime(remainingSeconds),
+                            // formatTime(remainingSeconds),
+                            formatTime(answerTimer),
                             style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
@@ -454,6 +476,9 @@ class _GroupWiseSpeedRound2ScreenState
                   ),
                 ),
                 onPressed: () {
+                  // Set answer timer
+                  Global.timer = answerTimer;
+
                   Get.dialog(
                     const QuizResultRound2Dialog(),
                   );

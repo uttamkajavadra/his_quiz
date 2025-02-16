@@ -26,6 +26,7 @@ class CompititionSeasonsScreen extends StatefulWidget {
 class _CompititionSeasonsScreenState extends State<CompititionSeasonsScreen>
     with SingleTickerProviderStateMixin {
   TabController? tabController;
+  int currentIndex = 0;
 
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
@@ -55,6 +56,14 @@ class _CompititionSeasonsScreenState extends State<CompititionSeasonsScreen>
         }
       }
     });
+  }
+
+  void handleTabChange() {
+    if (tabController!.indexIsChanging) {
+      setState(() {
+        currentIndex = tabController!.index;
+      });
+    }
   }
 
   Future<void> selectDate(
@@ -402,6 +411,12 @@ class _CompititionSeasonsScreenState extends State<CompititionSeasonsScreen>
   }
 
   @override
+  void dispose() {
+    tabController!.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
@@ -594,15 +609,86 @@ class _CompititionSeasonsScreenState extends State<CompititionSeasonsScreen>
               ),
             ),
           if (Global.role == "admin")
+            // Expanded(
+            //   // Use Expanded to allow TabBarView to take available space
+            //   child: TabBarView(
+            //     controller: tabController,
+            //     children: const [
+            //       // LiveTabScreen(),
+            //       // UpcomingTabScreen(),
+            //       // PastTabScreen(),
+
+            //       AnimatedSwitcher(
+            //         duration: Duration(
+            //           milliseconds: 300,
+            //         ),
+            //         child: LiveTabScreen(),
+            //       ),
+            //       AnimatedSwitcher(
+            //         duration: Duration(
+            //           milliseconds: 300,
+            //         ),
+            //         child: UpcomingTabScreen(),
+            //       ),
+            //       AnimatedSwitcher(
+            //         duration: Duration(
+            //           milliseconds: 300,
+            //         ),
+            //         child: PastTabScreen(),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+
             Expanded(
-              // Use Expanded to allow TabBarView to take available space
-              child: TabBarView(
-                controller: tabController,
-                children: const [
-                  LiveTabScreen(),
-                  UpcomingTabScreen(),
-                  PastTabScreen(),
-                ],
+              child: AnimatedSwitcher(
+                duration: const Duration(
+                  milliseconds: 300,
+                ),
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  // Get the current and previous indices
+                  final currentKey = child.key as ValueKey<int>;
+                  final currentValue = currentKey.value;
+
+                  // Special handling for first-to-last and last-to-first transitions
+                  bool slideFromRight;
+                  if (currentIndex == 0 && currentValue == 2) {
+                    slideFromRight = false; // Last to first
+                  } else if (currentIndex == 2 && currentValue == 0) {
+                    slideFromRight = true; // First to last
+                  } else {
+                    slideFromRight = currentIndex > currentValue;
+                  }
+
+                  return SlideTransition(
+                    position: Tween<Offset>(
+                      // begin: Offset(
+                      //   slideFromRight ? 1.0 : -1.0,
+                      //   0.0,
+                      // ),
+                      end: Offset.zero,
+                    ).animate(
+                      CurvedAnimation(
+                        parent: animation,
+                        // Using easeInOut for smoother transitions
+                        curve: Curves.easeInOut,
+                      ),
+                    ),
+                    child: FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    ),
+                  );
+                },
+                child: IndexedStack(
+                  key: ValueKey<int>(currentIndex),
+                  index: currentIndex,
+                  children: const [
+                    LiveTabScreen(),
+                    UpcomingTabScreen(),
+                    PastTabScreen(),
+                  ],
+                ),
               ),
             ),
 

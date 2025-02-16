@@ -1392,7 +1392,7 @@ class _NumberOfQuestionsRound2DialogState
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    "Divide Group",
+                    "Number of questions",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
