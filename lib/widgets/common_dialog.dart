@@ -1436,8 +1436,8 @@ class _NumberOfQuestionsRound2DialogState
                         if (value == null || value.isEmpty) {
                           return "Add time is required";
                         }
-                        if (int.parse(value) <= 0) {
-                          return "Enter a valid number";
+                        if (int.tryParse(value) == null) {
+                          return "Please enter a valid integer";
                         }
                         return null;
                       },

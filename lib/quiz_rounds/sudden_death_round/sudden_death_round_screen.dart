@@ -259,10 +259,11 @@ class _SuddenDeathRoundScreenState extends State<SuddenDeathRoundScreen> {
                     height: 20,
                   ),
                   Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    // mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      const SizedBox(),
                       Column(
                         children: [
                           ClipRRect(
@@ -294,10 +295,10 @@ class _SuddenDeathRoundScreenState extends State<SuddenDeathRoundScreen> {
                           ),
                         ],
                       ),
-                      if (Global.role != 'student')
-                        const SizedBox(
-                          width: 12,
-                        ),
+                      // if (Global.role != 'student')
+                      //   const SizedBox(
+                      //     width: 12,
+                      //   ),
                       if (Global.role != 'student')
                         Stack(
                           alignment: Alignment.center,
